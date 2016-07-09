@@ -27,3 +27,4 @@ cfs:standard-packages
 cfs:gridfs
 raix:ui-dropped-event
 accounts-password
+alanning:roles
