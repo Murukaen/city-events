@@ -1,0 +1,43 @@
+.location {
+    float: right;
+}
+
+.date {
+    float: left;
+}
+
+.dropzone {
+    padding: 50px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 10px 0px;
+    color: gray;
+}
+
+.image {
+    margin-bottom: 10px;
+}
+
+.hide {
+    display: none;
+}
+
+.eventView {
+    margin-top: 40px;
+    font-size: 26px;
+}
+
+.imgPlaceholder {
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    color: green;
+    font-size: 80px;
+    font-family: 'Pacifico', cursive;
+    padding: 30px;
+    background-color: #e1e1ea;
+}
+
+.event-box {
+    background-color: #e0ebeb;
+}

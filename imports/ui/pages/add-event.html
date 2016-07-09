@@ -1,0 +1,31 @@
+<template name="addEvent">
+    <h3 class="text-center"> Add a new event </h3>
+    <div class="row">
+        <form class="col-md-offset-4 col-md-4">
+            <div class="form-group">
+                <label for="nameInput">Name:</label>     
+                <input id="nameInput" class="form-control" type="text" name="name" placeholder="Enter a name..." required />
+            </div>
+            <div class="form-group">
+                <label for="inputLocation">Location:</label>
+                <input id="inputLocation" class="form-control" type="text" name="location" placeholder="Enter a location..." required />
+            </div>
+            <div class="form-group">
+                <label for="inputDate">Date:</label>
+                <div class="input-group datetimepicker">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input id="inputDate" name="date" type="text" class="form-control set-due-date" required />
+                </div>
+            </div>
+            <div id="imgDropZone" class="dropzone" name="img" imgUrl="">
+                <p class="text-center"> Drop image here </p>
+            </div>
+            <div id="droppedImg" class="image">
+                <img src="" class="img-responsive"/>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-default" type="submit"> Add event </button>
+            </div>    
+        </form>
+    </div>
+</template>
