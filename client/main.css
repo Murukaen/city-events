@@ -41,3 +41,13 @@
 .event-box {
     background-color: #e0ebeb;
 }
+
+#login-dp, #register-dp{
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color:rgba(255,255,255,.8);
+}
+#login-dp .form-group, #register-dp .form-group {
+    margin-bottom: 10px;
+}

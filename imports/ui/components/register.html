@@ -1,0 +1,29 @@
+<!-- <template name="register">
+    <h2> Register </h2>
+    <form class="register">
+        <p>Email: <input type="email" name="email"></p>
+        <p>Password: <input type="password" name="password"></p>
+        <p>Organizer: <input type="checkbox" name="organizer"> </p> 
+        <p><input type="submit" value="Register"></p>
+    </form>
+</template> -->
+
+<template name="register">
+    <form id="register-form">
+        <div class="form-group">
+        <label for="register-email">Email address</label>
+        <input type="email" class="form-control" id="register-email" placeholder="Email address" required>
+      </div>
+      <div class="form-group">
+         <label for="register-pass">Password</label>
+         <input type="password" class="form-control" id="register-pass" placeholder="Password" required>
+      </div>
+      <div class="form-group">
+        <label for="register-organizer">Are you an organizer?</label>
+        <input type="checkbox" id="register-organizer">
+      </div>
+      <div class="form-group">
+         <button type="submit" class="btn btn-default btn-block">Register</button>
+      </div>
+   </form>
+</template>

@@ -1,4 +1,6 @@
 import './navigation.html';
+import './login.js';
+import './register.js';
 
 Template.navigation.events({
     'click .logout': function(event) {
@@ -7,3 +9,7 @@ Template.navigation.events({
         //Router.go('login');
     }
 });
+
+// Template.navigation.helpers({
+//     ''
+// });

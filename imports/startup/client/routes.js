@@ -3,8 +3,6 @@ import '/imports/ui/layouts/app-body.js';
 import '/imports/ui/pages/show-events.js';
 import '/imports/ui/pages/add-event.js';
 import '/imports/ui/pages/view-event.js';
-import '/imports/ui/pages/register.js';
-import '/imports/ui/pages/login.js';
 
 Router.configure({
     layoutTemplate: 'main'
@@ -28,6 +26,6 @@ Router.route('/event/:_id', {
     }
 });
 
-Router.route('/register');
+// Router.route('/register');
 
-Router.route('/login');
+// Router.route('/login');
