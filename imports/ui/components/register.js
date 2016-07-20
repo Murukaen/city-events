@@ -7,7 +7,7 @@ Template.register.events({
 });
 
 Template.register.onRendered(function() {
-    $('.register').validate({
+    var validator = $('.register').validate({
         submitHandler: function() {
             Accounts.createUser({
                 email: $('.register #register-email').val(),
@@ -17,7 +17,11 @@ Template.register.onRendered(function() {
                 }
             }, function(error) {
                 if (error) {
-                    console.log(error.reason);
+                    if(error.reason == "Email already exists.") {
+                        validator.showErrors({
+                            email: "That email already belongs to a registered user."
+                        });
+                    }
                 }
             });
         }

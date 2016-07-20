@@ -7,12 +7,20 @@ Template.login.events({
 });
 
 Template.login.onRendered(function () {
-    $('.login').validate({
+    var validator = $('.login').validate({
         submitHandler: function(event) {
-            console.log("submitHandler", $(".login #login-pass").val());
             Meteor.loginWithPassword($(".login #login-email").val(), $(".login #login-pass").val(), function(error) {
                 if (error) {
-                    console.log(error.reason);
+                    if(error.reason == "User not found") {
+                        validator.showErrors({
+                            email: error.reason    
+                        });
+                    }
+                    if(error.reason == "Incorrect password"){
+                        validator.showErrors({
+                            password: error.reason    
+                        });
+                    }
                 }
             });
         }
