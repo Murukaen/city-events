@@ -1,21 +1,25 @@
 import './register.html';
 
 Template.register.events({
-    'submit form': function(event, template) {
+    'submit form': function(event) {
         event.preventDefault();
-        Accounts.createUser({
-            email: template.find("#register-email").value,
-            password: template.find("#register-email").value,
-            profile: {
-                isOrganizer: template.$("#register-organizer").is(":checked")
-            }
-        }, function(error) {
-            if (error) {
-                console.log(error.reason);
-            }
-            else {
-                // Router.go('home');
-            }
-        });
     }
+});
+
+Template.register.onRendered(function() {
+    $('.register').validate({
+        submitHandler: function() {
+            Accounts.createUser({
+                email: $('.register #register-email').val(),
+                password: $('.register #register-pass').val(),
+                profile: {
+                    isOrganizer: $(".register #register-organizer").is(":checked")
+                }
+            }, function(error) {
+                if (error) {
+                    console.log(error.reason);
+                }
+            });
+        }
+    });
 });

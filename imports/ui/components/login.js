@@ -1,19 +1,20 @@
 import './login.html';
 
 Template.login.events({
-    'submit form': function(event, template) {
+    'submit form': function(event) {
         event.preventDefault();
-        Meteor.loginWithPassword(template.find("#login-email").value, template.find("#login-pass").value, function(error) {
-            if (error) {
-                console.log(error.reason);
-            }
-            // else if (Router.current().route.getName() == 'login') {
-            //     Router.go('home');
-            // }
-        });
     }
 });
 
 Template.login.onRendered(function () {
-    $('.login').validate();
+    $('.login').validate({
+        submitHandler: function(event) {
+            console.log("submitHandler", $(".login #login-pass").val());
+            Meteor.loginWithPassword($(".login #login-email").val(), $(".login #login-pass").val(), function(error) {
+                if (error) {
+                    console.log(error.reason);
+                }
+            });
+        }
+    });
 });
