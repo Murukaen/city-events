@@ -1,4 +1,5 @@
 import './add-event.html';
+import './add-event.css'
 import '/imports/api/events/methods.js';
 //import {Images} from '/imports/api/images/images.js'; // TODO create method
 

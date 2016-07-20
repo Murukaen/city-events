@@ -1,4 +1,5 @@
 import './show-events.html';
+import './show-events.css';
 //import {Events} from '/imports/api/events/events.js';
 
 Template.showEvents.helpers({

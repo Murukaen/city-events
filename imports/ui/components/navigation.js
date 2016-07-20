@@ -1,4 +1,5 @@
 import './navigation.html';
+import './navigation.css';
 import './login.js';
 import './register.js';
 
