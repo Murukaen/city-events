@@ -15,7 +15,13 @@ Router.route('/', {
 
 Router.route('/add', {
     name: 'add',
-    template: 'addEvent'
+    template: 'addEvent',
+    onBeforeAction: function() {
+        if (Meteor.userId())
+            this.next();
+        else
+            this.render("needLogIn");
+    }
 });
 
 Router.route('/event/:_id', {
@@ -25,7 +31,3 @@ Router.route('/event/:_id', {
         return Events.findOne({_id: this.params._id});
     }
 });
-
-// Router.route('/register');
-
-// Router.route('/login');
