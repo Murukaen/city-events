@@ -17,12 +17,24 @@ function displayImage(imgObj) {
     });       
 }
 
-Template.addEvent.rendered = function() {
+Template.addEvent.onRendered(function() {
         $('.datetimepicker').datetimepicker({
             defaultDate: new Date(),
             format: "DD-MM-YYYY HH:mm"
         });
-    };
+        GoogleMaps.load({
+            key: 'AIzaSyBY0lDEE8uNafAydB8sJlj3SMKZQ1rr4Ls',
+            libraries: 'places'
+        });
+        this.autorun(function () {
+            if (GoogleMaps.loaded()) {
+                $("#inputLocation").geocomplete({
+                    map: '#map'
+                });
+            }
+        });
+});
+
 Template.addEvent.events({
     'submit form': function(event) {
         event.preventDefault();
@@ -36,12 +48,22 @@ Template.addEvent.events({
                 if (err){
                     console.log(err);
                 } else {
-                     // handle success depending what you need to do
-                    // var imageUrl = "/cfs/files/images/" + fileObj._id;
-                    // console.log("Added image:", imageUrl);
                     displayImage(fileObj);
                 }
             });
          });
     }
 });
+
+Template.addEvent.helpers({
+    mapOptions: function() {
+        // Make sure the maps API has loaded
+        if (GoogleMaps.loaded()) {
+          // Map initialization options
+          return {
+            center: new google.maps.LatLng(-37.8136, 144.9631),
+            zoom: 8
+          };
+        }
+    }
+})

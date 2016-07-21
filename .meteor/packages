@@ -31,3 +31,5 @@ matb33:collection-hooks
 themeteorchef:jquery-validation
 accounts-ui
 email
+dburles:google-maps
+jeremy:geocomplete
