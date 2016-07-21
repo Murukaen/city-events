@@ -16,4 +16,7 @@
 }
 .event-box {
     background-color: #e0ebeb;
+    word-wrap: break-word;
+    white-space: normal;
+    height:400px;
 }
