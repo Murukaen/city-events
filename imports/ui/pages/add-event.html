@@ -1,7 +1,7 @@
 <template name="addEvent">
     <h3 class="text-center"> Add a new event </h3>
     <div class="row">
-        <form class="col-md-offset-4 col-md-4">
+        <form class="col-md-offset-4 col-md-4 event-setup">
             <div class="form-group">
                 <label for="nameInput">Name:</label>     
                 <input id="nameInput" class="form-control" type="text" name="name" placeholder="Enter a name..." required />
@@ -10,10 +10,6 @@
                 <label for="inputLocation">Location:</label>
                 <input id="inputLocation" class="form-control" type="text" name="location" placeholder="Enter a location..." required />
             </div>
-            <!-- <div class="form-group">
-                <label for="inputGeolocation">Geolocation:</label>
-                <input id="inputGeolocation" class="form-control" type="text" name="geolocation">
-            </div> -->
             <div id="map" class="map-container">
 
             </div>
@@ -21,10 +17,17 @@
                 {{> googleMap name="map" options=mapOptions}}
             </div> -->
             <div class="form-group">
-                <label for="inputDate">Date:</label>
-                <div class="input-group datetimepicker">
+                <label for="inputStartDate">Starts:</label>
+                <div id="start-date" class="input-group datetimepicker">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <input id="inputDate" name="date" type="text" class="form-control set-due-date" required />
+                    <input id="inputStartDate" name="date" type="text" class="form-control" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEndDate">Ends:</label>
+                <div id="end-date" class="input-group datetimepicker">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input id="inputEndDate" name="date" type="text" class="form-control" required />
                 </div>
             </div>
             <div id="imgDropZone" class="dropzone" name="img" imgUrl="">
