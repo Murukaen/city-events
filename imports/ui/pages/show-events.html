@@ -1,26 +1,37 @@
 <template name="showEvents">
-    {{#if event.count}}
+    {{#if events.length}}
         <h2 class="text-center"> Current events </h2>
-        <div class="row">
-        {{#each event}}
-            <div class="event-box btn btn-default well col-md-3">
-                <h3 class="text-center"> {{name}} </h3>
-                <p class="date"> {{date}} </p>
-                <p class="location"> {{location}} </p>
-                <div class="clearfix"> </div>
-                <br />
-                {{#if imgUrl}}
-                    <img class="img-responsive" src="{{imgUrl}}" />
-                {{else}}
-                    <!--
-                    <img class="img-responsive" src="http://placehold.it/350x150" />
-                    -->
-                    <div class="text-center imgPlaceholder"> E </div>
-                {{/if}}
-            </div>
+        {{#each events}}
+            {{> eventRow}}
         {{/each}}
-        </div>
     {{else}}
         <p> There are currently no registered events </p>
     {{/if}}
+</template>
+
+<template name="eventRow">
+    <div class="row">
+        {{#each row}}
+            {{> eventCell}}
+        {{/each}}
+    </div>
+    <div class="clearfix visible-sm"></div>
+</template>
+
+<template name="eventCell">
+    <div class="event-box btn btn-default well col-md-3 col-sm-6 col-xs-12">
+        <h3 class="text-center"> {{name}} </h3>
+        <p class="date"> {{date}} </p>
+        <p class="location"> {{location}} </p>
+        <div class="clearfix"> </div>
+        <br />
+        {{#if imgUrl}}
+            <img class="img-responsive event-image" src="{{imgUrl}}" />
+        {{else}}
+            <!--
+            <img class="img-responsive" src="http://placehold.it/350x150" />
+            -->
+            <div class="text-center imgPlaceholder"> E </div>
+        {{/if}}
+    </div>
 </template>
