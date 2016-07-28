@@ -84,12 +84,18 @@ function initGoogleMaps() {
     });
 }
 
+Template.addEvent.onCreated(() => {
+    let template = Template.instance();
+    template.labels = new ReactiveVar([]);
+});
+
 Template.addEvent.onRendered(function() {
     initValidator();
     initGoogleMaps();
     initDateTimePickers();
 });
 
+/* EVENTS */
 Template.addEvent.events({
     'submit form': function(event) {
         event.preventDefault();
@@ -104,9 +110,18 @@ Template.addEvent.events({
                 }
             });
          });
+    },
+    'keypress input[name="label"]': function(event, template) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            let labels = Template.instance().labels;
+            labels.set(labels.get().concat({name: event.target.value}));
+            event.target.value = '';
+        }
     }
 });
 
+/* HELPERS */
 Template.addEvent.helpers({
     mapOptions: function() {
         // Make sure the maps API has loaded
@@ -117,5 +132,8 @@ Template.addEvent.helpers({
             zoom: 8
           };
         }
+    },
+    labels() {
+        return Template.instance().labels.get(); 
     }
 })
