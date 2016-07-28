@@ -2,18 +2,19 @@ import './events.js';
 //import {Events} from './events.js';
 
 Meteor.methods({
-    'addEvent': function(name, location, date, imgUrl, cbDone) {
-        console.log("Method: addEvent", name, location, date, imgUrl);
+    'addEvent': function(data, cbDone) {
+        console.log("Method addEvent:", data);
         //TODO check
         Events.insert({
-            name: name,
-            location: location,
-            date: date,
-            imgUrl: imgUrl
+            name: data.name,
+            location: data.location,
+            startDate: data.startDate,
+            endDate: data.endDate,
+            imgUrl: data.imgUrl,
+            labels: data.labels
         },
             cbDone
         );
-        console.log("---");
     },
     'test': function() {
         console.log("server test");

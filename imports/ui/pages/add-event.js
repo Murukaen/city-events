@@ -17,7 +17,7 @@ function displayImage(imgObj) {
     });       
 }
 
-function initValidator() {
+function initValidator(template) {
     var validator = $('.event-setup').validate({
         rules: {
             name: {
@@ -25,7 +25,15 @@ function initValidator() {
             }
         },
         submitHandler: function(event) {
-            Meteor.call('addEvent', event.target.name.value, event.target.location.value, event.target.date.value, $('#imgDropZone').attr('imgUrl'), function () {
+            var data = {
+                name: $('[name=name]').val(),
+                location: $('[name=location]').val(),
+                startDate: $('[name=startDate]').val(),
+                endDate: $('[name=endDate]').val(),
+                imgUrl: $('#imgDropZone').attr('imgUrl'),
+                labels: template.labels.get()
+            }
+            Meteor.call('addEvent', data, () => {
                 Router.go('home');
             });
         }
@@ -90,7 +98,7 @@ Template.addEvent.onCreated(() => {
 });
 
 Template.addEvent.onRendered(function() {
-    initValidator();
+    initValidator(Template.instance());
     initGoogleMaps();
     initDateTimePickers();
 });
@@ -99,6 +107,7 @@ Template.addEvent.onRendered(function() {
 Template.addEvent.events({
     'submit form': function(event) {
         event.preventDefault();
+        event.test = "Hello";
     },
     'dropped #imgDropZone': function(event) {
         FS.Utility.eachFile(event, function(file) {
