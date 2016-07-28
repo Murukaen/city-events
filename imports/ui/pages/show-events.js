@@ -2,6 +2,29 @@ import './show-events.html';
 import './show-events.css';
 //import {Events} from '/imports/api/events/events.js';
 
+Template.showEvents.onCreated(function () {
+    let template = Template.instance();
+    template.searchQuery = new ReactiveVar();
+    template.autorun( () => {
+        console.log("showEvents autorun");
+        template.subscribe('events', template.searchQuery.get());
+    });
+});
+
+/* EVENTS */
+Template.showEvents.events({
+    'click .event-box': function() {
+        Router.go('view', {_id: this._id});
+    },
+    'keypress [name=search]': function(event, template) {
+        let value = event.target.value.trim();
+        if (event.key === 'Enter') {
+            template.searchQuery.set(value);
+        }
+    }
+});
+
+/* HELPERS */
 Template.showEvents.helpers({
     events: function() {
         all = Events.find({}).fetch();
@@ -13,7 +36,6 @@ Template.showEvents.helpers({
         }
         if (all.length > 0)
             chunks.push({row: all});
-        console.log(chunks);
         return chunks;
     },
     // 'event': function() {
@@ -21,12 +43,5 @@ Template.showEvents.helpers({
     // },
     'formatDate': function(date) {
         return moment(date).format("DD-MM-YYYY HH:mm");
-    }
-});
-
-Template.showEvents.events({
-    'click .event-box': function() {
-        console.log("Click");
-        Router.go('view', {_id: this._id});
     }
 });

@@ -124,7 +124,7 @@ Template.addEvent.events({
         if (event.key === 'Enter') {
             event.preventDefault();
             let labels = Template.instance().labels;
-            labels.set(labels.get().concat({name: event.target.value}));
+            labels.set(labels.get().concat(event.target.value));
             event.target.value = '';
         }
     }

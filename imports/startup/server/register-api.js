@@ -1,2 +1,3 @@
-import '../../api/events/methods.js';
-import '../../api/images/images.js';
+import '/imports/api/events/methods.js';
+import '/imports/api/events/server/publications.js'
+import '/imports/api/images/images.js';
