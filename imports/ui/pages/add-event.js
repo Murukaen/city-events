@@ -35,7 +35,7 @@ function initValidator(template) {
                 createdBy: Meteor.user().emails[0].address
             }
             Meteor.call('addEvent', data, () => {
-                Router.go('home');
+                Router.go('myEvents');
             });
         }
     });

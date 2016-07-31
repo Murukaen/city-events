@@ -11,7 +11,8 @@ Meteor.methods({
             startDate: data.startDate,
             endDate: data.endDate,
             imgUrl: data.imgUrl,
-            labels: data.labels
+            labels: data.labels,
+            createdBy: data.createdBy
         },
             cbDone
         );

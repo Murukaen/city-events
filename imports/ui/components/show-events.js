@@ -8,6 +8,18 @@ Template.showEvents.events({
 });
 
 Template.showEvents.helpers({
+    'eventRows': function() {
+        let all = this.eventData;
+        let chunks = [];
+        let size = 4;
+        while (all.length > size) {
+            chunks.push({ row: all.slice(0, size)});
+            all = all.slice(size);
+        }
+        if (all.length > 0)
+            chunks.push({row: all});
+        return chunks;
+    },
     formatDate: function(date) {
         return moment(date).format("DD-MM-YYYY HH:mm");
     }

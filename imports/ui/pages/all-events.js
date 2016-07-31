@@ -25,16 +25,7 @@ Template.allEvents.events({
 
 /* HELPERS */
 Template.allEvents.helpers({
-    'eventChunks': function() {
-        let all = Events.find({}).fetch();
-        let chunks = [];
-        let size = 4;
-        while (all.length > size) {
-            chunks.push({ row: all.slice(0, size)});
-            all = all.slice(size);
-        }
-        if (all.length > 0)
-            chunks.push({row: all});
-        return chunks;
+    eventData: function() {
+        return Events.find({}).fetch();
     }
 });

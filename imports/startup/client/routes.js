@@ -31,16 +31,16 @@ Router.route('/add', {
     }
 });
 
-// Router.route('/myevents', {
-//     name: 'myEvents',
-//     template: 'myEvents',
-//     onBeforeAction: function() {
-//         if (isLoggedInAsOrganizer())
-//             this.next();
-//         else
-//             this.render("needLogIn");
-//     }
-// });
+Router.route('/myevents', {
+    name: 'myEvents',
+    template: 'myEvents',
+    onBeforeAction: function() {
+        if (isLoggedInAsOrganizer())
+            this.next();
+        else
+            this.render("needLogIn");
+    }
+});
 
 Router.route('/event/:_id', {
     name: 'view',

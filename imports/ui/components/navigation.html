@@ -8,6 +8,7 @@
           <li><a href="{{pathFor route='home'}}">Home</a></li>
           {{#if isInRole 'organizer'}}
             <li><a href="{{pathFor route='add'}}">Add event</a></li>
+            <li><a href="{{pathFor route='myEvents'}}">My Events</a></li>
           {{/if}}
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -19,11 +20,6 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
               <ul id="login-dp" class="dropdown-menu auth">
                 <li>
-<!--                   <div class="row">
-                    <div class="col-md-12">
-                      
-                      </div>
-                    </div> -->
                   {{> login}}
                 </li>
               </ul>
@@ -32,11 +28,6 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Register</b> <span class="caret"></span></a>
               <ul id="register-dp" class="dropdown-menu auth">
                 <li>
-<!--                   <div class="row">
-                    <div class="col-md-12">
-                      
-                      </div>
-                    </div> -->
                   {{> register}}
                 </li>
               </ul>
