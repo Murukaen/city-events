@@ -45,6 +45,9 @@ Router.route('/add', {
 Router.route('/event/:_id', {
     name: 'view',
     template: 'viewEvent',
+    subscriptions: function() {
+        return Meteor.subscribe('events');
+    },
     data: function() {
         return Events.findOne({_id: this.params._id});
     }
