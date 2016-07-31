@@ -31,7 +31,8 @@ function initValidator(template) {
                 startDate: $('[name=startDate]').val(),
                 endDate: $('[name=endDate]').val(),
                 imgUrl: $('#imgDropZone').attr('imgUrl'),
-                labels: template.labels.get()
+                labels: template.labels.get(),
+                createdBy: Meteor.user().emails[0].address
             }
             Meteor.call('addEvent', data, () => {
                 Router.go('home');
