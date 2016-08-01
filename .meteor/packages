@@ -33,3 +33,5 @@ accounts-ui
 email
 dburles:google-maps
 jeremy:geocomplete
+aldeed:simple-schema
+aldeed:collection2
