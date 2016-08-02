@@ -16,7 +16,8 @@ EventSchema = new SimpleSchema({
     name: {
         label: 'Event name',
         type: String,
-        max: 20
+        max: 20,
+        denyUpdate: true
     },
     location: {
         label: 'Event location',
@@ -24,11 +25,29 @@ EventSchema = new SimpleSchema({
     },
     startDate: {
         label: 'Event start datetime',
-        type: Date
+        type: Date,
+        autoform: {
+            afFieldInput: {
+                // type: "bootstrap-datetimepicker",
+                // timezoneId: "America/New_York",
+                dateTimePickerOptions: {
+                    format: "DD-MM-YYYY HH:mm"
+                }
+            }
+        }
     },
     endDate: {
         label: 'Event end datetime',
-        type: Date
+        type: Date,
+        autoform: {
+            afFieldInput: {
+                // type: "bootstrap-datetimepicker",
+                // timezoneId: "America/New_York",
+                dateTimePickerOptions: {
+                    format: "DD-MM-YYYY HH:mm"
+                }
+            }
+        }
     },
     imgUrl: {
         label: 'Event image url',

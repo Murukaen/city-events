@@ -1,4 +1,4 @@
-<template name="editEvent">
+<!-- <template name="editEvent">
     <div class="row">
         <form class="col-md-offset-4 col-md-4 event-setup">
             <div class="form-group">
@@ -13,5 +13,20 @@
                 <button class="btn btn-default" type="submit"> Modify event </button>
             </div> 
         </form>
+    </div>
+</template> -->
+<template name="editEvent">
+    <div class="container-fluid">
+        <div class="row">    
+            {{#autoForm collection='Events' id='editEventForm' doc=this type='update' omitFields='name' class="col-md-offset-4 col-md-4"}}
+                <fieldset>
+                  <legend>Edit event: {{name}}</legend>
+                  {{> afFormGroup name='location'}}
+                  {{> afFormGroup name='startDate' type='bootstrap-datetimepicker' class='datetimepicker'}}
+                  {{> afFormGroup name='endDate' type='bootstrap-datetimepicker'}}
+                </fieldset>
+                <button type="submit" class="btn btn-primary">Update</button>
+            {{/autoForm}}
+        </div>
     </div>
 </template>

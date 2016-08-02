@@ -3,6 +3,8 @@ accounts-password@1.1.11
 accounts-ui@1.1.9
 accounts-ui-unstyled@1.1.12
 alanning:roles@1.2.15
+aldeed:autoform@5.8.1
+aldeed:autoform-bs-datetimepicker@1.0.6
 aldeed:collection2@2.9.1
 aldeed:collection2-core@1.1.1
 aldeed:schema-deny@1.0.1
@@ -116,7 +118,7 @@ templating@1.1.12_1
 templating-tools@1.0.4
 themeteorchef:jquery-validation@1.14.0
 tracker@1.0.14
-tsega:bootstrap3-datetimepicker@4.17.37_1
+tsega:bootstrap3-datetimepicker@3.1.3_3
 twbs:bootstrap@3.3.6
 ui@1.0.11
 underscore@1.0.9

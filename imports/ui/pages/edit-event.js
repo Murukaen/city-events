@@ -7,7 +7,15 @@ Template.editEvent.onCreated(function () {
 /* EVENTS */
 Template.editEvent.events({
     'submit form': function(event) {
-        event.preventDefault();
-        console.log('Submit');
+        // console.log()
+        Router.go('myEvents');
     }
 });
+
+// Template.editEvent.helpers({
+//     dateTimePickerOptions: function () {
+//         return {
+//             format: "DD-MM-YYYY HH:mm"
+//         }
+//     }
+// });
