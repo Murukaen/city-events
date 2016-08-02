@@ -26,6 +26,9 @@ Template.allEvents.events({
 /* HELPERS */
 Template.allEvents.helpers({
     eventData: function() {
-        return Events.find({}).fetch();
+        return {
+            events: Events.find({}).fetch(),
+            clickRoute: 'view'
+        }    
     }
 });

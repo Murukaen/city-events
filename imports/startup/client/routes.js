@@ -5,6 +5,7 @@ import '/imports/ui/pages/add-event.js';
 import '/imports/ui/pages/view-event.js';
 import '/imports/ui/pages/forgot-pass.js';
 import '/imports/ui/pages/my-events.js';
+import '/imports/ui/pages/edit-event.js';
 import '/imports/ui/components/common.js';
 
 function isLoggedInAsOrganizer() {
@@ -50,15 +51,13 @@ Router.route('/event/:_id', {
     }
 });
 
-// Router.route('/event/:_id/edit', {
-//     name: 'edit',
-//     template: 'editEvent',
-//     subscriptions: function() {
-//         return Meteor.subscribe
-//     }
-// })
-
-
+Router.route('/event/:_id/edit', {
+    name: 'edit',
+    template: 'editEvent',
+    data: function() {
+        return Events.findOne({_id: this.params._id});
+    }
+})
 
 // Router.route('/forgot', {
 //     template: 'ForgotPassword'

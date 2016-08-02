@@ -8,6 +8,9 @@ Template.myEvents.onCreated(function () {
 
 Template.myEvents.helpers({
     eventData: function() {
-        return Events.find({createdBy: Meteor.user().emails[0].address}).fetch();
+        return {
+            events: Events.find({createdBy: Meteor.user().emails[0].address}).fetch(),
+            clickRoute: 'edit'
+        }
     }
 });

@@ -3,13 +3,13 @@ import './show-events.css';
 
 Template.showEvents.events({
     'click .event-box': function() {
-        Router.go('view', {_id: this._id});
+        Router.go(Template.instance().data.eventData.clickRoute, {_id: this._id});
     }
 });
 
 Template.showEvents.helpers({
     'eventRows': function() {
-        let all = this.eventData;
+        let all = this.eventData.events;
         let chunks = [];
         let size = 4;
         while (all.length > size) {

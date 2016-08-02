@@ -108,7 +108,6 @@ Template.addEvent.onRendered(function() {
 Template.addEvent.events({
     'submit form': function(event) {
         event.preventDefault();
-        event.test = "Hello";
     },
     'dropped #imgDropZone': function(event) {
         FS.Utility.eachFile(event, function(file) {
