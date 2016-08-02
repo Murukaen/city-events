@@ -49,6 +49,10 @@ EventSchema = new SimpleSchema({
             }
         }
     },
+    description: {
+        label: 'Event description',
+        type: String
+    },
     imgUrl: {
         label: 'Event image url',
         type: String,
