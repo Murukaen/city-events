@@ -1,9 +1,22 @@
 Events = new Meteor.Collection('events'); // TODO export const
 
+Events.allow({
+    insert: () => {
+        return true;
+    },
+    update: () => {
+        return true;
+    },
+    remove: () => {
+        return true;
+    }
+});
+
 EventSchema = new SimpleSchema({
     name: {
         label: 'Event name',
-        type: String
+        type: String,
+        max: 20
     },
     location: {
         label: 'Event location',
@@ -11,11 +24,11 @@ EventSchema = new SimpleSchema({
     },
     startDate: {
         label: 'Event start datetime',
-        type: String
+        type: Date
     },
     endDate: {
         label: 'Event end datetime',
-        type: String
+        type: Date
     },
     imgUrl: {
         label: 'Event image url',

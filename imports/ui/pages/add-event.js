@@ -28,8 +28,8 @@ function initValidator(template) {
             var data = {
                 name: $('[name=name]').val(),
                 location: $('[name=location]').val(),
-                startDate: $('[name=startDate]').val(),
-                endDate: $('[name=endDate]').val(),
+                startDate: new Date($('[name=startDate]').val()),
+                endDate: new Date($('[name=endDate]').val()),
                 imgUrl: $('#imgDropZone').attr('imgUrl'),
                 labels: template.labels.get(),
                 createdBy: Meteor.user().emails[0].address
