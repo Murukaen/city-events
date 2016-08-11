@@ -28,8 +28,7 @@ EventSchema = new SimpleSchema({
         type: Date,
         autoform: {
             afFieldInput: {
-                // type: "bootstrap-datetimepicker",
-                // timezoneId: "America/New_York",
+                type: "bootstrap-datetimepicker",
                 dateTimePickerOptions: {
                     format: "DD-MM-YYYY HH:mm"
                 }
@@ -41,8 +40,7 @@ EventSchema = new SimpleSchema({
         type: Date,
         autoform: {
             afFieldInput: {
-                // type: "bootstrap-datetimepicker",
-                // timezoneId: "America/New_York",
+                type: "bootstrap-datetimepicker",
                 dateTimePickerOptions: {
                     format: "DD-MM-YYYY HH:mm"
                 }
