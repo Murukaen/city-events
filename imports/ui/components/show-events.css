@@ -1,5 +1,6 @@
 .location {
-    float: right;
+    clear: both;
+    float: left;
 }
 .date {
     float: left;
@@ -18,5 +19,5 @@
     background-color: #f0f0f0;
     word-wrap: break-word;
     white-space: normal;
-    height:400px;
+    height:175px;
 }

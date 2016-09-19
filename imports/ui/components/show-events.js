@@ -19,8 +19,5 @@ Template.showEvents.helpers({
         if (all.length > 0)
             chunks.push({row: all});
         return chunks;
-    },
-    formatDate: function(date) {
-        return moment(date).format("DD-MM-YYYY HH:mm");
     }
 });
