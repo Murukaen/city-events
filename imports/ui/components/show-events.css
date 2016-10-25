@@ -21,3 +21,7 @@
     white-space: normal;
     height:175px;
 }
+.events-container {
+    width: 90%;
+    margin: 0px auto;
+}

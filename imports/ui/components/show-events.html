@@ -1,11 +1,13 @@
 <template name="showEvents">
-    {{#if eventRows.length}}
-        {{#each eventRows}}
-            {{> eventRow}}
-        {{/each}}
-    {{else}}
-        <p> There are currently no registered events </p>
-    {{/if}}
+    <div class="container events-container">
+        {{#if eventRows.length}}
+            {{#each eventRows}}
+                {{> eventRow}}
+            {{/each}}
+        {{else}}
+            <p> There are currently no registered events </p>
+        {{/if}}
+    </div>
 </template>
 
 <template name="eventRow">
@@ -19,15 +21,17 @@
 
 <template name="eventCell">
     <div class="event-box btn btn-default well col-md-3 col-sm-6 col-xs-12">
-        <h3 class="text-center"> {{name}} </h3>
-        <p class="date"> {{formatDate startDate}} </p>
-        <p class="location"> {{location}} </p>
-        <div class="clearfix"> </div>
-        <!-- <br />
-        {{#if imgUrl}}
-            <img class="img-responsive event-image" src="{{imgUrl}}" />
-        {{else}}
-            <div class="text-center imgPlaceholder"> E </div>
-        {{/if}} -->
+        <div class="col-xs-12">
+            <h3 class="text-center"> {{name}} </h3>
+            <p class="date"> {{formatDate startDate}} </p>
+            <p class="location"> {{location}} </p>
+            <div class="clearfix"> </div>
+            <!-- <br />
+            {{#if imgUrl}}
+                <img class="img-responsive event-image" src="{{imgUrl}}" />
+            {{else}}
+                <div class="text-center imgPlaceholder"> E </div>
+            {{/if}} -->
+        </div>
     </div>
 </template>
