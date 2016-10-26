@@ -1,21 +1,6 @@
 import './add-event.html';
 import './add-event.css'
 import '/imports/api/events/methods.js';
-//import {Images} from '/imports/api/images/images.js'; // TODO create method
-
-function displayImage(imgObj) {
-    var cursor = Images.find(imgObj._id);
-    var liveQuery = cursor.observe({
-        changed: function(newImage, oldImage) {
-          if (newImage.url() !== null) {
-            liveQuery.stop();
-            $('#droppedImg').find('img').attr('src', newImage.url());
-            $('#imgDropZone').attr('imgUrl', newImage.url());
-            $('#imgDropZone').addClass('hide');
-          }
-        }
-    });       
-}
 
 function initValidator(template) {
     var validator = $('.event-setup').validate({
@@ -31,7 +16,6 @@ function initValidator(template) {
                 startDate: $('#start-date').data('DateTimePicker').date.toDate(),
                 endDate: $('#end-date').data('DateTimePicker').date.toDate(),
                 description: $('[name=description').val(),
-                imgUrl: $('#imgDropZone').attr('imgUrl'),
                 labels: template.labels.get(),
                 createdBy: Meteor.user().profile.organizerName
             }
@@ -109,17 +93,6 @@ Template.addEvent.onRendered(function() {
 Template.addEvent.events({
     'submit form': function(event) {
         event.preventDefault();
-    },
-    'dropped #imgDropZone': function(event) {
-        FS.Utility.eachFile(event, function(file) {
-            Images.insert(file, function (err, fileObj) {
-                if (err){
-                    console.log(err);
-                } else {
-                    displayImage(fileObj);
-                }
-            });
-         });
     },
     'keypress input[name="label"]': function(event, template) {
         if (event.key === 'Enter') {
