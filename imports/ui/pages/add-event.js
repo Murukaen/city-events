@@ -28,12 +28,12 @@ function initValidator(template) {
             var data = {
                 name: $('[name=name]').val(),
                 location: $('[name=location]').val(),
-                startDate: new Date($('[name=startDate]').val()),
-                endDate: new Date($('[name=endDate]').val()),
+                startDate: $('#start-date').data('DateTimePicker').date.toDate(),
+                endDate: $('#end-date').data('DateTimePicker').date.toDate(),
                 description: $('[name=description').val(),
                 imgUrl: $('#imgDropZone').attr('imgUrl'),
                 labels: template.labels.get(),
-                createdBy: Meteor.user().emails[0].address
+                createdBy: Meteor.user().profile.organizerName
             }
             Meteor.call('addEvent', data, () => {
                 Router.go('myEvents');
@@ -50,8 +50,8 @@ function initDateTimePickers() {
             minDate: new Date()
         })
         .on("dp.change", () => {
-            var startDate = $('#start-date').data('DateTimePicker').date()
-            $("#end-date").data('DateTimePicker').minDate(startDate);
+            var startDate = $('#start-date').data('DateTimePicker').date
+            $("#end-date").data('DateTimePicker').setMinDate(startDate);
         });
     $('#end-date')
         .datetimepicker({
@@ -59,8 +59,8 @@ function initDateTimePickers() {
             format: "DD-MM-YYYY HH:mm",
         })
         .on("dp.change", () => {
-            var endDate = $('#end-date').data('DateTimePicker').date()
-            $("#start-date").data('DateTimePicker').maxDate(endDate);
+            var endDate = $('#end-date').data('DateTimePicker').date
+            $("#start-date").data('DateTimePicker').setMaxDate(endDate);
         });
 }
 

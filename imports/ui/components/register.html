@@ -1,6 +1,6 @@
 <template name="register">
     <form id="register-form" class="register">
-        <div class="form-group">
+      <div class="form-group">
         <label for="register-email">Email address</label>
         <input type="email" class="form-control" id="register-email" name="email" placeholder="Email address" required>
       </div>
@@ -12,6 +12,12 @@
         <label for="register-organizer">Are you an organizer?</label>
         <input type="checkbox" id="register-organizer">
       </div>
+      {{#if isOrganizer}}
+        <div class="form-group">
+          <label for="register-organizer-name">Name</label>
+          <input type="text" class="form-control" id="register-organizer-name" name="organizer-name" required>
+        </div>
+      {{/if}}
       <div class="form-group">
          <button type="submit" class="btn btn-default btn-block">Register</button>
       </div>

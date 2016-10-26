@@ -63,7 +63,7 @@ EventSchema = new SimpleSchema({
         optional: true
     },
     createdBy: {
-        label: 'Event organizer',
+        label: 'Event organizer name',
         type: String
     }
 });
