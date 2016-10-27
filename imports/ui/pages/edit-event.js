@@ -1,16 +1,17 @@
 import './edit-event.html';
 
 function initDateTimePickers() {
-    $('[name=endDate]').data('DateTimePicker').setMinDate($('[name=startDate]').data('DateTimePicker').date);
-    $('[name=startDate]').data('DateTimePicker').setMaxDate($('[name=endDate]').data('DateTimePicker').date);
-    $('[name=startDate]').data('DateTimePicker').setMinDate(moment().toDate())
+    $('[name=endDate]').data('DateTimePicker').minDate($('[name=startDate]').data('DateTimePicker').date());
+    $('[name=startDate]').data('DateTimePicker').minDate(moment().toDate())
+    $('[name=startDate]').data('DateTimePicker').maxDate($('[name=endDate]').data('DateTimePicker').date());
     $('[name=startDate]')
         .on("dp.change", () => {
-            $('[name=endDate]').data('DateTimePicker').setMinDate($('[name=startDate]').data('DateTimePicker').date);
+            $('[name=endDate]').data('DateTimePicker').minDate($('[name=startDate]').data('DateTimePicker').date());
         });
     $('[name=endDate]')
         .on("dp.change", () => {
-            $('[name=startDate]').data('DateTimePicker').setMaxDate($('[name=endDate]').data('DateTimePicker').date);
+            console.log("End date changed");
+            $('[name=startDate]').data('DateTimePicker').maxDate($('[name=endDate]').data('DateTimePicker').date());
         });
 }
 

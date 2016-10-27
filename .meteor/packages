@@ -20,7 +20,6 @@ ecmascript@0.5.8_1              # Enable ECMAScript2015+ syntax in app code
 twbs:bootstrap
 momentjs:moment
 iron:router
-tsega:bootstrap3-datetimepicker@=3.1.3_3
 fortawesome:fontawesome
 cfs:standard-packages
 cfs:gridfs
@@ -36,6 +35,7 @@ jeremy:geocomplete
 aldeed:simple-schema
 aldeed:collection2
 aldeed:autoform
-aldeed:autoform-bs-datetimepicker
 session@1.1.6
 shell-server
+qubitdev:autoform-bs-datetimepicker-updated
+tsega:bootstrap3-datetimepicker
