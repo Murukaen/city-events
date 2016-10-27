@@ -17,7 +17,10 @@ Router.configure({
 
 Router.route('/', {
     name: 'home',
-    template: 'allEvents'
+    template: 'allEvents',
+    subscriptions: function() {
+        return Meteor.subscribe('events', this.params.query.search);
+    }
 });
 
 Router.route('/add', {

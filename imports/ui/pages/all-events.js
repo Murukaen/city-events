@@ -5,21 +5,12 @@ import './all-events.css';
 
 //import {Events} from '/imports/api/events/events.js';
 
-Template.allEvents.onCreated(function () {
-    let template = Template.instance();
-    template.searchQuery = new ReactiveVar();
-    template.autorun( () => {
-        template.subscribe('events', template.searchQuery.get());
-    });
-});
-
 /* EVENTS */
 Template.allEvents.events({
-    'keypress [name=search]': function(event, template) {
-        let value = event.target.value.trim();
-        if (event.key === 'Enter') {
-            template.searchQuery.set(value);
-        }
+    'submit form': function(event, template) {
+        event.preventDefault();
+        let value = $('input[name=search]').val()
+        Router.go('home', {}, {query: 'search=' + value});
     }
 });
 
