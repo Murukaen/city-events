@@ -1,4 +1,4 @@
-Events = new Meteor.Collection('events'); // TODO export const
+Events = new Mongo.Collection('events'); // TODO export const
 
 Events.allow({
     insert: () => {

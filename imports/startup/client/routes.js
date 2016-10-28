@@ -56,7 +56,18 @@ Router.route('/event/:_id', {
 Router.route('/event/:_id/edit', {
     name: 'edit',
     template: 'editEvent',
+    subscriptions: function() {
+        return Meteor.subscribe('events');
+    },
     data: function() {
         return Events.findOne({_id: this.params._id});
+    },
+    action: function () {
+        if (this.ready()) {
+          this.render();
+        }
+        else {
+            this.render('loading');
+        }
     }
 })

@@ -15,8 +15,8 @@ function initDateTimePickers() {
         });
 }
 
-Template.editEvent.onCreated(function () {
-    this.subscribe('events');
+Template.editEvent.onCreated( () => {
+    Template.instance().labels = new ReactiveVar(Template.currentData().labels);
 });
 
 Template.editEvent.onRendered( () => {
@@ -29,3 +29,5 @@ Template.editEvent.events({
         Router.go('myEvents');
     }
 });
+
+/* HELPERS */
