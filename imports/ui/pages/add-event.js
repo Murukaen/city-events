@@ -1,6 +1,7 @@
 import './add-event.html';
 import './add-event.css'
 import '/imports/api/events/methods.js';
+import '/imports/ui/components/labels.js';
 
 function initValidator(template) {
     var validator = $('.event-setup').validate({
@@ -30,7 +31,8 @@ function initDateTimePickers() {
     $('#start-date')
         .datetimepicker({
             format: "DD-MM-YYYY HH:mm",
-            minDate: new Date()
+            minDate: new Date(),
+            useCurrent: false
         })
         .on("dp.change", () => {
             var startDate = $('#start-date').data('DateTimePicker').date()

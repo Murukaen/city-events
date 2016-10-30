@@ -6,6 +6,10 @@ Meteor.methods({
         //TODO check
         Events.insert(data,cbDone);
     },
+    'updateEvent': function(data, cbDone) {
+        // TODO check ownership
+        Events.update({_id: data._id}, {$set: data}, cbDone);
+    },
     'test': function() {
         console.log("server test");
     }
