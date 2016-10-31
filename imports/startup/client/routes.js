@@ -11,6 +11,15 @@ function isLoggedInAsOrganizer() {
     return Meteor.userId() && Roles.userIsInRole(Meteor.userId(), 'organizer');
 }
 
+var loadingAction = function(context) {
+    if (context.ready()) {
+        context.render();
+    }
+    else {
+        context.render('loading');
+    }
+}
+
 Router.configure({
     layoutTemplate: 'main'
 });
@@ -20,6 +29,9 @@ Router.route('/', {
     template: 'allEvents',
     subscriptions: function() {
         return Meteor.subscribe('events', this.params.query.search);
+    },
+    action: function() {
+        loadingAction(this);
     }
 });
 
@@ -37,19 +49,31 @@ Router.route('/add', {
 Router.route('/myevents', {
     name: 'myEvents',
     template: 'myEvents',
+    subscriptions: function() {
+        return Meteor.subscribe('events');
+    },
     onBeforeAction: function() {
         if (isLoggedInAsOrganizer())
             this.next();
         else
             this.render("needLogIn");
+    },
+    action: function() {
+        loadingAction(this);
     }
 });
 
 Router.route('/event/:_id', {
     name: 'view',
     template: 'viewEvent',
+    subscriptions: function() {
+        return Meteor.subscribe('events');
+    },
     data: function() {
         return Events.findOne({_id: this.params._id});
+    },
+    action: function() {
+        loadingAction(this);
     }
 });
 
@@ -62,12 +86,7 @@ Router.route('/event/:_id/edit', {
     data: function() {
         return Events.findOne({_id: this.params._id});
     },
-    action: function () {
-        if (this.ready()) {
-          this.render();
-        }
-        else {
-            this.render('loading');
-        }
+    action: function() {
+        loadingAction(this);
     }
-})
+});

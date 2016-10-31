@@ -1,10 +1,6 @@
-import '../components/show-events.js';
-
 import './my-events.html';
 
-Template.myEvents.onCreated(function () {
-    this.subscribe('events'); // TODO get only mine
-});
+import '../components/show-events.js';
 
 Template.myEvents.helpers({
     eventData: function() {
