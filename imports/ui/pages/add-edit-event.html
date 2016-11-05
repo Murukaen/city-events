@@ -1,0 +1,52 @@
+<template name="addEditEvent">
+    <div class="row">
+        <form class="col-md-offset-4 col-md-4 event-setup">
+            {{#if name}}
+                <h3> Edit event: {{name}} </h3>
+            {{else}}
+                <h3 class="text-center"> Add a new event </h3>
+                <div class="form-group">
+                    <label for="nameInput">Name:</label>     
+                    <input id="nameInput" class="form-control" type="text" name="name" placeholder="Enter a name..." required autofocus />
+                </div>
+            {{/if}}
+            <div class="form-group">
+                <label for="inputLocation">Location:</label>
+                <input id="inputLocation" class="form-control" type="text" name="location" value="{{location}}" placeholder="Enter a location..." required />
+            </div>
+            <div class="form-group">
+                <label for="inputStartDate">Starts:</label>
+                <div id="start-date" class="input-group datetimepicker">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input id="inputStartDate" name="startDate" type="text" class="form-control" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEndDate">Ends:</label>
+                <div id="end-date" class="input-group datetimepicker">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input id="inputEndDate" name="endDate" type="text" class="form-control" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputDescription">Description:</label>
+                <textarea id="inputDescription" class="form-control" name="description" rows="5" 
+                    placeholder="Enter some info about the event..." required>{{description}}</textarea>
+            </div>
+            {{>labelsT labels=labels}}
+            <div class="form-group">
+                <label for="inputLabel">Add label:</label>
+                <input id="inputLabel" class="form-control" type="text" name="label" placeholder="Type a label...">
+            </div>
+            <div class="text-center">
+                <button class="btn btn-default" type="submit">
+                    {{#if _id}}
+                        Update event
+                    {{else}}
+                        Add event
+                    {{/if}}
+                </button>
+            </div>    
+        </form>
+    </div>
+</template>
