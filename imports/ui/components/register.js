@@ -5,7 +5,7 @@ Template.register.onCreated(function() {
 });
 
 Template.register.onRendered(function() {
-    const self = this
+    const self = this;
     var validator = $('.register').validate({
         submitHandler: function() {
             Accounts.createUser({
@@ -22,6 +22,16 @@ Template.register.onRendered(function() {
                             email: "That email already belongs to a registered user."
                         });
                     }
+                }
+                else {
+                    Meteor.call( 'sendVerificationLink', ( error, response ) => {
+                      if ( error ) {
+                        console.log( "Verification error", error.reason);
+                      } else {
+                        console.log( 'Verification success' );
+                        // TODO alert user
+                      }
+                    });
                 }
             });
         }

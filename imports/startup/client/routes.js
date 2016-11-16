@@ -11,6 +11,10 @@ function isLoggedInAsOrganizer() {
     return Meteor.userId() && Roles.userIsInRole(Meteor.userId(), 'organizer');
 }
 
+function hasVerifiedEmail() {
+    return Meteor.user() && Meteor.user().emails[0].verified;
+}
+
 var loadingAction = function(context) {
     if (context.ready()) {
         context.render();
@@ -39,10 +43,12 @@ Router.route('/add', {
     name: 'add',
     template: 'addEvent',
     onBeforeAction: function() {
-        if (isLoggedInAsOrganizer())
-            this.next();
-        else
+        if (!isLoggedInAsOrganizer())
             this.render("needLogIn");
+        else if (!hasVerifiedEmail())
+            this.render("needEmailVerification");
+        else
+            this.next();
     }
 });
 

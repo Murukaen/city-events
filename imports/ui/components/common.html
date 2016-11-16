@@ -4,6 +4,31 @@
     </div>
 </template>
 
+<template name="needEmailVerification">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3 class="text-center"> Please verify your email address. </h3>
+                <p> If you can't find the verification email we sent you, try the following: </p>
+                <ol>
+                    <li> Look for it in your spam folder </li>
+                    <li>
+                        {{#unless validationSent}}
+                            <a href="#" class="resend-verification-email">Click this link to resend the verification email</a>
+                        {{else}} 
+                            {{#if validationSentSuccessfulyl}}
+                                <p> Validation email was resent </p>
+                            {{else}}
+                                <p> We encountered an issue. Please try again later. </p>
+                            {{/if}}
+                        {{/unless}}    
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</template>
+
 <template name="loading">
     <p> Loading ... </p>
 </template>
