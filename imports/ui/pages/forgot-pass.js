@@ -8,13 +8,7 @@ var isNotEmpty = function(val) {
     return val != null && val != "";
 }
 
-Template.ForgotPassword.events({
-  'submit #forgotPasswordForm': function(e, t) {
-    e.preventDefault();
-  },
-});
-
-Template.ForgotPassword.onRendered(function () {
+Template.forgotPassword.onRendered(function () {
     $('#forgotPasswordForm').validate({
         submitHandler: function() {
             var email = trimInput($('#forgotPasswordForm #forgotPasswordEmail').val().toLowerCase());
@@ -31,4 +25,10 @@ Template.ForgotPassword.onRendered(function () {
             });
         }
     });
+});
+
+Template.forgotPassword.events({
+  'submit #forgotPasswordForm': function(e, t) {
+    e.preventDefault();
+  },
 });

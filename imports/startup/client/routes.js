@@ -6,6 +6,8 @@ import '/imports/ui/pages/view-event.js';
 import '/imports/ui/pages/my-events.js';
 import '/imports/ui/pages/edit-event.js';
 import '/imports/ui/components/common.js';
+import '/imports/ui/pages/forgot-pass.js';
+import '/imports/ui/pages/reset-pass.js';
 
 function isLoggedInAsOrganizer() {
     return Meteor.userId() && Roles.userIsInRole(Meteor.userId(), 'organizer');
@@ -24,6 +26,10 @@ var loadingAction = function(context) {
     }
 }
 
+// Accounts.onResetPasswordLink(function(token, done) {
+//       Router.go('reset-pass');
+// });
+
 Router.configure({
     layoutTemplate: 'main'
 });
@@ -36,6 +42,19 @@ Router.route('/', {
     },
     action: function() {
         loadingAction(this);
+    }
+});
+
+Router.route('/forgot-pass', {
+    name: 'forgot-pass',
+    template: 'forgotPassword'
+});
+
+Router.route('/reset-pass/:token', {
+    name: 'reset-pass',
+    template: 'resetPassword',
+    data: function() {
+        return {token: this.params.token}
     }
 });
 

@@ -1,9 +1,7 @@
-<template name="ForgotPassword">
-
-    <form action="/forgot" id="forgotPasswordForm" method="post">
-      <input id="forgotPasswordEmail" type="text" name="email" placeholder="Email Address">
+<template name="forgotPassword">
+    <h3> Reset password </h3>
+    <form id="forgotPasswordForm" method="post">
+      <input id="forgotPasswordEmail" type="email" name="email" placeholder="Email Address">
       <input class="btn-submit" type="submit" value="Send">
     </form>
-    <!-- end #forgot-password-form -->
-
 </template>

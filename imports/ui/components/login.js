@@ -1,4 +1,5 @@
 import './login.html';
+import './login.css';
 
 Template.login.events({
     'submit form': function(event) {
@@ -25,4 +26,10 @@ Template.login.onRendered(function () {
             });
         }
     });
+});
+
+Template.login.events({
+    'click .forgot-pass': function() {
+        Router.go('forgot-pass');
+    }
 });

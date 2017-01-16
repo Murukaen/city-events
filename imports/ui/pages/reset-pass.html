@@ -1,0 +1,14 @@
+<template name="resetPassword">
+    <h3> Choose a new password for your account </h3>
+    <form id="resetPasswordForm" method="post">
+      <div class="form-group">
+         <label for="login-pass">New password</label>
+         <input type="password" class="form-control" id="pass" name="password" required>
+      </div>
+      <div class="form-group">
+         <label for="login-pass">Retype password</label>
+         <input type="password" class="form-control" id="pass-retype" name="password-retype" required>
+      </div>
+      <input class="btn-submit" type="submit" value="Send">
+    </form>
+</template>
