@@ -1,14 +1,23 @@
 import './events.js';
 //import {Events} from './events.js';
 
+function eventIsOwnByCurrentUser(eventId) {
+    if (Meteor.user()) {
+        let event = Events.findOne({_id: eventId});
+        let organizerName = Meteor.user().profile.organizerName;
+        return (event && event.createdBy == organizerName);
+    }
+    return false;
+}
+
 Meteor.methods({
     'addEvent': function(data, cbDone) {
-        //TODO check
         Events.insert(data,cbDone);
     },
     'updateEvent': function(data, cbDone) {
-        // TODO check ownership
-        Events.update({_id: data._id}, {$set: data}, cbDone);
+        if (eventIsOwnByCurrentUser(data._id)) {
+            Events.update({_id: data._id}, {$set: data}, cbDone);
+        }
     },
     'sendVerificationLink': function() {
         if (Meteor.isServer) {
@@ -17,8 +26,5 @@ Meteor.methods({
               return Accounts.sendVerificationEmail( userId );
             }
         }
-    },  
-    'test': function() {
-        console.log("server test");
     }
 })
