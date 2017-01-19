@@ -5,6 +5,13 @@ import './all-events.css';
 
 //import {Events} from '/imports/api/events/events.js';
 
+Template.allEvents.onRendered(function () {
+    $('#dateFilter').find('ul').find('a').click(function() {
+        $('#dateFilter').children('a').find('.selected').text($(this).text());
+        console.log($(this).text());
+    });
+});
+
 /* EVENTS */
 Template.allEvents.events({
     'submit form': function(event, template) {
