@@ -17,7 +17,7 @@ Template.allEvents.events({
     'submit form': function(event, template) {
         event.preventDefault();
         let value = $('input[name=search]').val()
-        Router.go('home', {}, {query: 'search=' + value});
+        Router.go('home', {}, {query: 'label=' + value});
     }
 });
 

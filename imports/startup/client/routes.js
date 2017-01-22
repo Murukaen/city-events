@@ -38,7 +38,7 @@ Router.route('/', {
     name: 'home',
     template: 'allEvents',
     subscriptions: function() {
-        return Meteor.subscribe('events', this.params.query.search);
+        return Meteor.subscribe('events', this.params.query);
     },
     action: function() {
         loadingAction(this);
