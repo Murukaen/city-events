@@ -12,6 +12,13 @@ function getStartOfCurrentWeek() {
     return date;
 }
 
+function getStartAndEndOfCurrentMonth() {
+    let date = new Date();
+    let startDate = new Date(date.getFullYear(), date.getMonth(), 1);
+    let endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    return {startDate: startDate, endDate: endDate};
+}
+
 function setDateOnQuery(startDate, endDate, query) {
     query.startDate = {$gte: startDate, $lte: endDate};
 }
@@ -34,7 +41,9 @@ function CrietriaParser(criteria) {
                     endDate = addDays(startDate, 7);
                     break;
                 case 'month':
-                    // TODO
+                    let currentMonthBounds = getStartAndEndOfCurrentMonth();
+                    startDate = currentMonthBounds.startDate;
+                    endDate = currentMonthBounds.endDate;
                     break;
             }
             setDateOnQuery(startDate, endDate, query);
