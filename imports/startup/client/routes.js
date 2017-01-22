@@ -26,10 +26,6 @@ var loadingAction = function(context) {
     }
 }
 
-// Accounts.onResetPasswordLink(function(token, done) {
-//       Router.go('reset-pass');
-// });
-
 Router.configure({
     layoutTemplate: 'main'
 });
@@ -39,6 +35,10 @@ Router.route('/', {
     template: 'allEvents',
     subscriptions: function() {
         return Meteor.subscribe('events', this.params.query);
+    },
+    onBeforeAction: function () {
+        Session.set('query', this.params.query);
+        this.next();
     },
     action: function() {
         loadingAction(this);

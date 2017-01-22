@@ -5,19 +5,23 @@ import './all-events.css';
 
 //import {Events} from '/imports/api/events/events.js';
 
-Template.allEvents.onRendered(function () {
-    $('#dateFilter').find('ul').find('a').click(function() {
-        $('#dateFilter').children('a').find('.selected').text($(this).text());
-        console.log($(this).text());
-    });
-});
+function filter(name, value) {
+    let query = Session.get('query');
+    query[name] = value;
+    Router.go('home', {}, {query: $.param(query)});
+}
 
 /* EVENTS */
 Template.allEvents.events({
-    'submit form': function(event, template) {
+    'submit #searchForm': function(event, template) {
         event.preventDefault();
-        let value = $('input[name=search]').val()
-        Router.go('home', {}, {query: 'label=' + value});
+        let value = $('input[name=search]').val();
+        filter('label', value);
+    },
+    'click #dateFilter ul': function(event, temaplte) {
+        event.preventDefault();
+        $('#dateFilter').find('.selected').text($(event.target).text());
+        filter('date', event.target.name);
     }
 });
 

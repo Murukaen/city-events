@@ -3,7 +3,7 @@
     <!-- Search bar -->
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <form class="form-horizontal">
+            <form class="form-horizontal" id="searchForm">
                 <div class="form-group searchBox">
                     <label for="searchBar" class="control-label col-md-1"> Search </label>
                     <div class="col-md-11">
@@ -27,9 +27,9 @@
             <li class="dropdown" id="dateFilter">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="selected">By Date</span> <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Today</a></li>
-                    <li><a href="#">Current week</a></li>
-                    <li><a href="#">Current month</a></li>
+                    <li><a href="#" name=today>Today</a></li>
+                    <li><a href="#" name=week>Current week</a></li>
+                    <li><a href="#" name=month>Current month</a></li>
                     <li class="divider"></li>
                     <li><a href="#">Current year</a></li>
                 </ul>
