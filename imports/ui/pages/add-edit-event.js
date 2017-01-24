@@ -78,7 +78,7 @@ Template.addEditEvent.events({
         if (event.key === 'Enter') {
             event.preventDefault();
             let labels = Template.instance().labels;
-            labels.set(labels.get().concat(event.target.value));
+            labels.set(labels.get().concat(event.target.value.toLowerCase()));
             event.target.value = '';
         }
     }

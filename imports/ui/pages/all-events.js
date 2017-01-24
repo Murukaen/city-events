@@ -22,7 +22,7 @@ Template.allEvents.events({
     'submit #searchForm': function(event, template) {
         event.preventDefault();
         let value = $('input[name=search]').val();
-        filter('label', value);
+        filter('label', value.toLowerCase());
     },
     'click #dateFilter ul': function(event, temaplte) {
         event.preventDefault();
