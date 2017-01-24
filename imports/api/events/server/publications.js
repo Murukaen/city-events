@@ -28,6 +28,8 @@ function CrietriaParser(criteria) {
         if (criteria.label) {
             query.labels = criteria.label;
         }
+    };
+    this.addDate = function(query) {
         if (criteria.date) {
             let startDate = new Date();
             let endDate = new Date();
@@ -47,8 +49,8 @@ function CrietriaParser(criteria) {
                     break;
             }
             setDateOnQuery(startDate, endDate, query);
-        }
-    }     
+        }  
+    };     
 }
 
 Meteor.publish('events', function(criteria) {
@@ -56,6 +58,7 @@ Meteor.publish('events', function(criteria) {
     if (criteria) {
         let parser = new CrietriaParser(criteria);
         parser.addLabel(query);
+        parser.addDate(query);
     }
     return Events.find(query);
 });
