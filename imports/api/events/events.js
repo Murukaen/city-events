@@ -16,6 +16,7 @@ EventSchema = new SimpleSchema({
     name: {
         label: 'Event name',
         type: String,
+        unique: true,
         max: 20,
         denyUpdate: true
     },
