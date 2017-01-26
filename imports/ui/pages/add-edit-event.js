@@ -17,7 +17,7 @@ function initValidator(template) {
                 startDate: $('#start-date').data('DateTimePicker').date().toDate(),
                 endDate: $('#end-date').data('DateTimePicker').date().toDate(),
                 description: $('[name=description').val(),
-                labels: template.labels.get(),
+                labels: template.labels.getLabels(),
                 createdBy: Meteor.user().profile.organizerName
             }
             var methodName = 'addEvent';
@@ -25,7 +25,6 @@ function initValidator(template) {
                 data._id = template.data._id;
                 methodName = 'updateEvent';
             }
-            // console.log("methodName", methodName);
             Meteor.call(methodName, data, () => {
                 Router.go('myEvents');
             });
@@ -60,7 +59,7 @@ function initDateTimePickers(template) {
 
 Template.addEditEvent.onCreated(() => {
     let template = Template.instance();
-    template.labels = new ReactiveVar(template.data ? template.data.labels : []);
+    template.labels = new Labels(template.data ? template.data.labels : null);
 });
 
 Template.addEditEvent.onRendered(function() {
@@ -77,8 +76,7 @@ Template.addEditEvent.events({
     'keypress input[name="label"]': function(event, template) {
         if (event.key === 'Enter') {
             event.preventDefault();
-            let labels = Template.instance().labels;
-            labels.set(labels.get().concat(event.target.value.toLowerCase()));
+            template.labels.addLabel(event.target.value.toLowerCase());
             event.target.value = '';
         }
     }
@@ -86,7 +84,7 @@ Template.addEditEvent.events({
 
 /* HELPERS */
 Template.addEditEvent.helpers({
-    labels() {
-        return Template.instance().labels.get(); 
+    'labels': function() {
+        return Template.instance().labels; 
     }
 })

@@ -41,10 +41,10 @@
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
-        {{#if labels.length}}
+        {{#if labels.getLabels.length}}
             <ul class="nav navbar-nav navbar-right">
                 <li> <a href="#">Active label: </a></li>
-                <li> {{>labelsT labels=labels}} </li>
+                <li> {{>labelsT labels}} </li>
             </ul>
         {{/if}}
       </div>
