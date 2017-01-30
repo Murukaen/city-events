@@ -3,6 +3,16 @@ import './add-edit-event.css';
 import '../components/labels.js';
 import '/imports/api/events/methods.js';
 
+function appendError(errorObj, name,type) {
+    switch(type) {
+        case 'unique':
+            errorObj[name] = name + ' already present';
+            break;
+        default:
+            errorObj[name] = type;
+    }
+}
+
 function initValidator(template) {
     var validator = $('.event-setup').validate({
         rules: {
@@ -25,16 +35,29 @@ function initValidator(template) {
                 data._id = template.data._id;
                 methodName = 'updateEvent';
             }
-            Meteor.call(methodName, data, () => {
-                Router.go('myEvents');
+            Meteor.call(methodName, data, (err) => {
+                if (err) {
+                    if (err.reason == "Internal server error") {
+                        console.log("Internal server error:", err);
+                    }
+                    else {
+                        console.log("Error (details):", err.details);
+                        let errors = {};
+                        err.details.forEach((e) => {
+                            appendError(errors, e.name, e.type);
+                        });
+                        template.errors.set(errors);
+                    }
+                }
+                else {
+                    Router.go('myEvents');
+                }
             });
         }
     });
 }
 
 function initDateTimePickers(template) {
-    // $('[name=endDate]').data('DateTimePicker').minDate($('[name=startDate]').data('DateTimePicker').date());
-    // $('[name=startDate]').data('DateTimePicker').maxDate($('[name=endDate]').data('DateTimePicker').date());
     $('#start-date')
         .datetimepicker({
             format: "DD-MM-YYYY HH:mm",
@@ -60,6 +83,7 @@ function initDateTimePickers(template) {
 Template.addEditEvent.onCreated(() => {
     let template = Template.instance();
     template.labels = new Labels(template.data ? template.data.labels : null);
+    template.errors = new ReactiveDict();
 });
 
 Template.addEditEvent.onRendered(function() {
@@ -86,5 +110,8 @@ Template.addEditEvent.events({
 Template.addEditEvent.helpers({
     'labels': function() {
         return Template.instance().labels; 
+    },
+    'error': function(name) {
+        return Template.instance().errors.get(name);
     }
-})
+});

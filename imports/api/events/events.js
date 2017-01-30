@@ -26,26 +26,16 @@ EventSchema = new SimpleSchema({
     },
     startDate: {
         label: 'Event start datetime',
-        type: Date,
-        autoform: {
-            afFieldInput: {
-                type: "bootstrap-datetimepicker",
-                dateTimePickerOptions: {
-                    format: "DD-MM-YYYY HH:mm"
-                }
-            }
-        }
+        type: Date
     },
     endDate: {
         label: 'Event end datetime',
         type: Date,
-        autoform: {
-            afFieldInput: {
-                type: "bootstrap-datetimepicker",
-                dateTimePickerOptions: {
-                    format: "DD-MM-YYYY HH:mm"
-                }
+        custom: function() {
+            if (this.value < this.field('startDate').value) {
+                return 'badDate';
             }
+            return true;
         }
     },
     description: {

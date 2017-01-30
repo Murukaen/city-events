@@ -39,3 +39,7 @@ session@1.1.6
 shell-server
 qubitdev:autoform-bs-datetimepicker-updated
 tsega:bootstrap3-datetimepicker
+mdg:validated-method
+aldeed:schema-index
+mdg:validation-error
+reactive-dict

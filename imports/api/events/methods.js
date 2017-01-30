@@ -10,10 +10,11 @@ function eventIsOwnByCurrentUser(eventId) {
     return false;
 }
 
+function checkEventNameIsPresent(name) {
+    return name && Events.findOne({name: name}) !== undefined;
+}
+
 Meteor.methods({
-    'addEvent': function(data, cbDone) {
-        Events.insert(data,cbDone);
-    },
     'updateEvent': function(data, cbDone) {
         if (eventIsOwnByCurrentUser(data._id)) {
             Events.update({_id: data._id}, {$set: data}, cbDone);
@@ -27,4 +28,17 @@ Meteor.methods({
             }
         }
     }
-})
+});
+
+addEvent = new ValidatedMethod({
+    name: 'addEvent',
+    validate: Events.simpleSchema().validator(),
+    run(data) {
+        if (checkEventNameIsPresent(data.name)) {
+            throw new ValidationError([{name: 'name', type: 'unique'}]);
+        }
+        else {
+            Events.insert(data);
+        }
+    }   
+});
