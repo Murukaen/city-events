@@ -20,6 +20,11 @@ Meteor.methods({
             Events.update({_id: data._id}, {$set: data}, cbDone);
         }
     },
+    'deleteEvent': function(id) {
+        if (eventIsOwnByCurrentUser(id)) {
+            Events.remove({_id: id});
+        }
+    },
     'sendVerificationLink': function() {
         if (Meteor.isServer) {
             let userId = Meteor.userId();

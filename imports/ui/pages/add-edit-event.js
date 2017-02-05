@@ -97,6 +97,16 @@ Template.addEditEvent.events({
     'submit form': function(event, template) {
         event.preventDefault();
     },
+    'click #deleteButton': function(event, template) {
+        Meteor.call('deleteEvent', template.data._id, (err) => {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                Router.go('myEvents');
+            }
+        });
+    },
     'keypress input[name="label"]': function(event, template) {
         if (event.key === 'Enter') {
             event.preventDefault();
