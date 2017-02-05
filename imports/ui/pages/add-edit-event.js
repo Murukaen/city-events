@@ -61,7 +61,7 @@ function initDateTimePickers(template) {
     $('#start-date')
         .datetimepicker({
             format: "DD-MM-YYYY HH:mm",
-            minDate: new Date(),
+            minDate: template.data ? undefined : new Date(),
             defaultDate: template.data ? template.data.startDate : undefined, 
             useCurrent: false
         })
@@ -94,7 +94,7 @@ Template.addEditEvent.onRendered(function() {
 
 /* EVENTS */
 Template.addEditEvent.events({
-    'submit form': function(event) {
+    'submit form': function(event, template) {
         event.preventDefault();
     },
     'keypress input[name="label"]': function(event, template) {
