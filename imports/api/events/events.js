@@ -1,17 +1,5 @@
 Events = new Mongo.Collection('events'); // TODO export const
 
-Events.allow({
-    insert: () => {
-        return true;
-    },
-    update: () => {
-        return true;
-    },
-    remove: () => {
-        return true;
-    }
-});
-
 EventSchema = new SimpleSchema({
     name: {
         label: 'Event name',
