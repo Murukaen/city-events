@@ -13,6 +13,58 @@ function appendError(errorObj, name,type) {
     }
 }
 
+let DateUtil = {
+    'getStartDate': function () {
+        return $('#start-date').data('DateTimePicker').date();
+    },
+    'getEndDate': function () {
+        return $('#end-date').data('DateTimePicker').date();
+    },
+    'setEndDate': function (date) {
+        $('#end-date').data('DateTimePicker').date(date);
+    },
+    'setMinEndDate': function() {
+        $("#end-date").data('DateTimePicker').minDate(DateUtil.getStartDate());
+    },
+    'setDefaultEndDate': function () {
+        DateUtil.setEndDate(DateUtil.getStartDate().add(1, 'hours'));
+    },
+    'toggleEndDate': function(visibility) {
+        let element = $('#formEndDate');
+        if (visibility) {
+            element.show();
+        }
+        else {
+            element.hide();
+        }
+    },
+    'initDateTimePickers': function(template) {
+        $('#start-date')
+            .datetimepicker({
+                format: "DD-MM-YYYY HH:mm",
+                minDate: template.data ? undefined : new Date(),
+                defaultDate: template.data ? template.data.startDate : undefined, 
+                useCurrent: false
+            })
+            .on("dp.change", () => {
+                var startDate = $('#start-date').data('DateTimePicker').date();
+                template.startDateSet = !!startDate;
+                template.startDateChanged = true;
+            });
+        $('#end-date')
+            .datetimepicker({
+                format: "DD-MM-YYYY HH:mm",
+                defaultDate: template.data ? template.data.endDate : undefined 
+            });
+        DateUtil.toggleEndDate(!!DateUtil.getEndDate());
+        if(DateUtil.getEndDate()) {
+            DateUtil.setMinEndDate();
+        }
+        template.startDateSet = !!DateUtil.getStartDate();
+        template.startDateChanged = false;
+    }
+};
+
 function initValidator(template) {
     var validator = $('.event-setup').validate({
         rules: {
@@ -57,29 +109,6 @@ function initValidator(template) {
     });
 }
 
-function initDateTimePickers(template) {
-    $('#start-date')
-        .datetimepicker({
-            format: "DD-MM-YYYY HH:mm",
-            minDate: template.data ? undefined : new Date(),
-            defaultDate: template.data ? template.data.startDate : undefined, 
-            useCurrent: false
-        })
-        .on("dp.change", () => {
-            var startDate = $('#start-date').data('DateTimePicker').date()
-            $("#end-date").data('DateTimePicker').minDate(startDate);
-        });
-    $('#end-date')
-        .datetimepicker({
-            format: "DD-MM-YYYY HH:mm",
-            defaultDate: template.data ? template.data.endDate : undefined 
-        })
-        .on("dp.change", () => {
-            var endDate = $('#end-date').data('DateTimePicker').date()
-            $("#start-date").data('DateTimePicker').maxDate(endDate);
-        });
-}
-
 Template.addEditEvent.onCreated(() => {
     let template = Template.instance();
     template.labels = new Labels(template.data ? template.data.labels : null);
@@ -89,7 +118,7 @@ Template.addEditEvent.onCreated(() => {
 Template.addEditEvent.onRendered(function() {
     let template = Template.instance();
     initValidator(template);
-    initDateTimePickers(template);
+    DateUtil.initDateTimePickers(template);
 });
 
 /* EVENTS */
@@ -112,6 +141,13 @@ Template.addEditEvent.events({
             event.preventDefault();
             template.labels.addLabel(event.target.value.toLowerCase());
             event.target.value = '';
+        }
+    },
+    'focusout #inputStartDate': function(event, template) {
+        DateUtil.toggleEndDate(template.startDateSet);
+        if(template.startDateSet && template.startDateChanged) {
+            DateUtil.setMinEndDate();
+            DateUtil.setDefaultEndDate();
         }
     }
 })
