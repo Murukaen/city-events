@@ -18,12 +18,12 @@ function hasVerifiedEmail() {
 }
 
 var loadingAction = function(context) {
-    if (context.ready()) {
+    // if (context.ready()) {
         context.render();
-    }
-    else {
-        context.render('loading');
-    }
+    // }
+    // else {
+    //     context.render('loading');
+    // }
 }
 
 Router.configure({
