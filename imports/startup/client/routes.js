@@ -37,8 +37,13 @@ Router.route('/', {
         return Meteor.subscribe('events', this.params.query);
     },
     onBeforeAction: function () {
-        Session.set('query', this.params.query);
-        this.next();
+        if (!Object.keys(this.params.query).length) {
+            this.redirect('/?date=today');
+        }
+        else {
+            Session.set('query', this.params.query);
+            this.next();
+        }
     },
     action: function() {
         loadingAction(this);
