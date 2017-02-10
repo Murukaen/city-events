@@ -80,7 +80,7 @@ Router.route('/myevents', {
     name: 'myEvents',
     template: 'myEvents',
     subscriptions: function() {
-        return Meteor.subscribe('events');
+        return Meteor.subscribe('my-events');
     },
     onBeforeAction: function() {
         if (isLoggedInAsOrganizer())

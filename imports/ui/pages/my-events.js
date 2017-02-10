@@ -5,7 +5,7 @@ import '../components/show-events.js';
 Template.myEvents.helpers({
     eventData: function() {
         return {
-            events: Events.find({createdBy: Meteor.user().profile.organizerName}).fetch(),
+            events: Events.find({}).fetch(),
             clickRoute: 'edit'
         }
     }

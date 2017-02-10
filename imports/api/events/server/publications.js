@@ -62,3 +62,11 @@ Meteor.publish('events', function(criteria) {
     }
     return Events.find(query);
 });
+
+Meteor.publish('my-events', function() {
+    if (this.userId) {
+        var user = Meteor.users.findOne(this.userId);
+        return Events.find({createdBy: user.profile.organizerName});
+    }
+    return this.ready();
+});

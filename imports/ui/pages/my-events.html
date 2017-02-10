@@ -1,7 +1,3 @@
 <template name="myEvents">
-    {{#if Template.subscriptionsReady}}
-        {{>showEvents eventData=eventData}}
-    {{else}}
-        <p> Loading </p>
-    {{/if}}
+    {{>showEvents eventData=eventData}}
 </template>
