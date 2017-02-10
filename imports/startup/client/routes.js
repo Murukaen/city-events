@@ -97,7 +97,7 @@ Router.route('/event/:_id', {
     name: 'view',
     template: 'viewEvent',
     subscriptions: function() {
-        return Meteor.subscribe('events');
+        return Meteor.subscribe('one-event', this.params._id);
     },
     data: function() {
         return Events.findOne({_id: this.params._id});
@@ -111,7 +111,7 @@ Router.route('/event/:_id/edit', {
     name: 'edit',
     template: 'editEvent',
     subscriptions: function() {
-        return Meteor.subscribe('events');
+        return Meteor.subscribe('one-event', this.params._id);
     },
     data: function() {
         return Events.findOne({_id: this.params._id});

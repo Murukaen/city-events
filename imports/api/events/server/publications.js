@@ -70,3 +70,10 @@ Meteor.publish('my-events', function() {
     }
     return this.ready();
 });
+
+Meteor.publish('one-event', function(eventId) {
+    if (eventId) {
+        return Events.find({_id:eventId});
+    }
+    return this.ready();
+});
