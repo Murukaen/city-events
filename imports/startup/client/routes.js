@@ -17,15 +17,6 @@ function hasVerifiedEmail() {
     return Meteor.user() && Meteor.user().emails[0].verified;
 }
 
-var loadingAction = function(context) {
-    // if (context.ready()) {
-        context.render();
-    // }
-    // else {
-    //     context.render('loading');
-    // }
-}
-
 Router.configure({
     layoutTemplate: 'main'
 });
@@ -33,7 +24,8 @@ Router.configure({
 Router.route('/', {
     name: 'home',
     template: 'allEvents',
-    subscriptions: function() {
+    loadingTemplate: 'loading',
+    waitOn: function() {
         return Meteor.subscribe('events', this.params.query);
     },
     onBeforeAction: function () {
@@ -46,7 +38,7 @@ Router.route('/', {
         }
     },
     action: function() {
-        loadingAction(this);
+        this.render();
     }
 });
 
@@ -79,7 +71,8 @@ Router.route('/add', {
 Router.route('/myevents', {
     name: 'myEvents',
     template: 'myEvents',
-    subscriptions: function() {
+    loadingTemplate: 'loading',
+    waitOn: function() {
         return Meteor.subscribe('my-events');
     },
     onBeforeAction: function() {
@@ -89,34 +82,36 @@ Router.route('/myevents', {
             this.render("needLogIn");
     },
     action: function() {
-        loadingAction(this);
+        this.render();
     }
 });
 
 Router.route('/event/:_id', {
     name: 'view',
     template: 'viewEvent',
-    subscriptions: function() {
+    loadingTemplate: 'loading',
+    waitOn: function() {
         return Meteor.subscribe('one-event', this.params._id);
     },
     data: function() {
         return Events.findOne({_id: this.params._id});
     },
     action: function() {
-        loadingAction(this);
+        this.render();
     }
 });
 
 Router.route('/event/:_id/edit', {
     name: 'edit',
     template: 'editEvent',
-    subscriptions: function() {
+    loadingTemplate: 'loading',
+    waitOn: function() {
         return Meteor.subscribe('one-event', this.params._id);
     },
     data: function() {
         return Events.findOne({_id: this.params._id});
     },
     action: function() {
-        loadingAction(this);
+        this.render();
     }
 });
