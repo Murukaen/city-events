@@ -1,23 +1,4 @@
-function addDays(date, days) { // TODO move to util
-    var result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result;
-}
-
-function getStartOfCurrentWeek() { // TODO move to util
-    let date = new Date();
-    let day = date.getDay() || 7;
-    if( day !== 1 ) 
-        date.setHours(-24 * (day - 1)); 
-    return date;
-}
-
-function getStartAndEndOfCurrentMonth() { // TODO move to util
-    let date = new Date();
-    let startDate = new Date(date.getFullYear(), date.getMonth(), 1);
-    let endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-    return {startDate: startDate, endDate: endDate};
-}
+import {DateUtils} from '/imports/lib/date.js';
 
 var MongoQuery = function(query) {
     this.query = query || {};
@@ -51,11 +32,11 @@ function CriteriaParser(criteria) { // TODO consider passing query in constructo
                     endDate.setHours(23,59,59,999);
                     break;
                 case 'week':
-                    startDate = getStartOfCurrentWeek();
-                    endDate = addDays(startDate, 7);
+                    startDate = DateUtils.getStartOfCurrentWeek();
+                    endDate = DateUtils.addDays(startDate, 7);
                     break;
                 case 'month':
-                    let currentMonthBounds = getStartAndEndOfCurrentMonth();
+                    let currentMonthBounds = DateUtils.getStartAndEndOfCurrentMonth();
                     startDate = currentMonthBounds.startDate;
                     endDate = currentMonthBounds.endDate;
                     break;
