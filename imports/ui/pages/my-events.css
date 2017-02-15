@@ -1,0 +1,10 @@
+#myEvents ul.dropdown-menu {
+    min-width: 100px;
+    padding: 0px;
+    text-align: center;
+}
+
+#myEvents ul.dropdown-menu li {
+    border: 1px solid grey;
+    padding: 10px;
+}

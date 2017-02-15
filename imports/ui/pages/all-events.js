@@ -1,31 +1,18 @@
 import '../components/show-events.js';
+import '../helpers/query.js';
 
 import './all-events.html';
 import './all-events.css';
 
 //import {Events} from '/imports/api/events/events.js';
 
-function filter(name, value) {
-    let query = Session.get('query');
-    if (value) {
-        query[name] = value;
-    }
-    else {
-        delete query[name];
-    }
-    let queryParam = {query: $.param(query)};
-    if (Object.keys(query).length == 0) {
-        queryParam = {};    
-    }
-    Router.go('home', {}, queryParam);
-}
 
 Template.allEvents.onCreated(function () {
     let template = Template.instance();
     let currentLabel = Session.get('query').label;
     template.labels = new Labels(currentLabel ? [currentLabel] : []);
     template.autorun(function () {
-        filter('label', template.labels.getLabels()[0]);
+        Query.filter('home', 'label', template.labels.getLabels()[0]);
     });
 });
 
@@ -45,7 +32,7 @@ Template.allEvents.events({
     },
     'click #dateFilter ul': function(event, template) {
         event.preventDefault();
-        filter('date', event.target.name);
+        Query.filter('home', 'date', event.target.name);
     }
 });
 

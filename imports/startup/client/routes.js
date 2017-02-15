@@ -9,12 +9,33 @@ import '/imports/ui/components/common.js';
 import '/imports/ui/pages/forgot-pass.js';
 import '/imports/ui/pages/reset-pass.js';
 
+var defaultQueries =  {
+    defaults : {
+        'home': 'date=today',
+        'myEvents' : 'future=true'
+    },
+    get: function(context) {
+        return context.route._path + '?' + this.defaults[context.route.getName()];
+    }
+}
+
 function isLoggedInAsOrganizer() {
     return Meteor.userId() && Roles.userIsInRole(Meteor.userId(), 'organizer');
 }
 
 function hasVerifiedEmail() {
     return Meteor.user() && Meteor.user().emails[0].verified;
+}
+
+
+function setQuery(context) {
+    if (!Object.keys(context.params.query).length) {
+        context.redirect(defaultQueries.get(context));
+    }
+    else {
+        Session.set('query', context.params.query);
+        context.next();
+    }
 }
 
 Router.configure({
@@ -29,13 +50,7 @@ Router.route('/', {
         return Meteor.subscribe('events', this.params.query);
     },
     onBeforeAction: function () {
-        if (!Object.keys(this.params.query).length) {
-            this.redirect('/?date=today');
-        }
-        else {
-            Session.set('query', this.params.query);
-            this.next();
-        }
+        setQuery(this);
     },
     action: function() {
         this.render();
@@ -73,11 +88,11 @@ Router.route('/myevents', {
     template: 'myEvents',
     loadingTemplate: 'loading',
     waitOn: function() {
-        return Meteor.subscribe('my-events');
+        return Meteor.subscribe('my-events', this.params.query);
     },
     onBeforeAction: function() {
         if (isLoggedInAsOrganizer())
-            this.next();
+            setQuery(this);
         else
             this.render("needLogIn");
     },
