@@ -14,22 +14,22 @@ function appendError(errorObj, name,type) {
 }
 
 let DateUtil = {
-    'getStartDate': function () {
+    getStartDate() {
         return $('#start-date').data('DateTimePicker').date();
     },
-    'getEndDate': function () {
+    getEndDate() {
         return $('#end-date').data('DateTimePicker').date();
     },
-    'setEndDate': function (date) {
+    setEndDate(date) {
         $('#end-date').data('DateTimePicker').date(date);
     },
-    'setMinEndDate': function() {
+    setMinEndDate() {
         $("#end-date").data('DateTimePicker').minDate(DateUtil.getStartDate());
     },
-    'setDefaultEndDate': function () {
+    setDefaultEndDate() {
         DateUtil.setEndDate(DateUtil.getStartDate().add(1, 'hours'));
     },
-    'toggleEndDate': function(visibility) {
+    toggleEndDate(visibility) {
         let element = $('#formEndDate');
         if (visibility) {
             element.show();
@@ -38,7 +38,7 @@ let DateUtil = {
             element.hide();
         }
     },
-    'initDateTimePickers': function(template) {
+    initDateTimePickers(template) {
         $('#start-date')
             .datetimepicker({
                 format: "DD-MM-YYYY HH:mm",
@@ -72,7 +72,7 @@ function initValidator(template) {
                 maxlength: 20
             }
         },
-        submitHandler: function(event) {
+        submitHandler(event) {
             var data = {
                 name: $('[name=name]').val(),
                 location: $('[name=location]').val(),
@@ -154,10 +154,10 @@ Template.addEditEvent.events({
 
 /* HELPERS */
 Template.addEditEvent.helpers({
-    'labels': function() {
+    labels() {
         return Template.instance().labels; 
     },
-    'error': function(name) {
+    error(name) {
         return Template.instance().errors.get(name);
     }
 });

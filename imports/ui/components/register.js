@@ -7,7 +7,7 @@ Template.register.onCreated(function() {
 Template.register.onRendered(function() {
     const self = this;
     var validator = $('.register').validate({
-        submitHandler: function() {
+        submitHandler () {
             Accounts.createUser({
                 email: $('.register #register-email').val(),
                 password: $('.register #register-pass').val(),
@@ -48,7 +48,7 @@ Template.register.events({
 });
 
 Template.register.helpers({
-    'isOrganizer': function() {
+    isOrganizer () {
         return Template.instance().isOrganizer.get();
     }
 })

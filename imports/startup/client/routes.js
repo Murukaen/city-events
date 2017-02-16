@@ -14,7 +14,7 @@ var defaultQueries =  {
         'home': 'date=today',
         'myEvents' : 'future=true'
     },
-    get: function(context) {
+    get (context) {
         return context.route._path + '?' + this.defaults[context.route.getName()];
     }
 }
@@ -46,13 +46,13 @@ Router.route('/', {
     name: 'home',
     template: 'allEvents',
     loadingTemplate: 'loading',
-    waitOn: function() {
+    waitOn () {
         return Meteor.subscribe('events', this.params.query);
     },
-    onBeforeAction: function () {
+    onBeforeAction () {
         setQuery(this);
     },
-    action: function() {
+    action () {
         this.render();
     }
 });
@@ -65,7 +65,7 @@ Router.route('/forgot-pass', {
 Router.route('/reset-pass/:token', {
     name: 'reset-pass',
     template: 'resetPassword',
-    data: function() {
+    data () {
         return {token: this.params.token}
     }
 });
@@ -73,7 +73,7 @@ Router.route('/reset-pass/:token', {
 Router.route('/add', {
     name: 'add',
     template: 'addEvent',
-    onBeforeAction: function() {
+    onBeforeAction () {
         if (!isLoggedInAsOrganizer())
             this.render("needLogIn");
         else if (!hasVerifiedEmail())
@@ -87,16 +87,16 @@ Router.route('/myevents', {
     name: 'myEvents',
     template: 'myEvents',
     loadingTemplate: 'loading',
-    waitOn: function() {
+    waitOn () {
         return Meteor.subscribe('my-events', this.params.query);
     },
-    onBeforeAction: function() {
+    onBeforeAction () {
         if (isLoggedInAsOrganizer())
             setQuery(this);
         else
             this.render("needLogIn");
     },
-    action: function() {
+    action () {
         this.render();
     }
 });
@@ -105,13 +105,13 @@ Router.route('/event/:_id', {
     name: 'view',
     template: 'viewEvent',
     loadingTemplate: 'loading',
-    waitOn: function() {
+    waitOn () {
         return Meteor.subscribe('one-event', this.params._id);
     },
-    data: function() {
+    data () {
         return Events.findOne({_id: this.params._id});
     },
-    action: function() {
+    action () {
         this.render();
     }
 });
@@ -120,13 +120,13 @@ Router.route('/event/:_id/edit', {
     name: 'edit',
     template: 'editEvent',
     loadingTemplate: 'loading',
-    waitOn: function() {
+    waitOn () {
         return Meteor.subscribe('one-event', this.params._id);
     },
-    data: function() {
+    data () {
         return Events.findOne({_id: this.params._id});
     },
-    action: function() {
+    action () {
         this.render();
     }
 });

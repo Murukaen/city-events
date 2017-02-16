@@ -12,7 +12,7 @@ Template.resetPassword.onRendered(function () {
                 equalTo: "#pass"
             }
         },
-        submitHandler: function() {
+        submitHandler() {
             console.log("Submit for token", self.data.token);
             Accounts.resetPassword(self.data.token, $('#pass').val(), function(err) {
                 if (err) {

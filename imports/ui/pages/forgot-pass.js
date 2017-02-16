@@ -10,7 +10,7 @@ var isNotEmpty = function(val) {
 
 Template.forgotPassword.onRendered(function () {
     $('#forgotPasswordForm').validate({
-        submitHandler: function() {
+        submitHandler() {
             var email = trimInput($('#forgotPasswordForm #forgotPasswordEmail').val().toLowerCase());
             Accounts.forgotPassword({email: email}, function(err) {
                 if (err) {

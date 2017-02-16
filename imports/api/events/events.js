@@ -19,7 +19,7 @@ EventSchema = new SimpleSchema({
     endDate: {
         label: 'Event end datetime',
         type: Date,
-        custom: function() {
+        custom() {
             if (this.value < this.field('startDate').value) {
                 return 'badDate';
             }

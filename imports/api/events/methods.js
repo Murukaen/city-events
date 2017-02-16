@@ -15,17 +15,17 @@ function checkEventNameIsPresent(name) {
 }
 
 Meteor.methods({
-    'updateEvent': function(data, cbDone) {
+    updateEvent(data, cbDone) {
         if (eventIsOwnByCurrentUser(data._id)) {
             Events.update({_id: data._id}, {$set: data}, cbDone);
         }
     },
-    'deleteEvent': function(id) {
+    deleteEvent(id) {
         if (eventIsOwnByCurrentUser(id)) {
             Events.remove({_id: id});
         }
     },
-    'sendVerificationLink': function() {
+    sendVerificationLink() {
         if (Meteor.isServer) {
             let userId = Meteor.userId();
             if ( userId ) {

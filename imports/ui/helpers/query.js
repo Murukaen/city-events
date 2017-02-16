@@ -1,5 +1,5 @@
 Query = {
-    'filter': function(route, name, value) {
+    filter(route, name, value) {
         let query = Session.get('query');
         if (value || value === false) {
             query[name] = value;

@@ -26,7 +26,7 @@ Template.labelsT.events({
 });
 
 Template.labelsT.helpers({
-    'labels': function() {
+    labels () {
         return Template.instance().data.getLabels();
     }
 })

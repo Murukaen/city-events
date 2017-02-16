@@ -8,7 +8,7 @@ Template.showEvents.events({
 });
 
 Template.showEvents.helpers({
-    'eventRows': function() {
+    eventRows () {
         let all = this.eventData.events;
         let chunks = [];
         let size = 4;

@@ -24,10 +24,10 @@ Template.needEmailVerification.events({
 });
 
 Template.needEmailVerification.helpers({
-    'validationSent': function() {
+    validationSent () {
         return Template.instance().validationSent.get();
     },
-    'validationSentSuccessfulyl': function() {
+    validationSentSuccessfully () {
         return Template.instance().validationSentSuccessfulyl.get();
     }
 })

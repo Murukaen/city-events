@@ -36,7 +36,7 @@ Template.myEvents.events({
 });
 
 Template.myEvents.helpers({
-    eventData: function() {
+    eventData() {
         return {
             events: Events.find({}).fetch(),
             clickRoute: 'edit'
