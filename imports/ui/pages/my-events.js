@@ -8,8 +8,6 @@ function updateFutureFilter() {
     let future = $('#filterFutureInput').is(':checked');
     let past = $('#filterPastInput').is(':checked');
     let text = "Future & Past";
-    console.log("future", future);
-    console.log("past", past);
     if (future && !past) {
         text = "Future";
     }

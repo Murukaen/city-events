@@ -3,7 +3,12 @@ import './show-events.css';
 
 Template.showEvents.events({
     'click .event-box': function() {
-        Router.go(Template.instance().data.eventData.clickRoute, {_id: this._id});
+        if (this.startDate >= new Date()) {
+            Router.go(Template.instance().data.eventData.clickRoute, {_id: this._id});
+        }
+        else {
+            console.log("Cannot select a past event");
+        }
     }
 });
 
