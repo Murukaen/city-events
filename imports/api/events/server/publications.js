@@ -36,9 +36,10 @@ function CriteriaParser(criteria) { // TODO consider passing query in constructo
                     endDate = DateUtils.addDays(startDate, 7);
                     break;
                 case 'month':
-                    let currentMonthBounds = DateUtils.getStartAndEndOfCurrentMonth();
-                    startDate = currentMonthBounds.startDate;
-                    endDate = currentMonthBounds.endDate;
+                    ({startDate, endDate} = DateUtils.getStartAndEndOfCurrentMonth());
+                    break;
+                case 'year':
+                    ({startDate, endDate} = DateUtils.getStartAndEndOfCurrentYear());
                     break;
             }
             new MongoQuery(query).setStartDateLimits(startDate, endDate);

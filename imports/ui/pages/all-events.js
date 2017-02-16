@@ -17,7 +17,7 @@ Template.allEvents.onCreated(function () {
 });
 
 Template.allEvents.onRendered(function () {
-     let currentDate = Session.get('query').date;
+    let currentDate = Session.get('query').date;
     if (currentDate) {
         $('#dateFilter').find('.selected').text($('#dateFilter').find('[name=' + currentDate.trim() + ']').text());
     }

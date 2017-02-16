@@ -16,5 +16,11 @@ export const DateUtils = {
         let startDate = new Date(date.getFullYear(), date.getMonth(), 1);
         let endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
         return {startDate: startDate, endDate: endDate};
+    },
+    'getStartAndEndOfCurrentYear': function () {
+        let date = new Date();
+        let startDate = new Date(date.getFullYear(), 0, 1);
+        let endDate = new Date(date.getFullYear() + 1, 0, 0);
+        return {startDate: startDate, endDate: endDate};
     }
 }
