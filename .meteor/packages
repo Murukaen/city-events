@@ -44,3 +44,5 @@ aldeed:schema-index
 mdg:validation-error
 reactive-dict@1.1.8
 fds:keycodes
+practicalmeteor:mocha
+practicalmeteor:chai
