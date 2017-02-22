@@ -1,0 +1,7 @@
+{
+  "galaxy.meteor.com": {
+     "env": {
+       "MONGO_URL": "mongodb://admin:cityadmin@ds157839.mlab.com:57839/city-events"
+     }
+   }
+}
