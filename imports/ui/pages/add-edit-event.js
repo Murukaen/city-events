@@ -1,7 +1,7 @@
 import './add-edit-event.html';
 import './add-edit-event.css';
 import '../components/labels.js';
-import '/imports/api/events/methods.js';
+import '/imports/api/events/event-methods.js';
 
 function appendError(errorObj, name,type) {
     switch(type) {

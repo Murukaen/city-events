@@ -1,4 +1,4 @@
-//import {Events} from '/imports/api/events/events.js';
+import {Events} from '/imports/api/events/events.js';
 import '/imports/ui/layouts/app-body.js';
 import '/imports/ui/pages/all-events.js';
 import '/imports/ui/pages/add-event.js';

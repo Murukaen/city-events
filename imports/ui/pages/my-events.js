@@ -4,6 +4,8 @@ import './my-events.css';
 import '../components/show-events.js';
 import '../helpers/query.js';
 
+import {Events} from '/imports/api/events/events.js';
+
 function updateFutureFilter() {
     let future = $('#filterFutureInput').is(':checked');
     let past = $('#filterPastInput').is(':checked');

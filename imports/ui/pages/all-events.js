@@ -4,7 +4,7 @@ import '../helpers/query.js';
 import './all-events.html';
 import './all-events.css';
 
-//import {Events} from '/imports/api/events/events.js';
+import {Events} from '/imports/api/events/events.js';
 
 
 Template.allEvents.onCreated(function () {

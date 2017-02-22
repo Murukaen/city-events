@@ -1,4 +1,4 @@
-Events = new Mongo.Collection('events'); // TODO export const
+export const Events = new Mongo.Collection('events');
 
 EventSchema = new SimpleSchema({
     name: {

@@ -1,4 +1,5 @@
 import {DateUtils} from '/imports/lib/date.js';
+import {Events} from '/imports/api/events/events.js';
 
 var MongoQuery = function(query) {
     this.query = query || {};

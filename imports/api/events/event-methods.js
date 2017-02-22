@@ -1,5 +1,4 @@
-import './events.js';
-//import {Events} from './events.js';
+import {Events} from './events.js';
 
 function eventIsOwnByCurrentUser(eventId) {
     if (Meteor.user()) {
@@ -23,14 +22,6 @@ Meteor.methods({
     deleteEvent(id) {
         if (eventIsOwnByCurrentUser(id)) {
             Events.remove({_id: id});
-        }
-    },
-    sendVerificationLink() {
-        if (Meteor.isServer) {
-            let userId = Meteor.userId();
-            if ( userId ) {
-              return Accounts.sendVerificationEmail( userId );
-            }
         }
     }
 });
