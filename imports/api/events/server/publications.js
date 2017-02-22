@@ -28,18 +28,16 @@ function CriteriaParser(criteria) { // TODO consider passing query in constructo
             let endDate = new Date();
             switch(criteria.date) {
                 case 'today': 
-                    startDate.setHours(0,0,0,0);
                     endDate.setHours(23,59,59,999);
                     break;
                 case 'week':
-                    startDate = DateUtils.getStartOfCurrentWeek();
-                    endDate = DateUtils.addDays(startDate, 7);
+                    ({endDate} = DateUtils.getStartAndEndOfCurrentWeek());
                     break;
                 case 'month':
-                    ({startDate, endDate} = DateUtils.getStartAndEndOfCurrentMonth());
+                    ({endDate} = DateUtils.getStartAndEndOfCurrentMonth());
                     break;
                 case 'year':
-                    ({startDate, endDate} = DateUtils.getStartAndEndOfCurrentYear());
+                    ({endDate} = DateUtils.getStartAndEndOfCurrentYear());
                     break;
             }
             new MongoQuery(query).setStartDateLimits(startDate, endDate);

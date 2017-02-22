@@ -4,13 +4,14 @@ export const DateUtils = {
         result.setDate(result.getDate() + days);
         return result;
     },
-    getStartOfCurrentWeek () {
-        let date = new Date();
-        let day = date.getDay() || 7;
+    getStartAndEndOfCurrentWeek () {
+        let startDate = new Date();
+        let day = startDate.getDay() || 7;
         if( day !== 1 ) 
-            date.setHours(-24 * (day - 1)); 
-        date.setHours(0, 0, 0);
-        return date;
+            startDate.setHours(-24 * (day - 1)); 
+        startDate.setHours(0, 0, 0);
+        let endDate = new Date(DateUtils.addDays(startDate, 7).getTime() - 1000);
+        return {startDate, endDate};
     },
     getStartAndEndOfCurrentMonth () {
         let date = new Date();

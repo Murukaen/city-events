@@ -19,13 +19,15 @@ describe('DateUtils', function () {
     chai.assert.equal(DateUtils.addDays(new Date(2010, 11, 31), 1).getTime(), new Date(2011, 0, 1).getTime(), 'must add one day towards next year');
     chai.assert.equal(DateUtils.addDays(new Date(2010, 6, 15), 100).getTime(), new Date(2010, 9, 23).getTime(), 'must add the equivalent of more months in same year');
   });
-  it('should getStartOfCurrentWeek', function () {
+  it('should getStartAndEndOfCurrentWeek', function () {
     let d = new Date();
-    let ret = DateUtils.getStartOfCurrentWeek();
-    chai.assert.equal(ret.getDay(), 1, 'result date must be on Monday');
-    chai.assert.isAbove(d - ret, 0, 'result date must come before current date');
-    chai.assert.isBelow(d - ret, 1000 * 3600 * 24 * 7, 'result date must not be more than 7 days apart from current date');
-    assertFirstTimeOfDay(ret, 'result date');
+    let {startDate: start, endDate: end} = DateUtils.getStartAndEndOfCurrentWeek();
+    chai.assert.equal(start.getDay(), 1, 'startDate must be on Monday');
+    assertFirstTimeOfDay(start, 'startDate');
+    chai.assert.isAbove(d - start, 0, 'startDate must come before current date');
+    let millisecondsInWeek = 1000 * 3600 * 24 * 7;
+    chai.assert.isBelow(d - start, millisecondsInWeek, 'startDate must not be more than 7 days apart from current date');
+    chai.assert(end-start, millisecondsInWeek-1);
   });
   it('should getStartAndEndOfCurrentMonth', function () {
     let {startDate: start, endDate: end} = DateUtils.getStartAndEndOfCurrentMonth();
