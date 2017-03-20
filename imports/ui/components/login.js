@@ -31,5 +31,14 @@ Template.login.onRendered(function () {
 Template.login.events({
     'click .forgot-pass': function() {
         Router.go('forgot-pass');
+    },
+    'click #fb-login': function() {
+        Meteor.loginWithFacebook({}, function(err){
+            if (err) {
+                console.error(err);
+                throw new Meteor.Error("Facebook login failed");
+            }
+        });
+        // Meteor.linkWithFacebook();
     }
 });
