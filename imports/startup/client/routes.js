@@ -8,6 +8,7 @@ import '/imports/ui/pages/edit-event.js';
 import '/imports/ui/components/common.js';
 import '/imports/ui/pages/forgot-pass.js';
 import '/imports/ui/pages/reset-pass.js';
+import '/imports/ui/pages/profile.js';
 
 var defaultQueries =  {
     defaults : {
@@ -57,6 +58,30 @@ Router.route('/', {
     }
 });
 
+Router.route('/profile', {
+    name: 'profile',
+    template: 'profile',
+    loadingTemplate: 'loading',
+    onBeforeAction () {
+        if (!Meteor.user())
+            this.render('needLogInToViewProfile');
+        else
+            this.next();
+    },
+    data () {
+        if (Meteor.user()) {
+            console.log(Meteor.user());
+            let user = Meteor.user();
+            return {
+                email: user.emails[0].address, 
+                role: user.roles[0].toUpperCase(), 
+                isOrganizer: user.profile.isOrganizer, 
+                organizerName: user.profile.organizerName
+            };
+        }
+    }
+});
+
 Router.route('/forgot-pass', {
     name: 'forgot-pass',
     template: 'forgotPassword'
@@ -75,7 +100,7 @@ Router.route('/add', {
     template: 'addEvent',
     onBeforeAction () {
         if (!isLoggedInAsOrganizer())
-            this.render("needLogIn");
+            this.render("needLogInAsOrgToAdd");
         else if (!hasVerifiedEmail())
             this.render("needEmailVerification");
         else
@@ -94,7 +119,7 @@ Router.route('/myevents', {
         if (isLoggedInAsOrganizer())
             setQuery(this);
         else
-            this.render("needLogIn");
+            this.render("needLogInAsOrgToAdd");
     },
     action () {
         this.render();
