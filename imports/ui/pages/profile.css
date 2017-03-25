@@ -1,0 +1,15 @@
+#profile {
+    text-align: center;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#profile table {
+    margin-top: 50px;
+    font-size: 26px;
+}
+
+#profile div#linkSocial {
+    margin-top: 50px;
+}

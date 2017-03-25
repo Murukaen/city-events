@@ -3,7 +3,7 @@ Meteor.users.after.insert(function (userId, doc) {
         Roles.addUsersToRoles(doc._id, 'organizer');
     } 
     else {
-        Roles.addUsersToRoles(doc._id, 'normal');
+        Roles.addUsersToRoles(doc._id, 'user');
     }
 });
 
