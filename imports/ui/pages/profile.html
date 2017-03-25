@@ -18,6 +18,13 @@
                     </tr>
                 {{/if}}
             </tbody>
+            {{#if isVerified}}
+                <div id="linkSocial">
+                    {{#unless isLinkedWithFacebook}}
+                        <button> Link with Fb </button>
+                    {{/unless}}
+                </div>
+            {{/if}}
         </table>
     </div>
 </template>

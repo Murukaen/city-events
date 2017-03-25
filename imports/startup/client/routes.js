@@ -70,13 +70,14 @@ Router.route('/profile', {
     },
     data () {
         if (Meteor.user()) {
-            console.log(Meteor.user());
             let user = Meteor.user();
             return {
                 email: user.emails[0].address, 
                 role: user.roles[0].toUpperCase(), 
                 isOrganizer: user.profile.isOrganizer, 
-                organizerName: user.profile.organizerName
+                organizerName: user.profile.organizerName,
+                isVerified: hasVerifiedEmail(), 
+                isLinkedWithFacebook: user.profile.isLinkedWithFacebook
             };
         }
     }
