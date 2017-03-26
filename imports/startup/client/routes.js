@@ -58,6 +58,21 @@ Router.route('/', {
     }
 });
 
+Router.route('/verify-email/:token', {
+    name: 'verifyEmail',
+    action () {
+        Accounts.verifyEmail(this.params.token, (err) => {
+            if (err) {
+                console.error(err);
+            }
+            else {
+                console.log("Email verified");
+            }
+            this.redirect('home');
+        });
+    }
+});
+
 Router.route('/profile', {
     name: 'profile',
     template: 'profile',
