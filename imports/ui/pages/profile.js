@@ -8,7 +8,7 @@ Template.profile.events({
                 console.error(err);
             }
             else {
-                Meteor.user().profile.isLinkedWithFacebook = true;
+                Meteor.call('updateProfile', {key: 'isLinkedWithFacebook', value: true});
             }
         });
     }

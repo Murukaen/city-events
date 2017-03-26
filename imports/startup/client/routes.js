@@ -88,8 +88,7 @@ Router.route('/profile', {
             let user = Meteor.user();
             return {
                 email: user.emails[0].address, 
-                role: user.roles[0].toUpperCase(), 
-                isOrganizer: user.profile.isOrganizer, 
+                isOrganizer: isLoggedInAsOrganizer(), 
                 organizerName: user.profile.organizerName,
                 isVerified: hasVerifiedEmail(), 
                 isLinkedWithFacebook: user.profile.isLinkedWithFacebook
