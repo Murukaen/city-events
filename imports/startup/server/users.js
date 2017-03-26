@@ -8,9 +8,12 @@ Meteor.users.after.insert(function (userId, doc) {
 });
 
 Meteor.startup(function() {
- Accounts.urls.resetPassword = function(token) {
-    return Meteor.absoluteUrl('reset-pass/' + token);
-  };
+    Accounts.urls.resetPassword = function(token) {
+        return Meteor.absoluteUrl('reset-pass/' + token);
+    };
+    Accounts.urls.verifyEmail = function(token) {
+        return Meteor.absoluteUrl('verify-email/' + token);
+    };
 });
 
 // Accounts.emailTemplates.resetPassword.text = function(user, url) {

@@ -26,9 +26,9 @@ Template.register.onRendered(function() {
                 else {
                     Meteor.call( 'sendVerificationLink', ( error, response ) => {
                       if ( error ) {
-                        console.log( "Verification error", error.reason);
+                        console.log('Verification error', error.reason);
                       } else {
-                        console.log( 'Verification success' );
+                        console.log('Verification sent successfully');
                         // TODO alert user
                       }
                     });
