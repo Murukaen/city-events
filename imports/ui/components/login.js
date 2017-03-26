@@ -35,10 +35,13 @@ Template.login.events({
     'click #fb-login': function() {
         Meteor.loginWithFacebook({}, function(err){
             if (err) {
-                console.error(err);
-                throw new Meteor.Error("Facebook login failed");
+                if (err.reason == 'Must link account first') {
+                    console.error("Facebook account is not linked");
+                }
+                else {
+                    console.error("Facebook login failed with:", err);
+                }
             }
         });
-        // Meteor.linkWithFacebook();
     }
 });

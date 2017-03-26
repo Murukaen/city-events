@@ -7,6 +7,12 @@ Meteor.users.after.insert(function (userId, doc) {
     }
 });
 
+Accounts.validateNewUser((user) => {
+    if(user.hasOwnProperty('emails'))
+        return true;
+    throw new Meteor.Error(403, "Must link account first");
+});
+
 Meteor.startup(function() {
     Accounts.urls.resetPassword = function(token) {
         return Meteor.absoluteUrl('reset-pass/' + token);
