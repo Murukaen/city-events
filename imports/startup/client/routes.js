@@ -48,7 +48,10 @@ Router.route('/', {
     template: 'allEvents',
     loadingTemplate: 'loading',
     waitOn () {
-        return Meteor.subscribe('events', this.params.query);
+        if (Object.keys(this.params.query).length) {
+            return Meteor.subscribe('events', this.params.query);
+        }
+        return [];
     },
     onBeforeAction () {
         setQuery(this);
