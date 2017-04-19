@@ -6,16 +6,16 @@
 
 meteor-base@1.0.4             # Packages every Meteor app needs to have
 mobile-experience@1.0.4       # Packages for a great mobile UX
-mongo@1.1.14                   # The database Meteor supports right now
+mongo@1.1.16                   # The database Meteor supports right now
 blaze-html-templates@1.0.4    # Compile .html files into Meteor Blaze views
 reactive-var@1.0.11            # Reactive variable for tracker
 jquery@1.11.10                  # Helpful client-side library
-tracker@1.1.1                 # Meteor's client-side reactive programming library
+tracker@1.1.2                 # Meteor's client-side reactive programming library
 
-standard-minifier-css@1.3.2   # CSS minifier run for production mode
-standard-minifier-js@1.2.1    # JS minifier run for production mode
+standard-minifier-css@1.3.4   # CSS minifier run for production mode
+standard-minifier-js@2.0.0    # JS minifier run for production mode
 es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
-ecmascript@0.6.1              # Enable ECMAScript2015+ syntax in app code
+ecmascript@0.7.2              # Enable ECMAScript2015+ syntax in app code
 
 twbs:bootstrap
 momentjs:moment
@@ -24,18 +24,18 @@ fortawesome:fontawesome
 cfs:standard-packages
 cfs:gridfs
 raix:ui-dropped-event
-accounts-password@1.3.3
+accounts-password@1.3.5
 alanning:roles
 matb33:collection-hooks
 themeteorchef:jquery-validation
-email@1.1.18
+email@1.2.0
 dburles:google-maps
 jeremy:geocomplete
 aldeed:simple-schema
 aldeed:collection2
 aldeed:autoform
 session@1.1.7
-shell-server@0.2.1
+shell-server@0.2.3
 qubitdev:autoform-bs-datetimepicker-updated
 tsega:bootstrap3-datetimepicker
 mdg:validated-method
@@ -45,7 +45,8 @@ reactive-dict@1.1.8
 fds:keycodes
 practicalmeteor:mocha
 practicalmeteor:chai
-accounts-facebook
+accounts-facebook@1.1.1
 tanis:bootstrap-social
-service-configuration
+service-configuration@1.0.11
 bozhao:link-accounts
+facebook-config-ui
