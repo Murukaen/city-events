@@ -14,9 +14,13 @@ Template.allEvents.onCreated(function () {
     template.autorun(function () {
         Query.filter('home', 'label', template.labels.getLabels()[0]);
     });
+    template.allLabels = Array.from(Events.find().fetch()
+            .map((event) => event.labels)
+            .reduce((set, arr) => new Set(Array.from(set).concat(arr)), new Set()))
 });
 
 Template.allEvents.onRendered(function () {
+    Meteor.typeahead.inject();
     let currentDate = Session.get('query').date;
     if (currentDate) {
         $('#dateFilter').find('.selected').text($('#dateFilter').find('[name=' + currentDate.trim() + ']').text());
@@ -46,5 +50,8 @@ Template.allEvents.helpers({
     },
     labels() {
         return Template.instance().labels; 
+    },
+    allLabels() {
+        return Template.instance().allLabels
     }
 });

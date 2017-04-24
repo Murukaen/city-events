@@ -50,3 +50,4 @@ tanis:bootstrap-social
 service-configuration@1.0.11
 bozhao:link-accounts
 facebook-config-ui
+sergeyt:typeahead
