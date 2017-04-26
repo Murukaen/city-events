@@ -29,7 +29,8 @@ Template.login.onRendered(function () {
 });
 
 Template.login.events({
-    'click .forgot-pass': function() {
+    'click .forgot-pass': function(event) {
+        $(event.target).closest(".dropdown-menu").prev().dropdown("toggle");
         Router.go('forgot-pass');
     },
     'click #fb-login': function() {
