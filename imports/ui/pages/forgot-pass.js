@@ -12,12 +12,12 @@ Template.forgotPassword.onRendered(function () {
     $('#forgotPasswordForm').validate({
         submitHandler() {
             var email = trimInput($('#forgotPasswordForm #forgotPasswordEmail').val().toLowerCase());
-            Accounts.forgotPassword({email: email}, function(err) {
+            Accounts.forgotPassword({email}, (err) => {
                 if (err) {
                   if (err.message === 'User not found [403]') {
                     console.log('This email does not exist.');
                   } else {
-                    console.log('We are sorry but something went wrong.');
+                    console.log('We are sorry but something went wrong.', err);
                   }
                 } else {
                   console.log('Email Sent. Check your mailbox.');
