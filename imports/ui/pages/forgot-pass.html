@@ -2,6 +2,9 @@
     <h3> Reset password </h3>
     <form id="forgotPasswordForm" method="post">
       <input id="forgotPasswordEmail" type="email" name="email" placeholder="Email Address" required>
+        {{#if error 'email'}}
+            <label for="forgotPasswordEmail" class="error"> {{error 'email'}} </label>
+        {{/if}}
       <br />
       <input class="btn-submit" type="submit" value="Send">
     </form>
