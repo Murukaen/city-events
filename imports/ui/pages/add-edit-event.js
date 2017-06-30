@@ -139,7 +139,8 @@ Template.addEditEvent.events({
     'keypress input[name="label"]': function(event, template) {
         if (event.key === 'Enter') {
             event.preventDefault();
-            template.labels.addLabel(event.target.value.toLowerCase());
+            if (event.target.value && event.target.value != '')
+                template.labels.addLabel(event.target.value.toLowerCase());
             event.target.value = '';
         }
     },
