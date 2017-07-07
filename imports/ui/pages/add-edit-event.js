@@ -88,22 +88,21 @@ function initValidator(template) {
                 methodName = 'updateEvent';
             }
             Meteor.call(methodName, data, (err) => {
+                let errors = {};
                 if (err) {
                     if (err.reason == "Internal server error") {
                         console.log("Internal server error:", err);
                     }
                     else {
-                        console.log("Error (details):", err.details);
-                        let errors = {};
                         err.details.forEach((e) => {
                             appendError(errors, e.name, e.type);
                         });
-                        template.errors.set(errors);
                     }
                 }
                 else {
                     Router.go('myEvents');
                 }
+                template.errors.set(errors);
             });
         }
     });
@@ -150,6 +149,9 @@ Template.addEditEvent.events({
             DateUtil.setMinEndDate();
             DateUtil.setDefaultEndDate();
         }
+    },
+    'keyup input': function(e,t) {
+        t.errors.delete(e.target.name)
     }
 })
 
