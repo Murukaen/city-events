@@ -4,6 +4,6 @@ ServiceConfiguration.configurations.remove({
  
 ServiceConfiguration.configurations.insert({
     service: 'facebook',
-    appId: '1338019239602378',
-    secret: '4b238d5d5449e657f43cb7391d48ed59'
+    appId: Meteor.settings.facebook.appId,
+    secret: Meteor.settings.facebook.secret
 });
