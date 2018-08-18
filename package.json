@@ -6,6 +6,7 @@
     "test": "meteor test --driver-package practicalmeteor:mocha --port 3030"
   },
   "dependencies": {
+    "@babel/runtime": "^7.0.0-rc.1",
     "babel-runtime": "^6.26.0",
     "bcrypt": "^0.8.7",
     "meteor-node-stubs": "~0.2.0"
