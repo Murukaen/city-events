@@ -42,7 +42,7 @@ EventSchema = new SimpleSchema({
         optional: true
     },
     createdBy: {
-        label: 'Event organizer name',
+        label: 'Event poster',
         type: String
     }
 });

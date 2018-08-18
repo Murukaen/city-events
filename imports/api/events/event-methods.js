@@ -1,10 +1,9 @@
 import {Events} from './events.js';
 
-function eventIsOwnByCurrentUser(eventId) {
+function eventIsPostedByCurrentUser(eventId) {
     if (Meteor.user()) {
         let event = Events.findOne({_id: eventId});
-        let organizerName = Meteor.user().profile.organizerName;
-        return (event && event.createdBy == organizerName);
+        return (event && event.createdBy == Meteor.userId());
     }
     return false;
 }
@@ -15,12 +14,12 @@ function checkEventNameIsPresent(name) {
 
 Meteor.methods({
     updateEvent(data, cbDone) {
-        if (eventIsOwnByCurrentUser(data._id)) {
+        if (eventIsPostedByCurrentUser(data._id)) {
             Events.update({_id: data._id}, {$set: data}, cbDone);
         }
     },
     deleteEvent(id) {
-        if (eventIsOwnByCurrentUser(id)) {
+        if (eventIsPostedByCurrentUser(id)) {
             Events.remove({_id: id});
         }
     }

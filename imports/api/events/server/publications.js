@@ -67,7 +67,7 @@ Meteor.publish('events', function(criteria) {
 Meteor.publish('my-events', function(criteria) {
     if (this.userId) {
         var user = Meteor.users.findOne(this.userId);
-        let query = {createdBy: user.profile.organizerName};
+        let query = {createdBy: this.userId};
         new CriteriaParser(criteria)
             .addFuture(query);
         return Events.find(query);

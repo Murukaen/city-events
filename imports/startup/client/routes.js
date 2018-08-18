@@ -20,10 +20,6 @@ var defaultQueries =  {
     }
 }
 
-function isLoggedInAsOrganizer() {
-    return Meteor.userId() && Roles.userIsInRole(Meteor.userId(), 'organizer');
-}
-
 function hasVerifiedEmail() {
     return Meteor.user() && Meteor.user().emails[0].verified;
 }
@@ -91,8 +87,6 @@ Router.route('/profile', {
             let user = Meteor.user();
             return {
                 email: user.emails[0].address, 
-                isOrganizer: isLoggedInAsOrganizer(), 
-                organizerName: user.profile.organizerName,
                 isVerified: hasVerifiedEmail(), 
                 isLinkedWithFacebook: user.profile.isLinkedWithFacebook
             };
@@ -117,9 +111,7 @@ Router.route('/add', {
     name: 'add',
     template: 'addEvent',
     onBeforeAction () {
-        if (!isLoggedInAsOrganizer())
-            this.render("needLogInAsOrgToAdd");
-        else if (!hasVerifiedEmail())
+        if (!hasVerifiedEmail())
             this.render("needEmailVerification");
         else
             this.next();
@@ -134,10 +126,7 @@ Router.route('/myevents', {
         return Meteor.subscribe('my-events', this.params.query);
     },
     onBeforeAction () {
-        if (isLoggedInAsOrganizer())
-            setQuery(this);
-        else
-            this.render("needLogInAsOrgToAdd");
+        setQuery(this);
     },
     action () {
         this.render();
