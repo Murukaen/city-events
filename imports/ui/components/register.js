@@ -6,7 +6,10 @@ Template.register.onRendered(function() {
         submitHandler () {
             Accounts.createUser({
                 email: $('.register #register-email').val(),
-                password: $('.register #register-pass').val()
+                password: $('.register #register-pass').val(),
+                profile: {
+                    points: 0
+                }
             }, function(error) {
                 if (error) {
                     if(error.reason == "Email already exists.") {

@@ -88,7 +88,8 @@ Router.route('/profile', {
             return {
                 email: user.emails[0].address, 
                 isVerified: hasVerifiedEmail(), 
-                isLinkedWithFacebook: user.profile.isLinkedWithFacebook
+                isLinkedWithFacebook: user.profile.isLinkedWithFacebook,
+                points: user.profile.points
             };
         }
     }
