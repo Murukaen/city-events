@@ -34,6 +34,10 @@ addEvent = new ValidatedMethod({
         }
         else {
             Events.insert(data);
+            if (!this.isSimulation) {
+                const {UserManager} = require('/imports/api/users/server/user-manager');
+                UserManager.increaseScore();
+            }
         }
     }   
 });
