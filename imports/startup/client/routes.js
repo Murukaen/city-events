@@ -9,6 +9,7 @@ import '/imports/ui/components/common.js';
 import '/imports/ui/pages/forgot-pass.js';
 import '/imports/ui/pages/reset-pass.js';
 import '/imports/ui/pages/profile.js';
+import {Profile} from '/imports/lib/profile';
 
 var defaultQueries =  {
     defaults : {
@@ -21,7 +22,7 @@ var defaultQueries =  {
 }
 
 function hasVerifiedEmail() {
-    return Meteor.user() && Meteor.user().emails[0].verified;
+    return Profile.isDev() || Meteor.user() && Meteor.user().emails[0].verified;
 }
 
 

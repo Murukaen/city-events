@@ -44,6 +44,12 @@ EventSchema = new SimpleSchema({
     createdBy: {
         label: 'Event poster',
         type: String
+    },
+    validatedBy: {
+        label: "Users that validated this event",
+        type: [String],
+        optional: true,
+        defaultValue: []
     }
 });
 

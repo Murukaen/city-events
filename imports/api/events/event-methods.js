@@ -18,9 +18,14 @@ Meteor.methods({
             Events.update({_id: data._id}, {$set: data}, cbDone);
         }
     },
-    deleteEvent(id) {
-        if (eventIsPostedByCurrentUser(id)) {
-            Events.remove({_id: id});
+    deleteEvent(eventId) {
+        if (eventIsPostedByCurrentUser(eventId)) {
+            Events.remove({_id: eventId});
+        }
+    },
+    voteUpEvent(eventId) {
+        if (!eventIsPostedByCurrentUser(eventId)) {
+            Events.update({_id: eventId}, {$addToSet: {validatedBy: Meteor.userId()}});
         }
     }
 });

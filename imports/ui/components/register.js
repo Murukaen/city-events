@@ -1,4 +1,5 @@
 import './register.html';
+import {Profile} from '/imports/lib/profile';
 
 Template.register.onRendered(function() {
     const self = this;
@@ -18,7 +19,7 @@ Template.register.onRendered(function() {
                         });
                     }
                 }
-                else {
+                else if (!Profile.isDev()) {
                     Meteor.call( 'sendVerificationLink', ( error, response ) => {
                       if ( error ) {
                         console.log('Verification error', error.reason);
