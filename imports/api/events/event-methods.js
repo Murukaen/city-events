@@ -25,7 +25,14 @@ Meteor.methods({
     },
     voteUpEvent(eventId) {
         if (!eventIsPostedByCurrentUser(eventId)) {
-            Events.update({_id: eventId}, {$addToSet: {validatedBy: Meteor.userId()}});
+            let event = Events.findOne({_id: eventId});
+            if (event && !event.validatedBy.includes(Meteor.userId())) {
+                Events.update({_id: eventId}, {$push: {validatedBy: Meteor.userId()}});
+                if (!this.isSimulation) {
+                    const {UserManager} = require('/imports/api/users/server/user-manager');
+                    UserManager.increaseScore(event.createdBy);
+                }
+            }
         }
     }
 });
