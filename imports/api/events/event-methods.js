@@ -32,7 +32,7 @@ Meteor.methods({
                 Events.update({_id: eventId}, {$pull: {invalidatedBy: userId}});
                 if (!this.isSimulation) {
                     const {UserManager} = require('/imports/api/users/server/user-manager');
-                    UserManager.increaseScore(event.createdBy);
+                    UserManager.increaseScore(event.createdBy, userId);
                 }
             }
         }
@@ -46,7 +46,7 @@ Meteor.methods({
                 Events.update({_id: eventId}, {$pull: {validatedBy: userId}});
                 if (!this.isSimulation) {
                     const {UserManager} = require('/imports/api/users/server/user-manager');
-                    UserManager.decreaseScore(event.createdBy);
+                    UserManager.decreaseScore(event.createdBy, userId);
                 }
             }
         }
