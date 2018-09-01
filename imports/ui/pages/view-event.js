@@ -7,5 +7,11 @@ Template.viewEvent.events({
             if (err) 
                 console.log(err);
         });
+    },
+    'click #voteDown': function(event, template) {
+        Meteor.call('voteDownEvent', template.data._id, (err) => {
+            if (err) 
+                console.log(err);
+        });
     }
 })

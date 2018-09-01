@@ -50,6 +50,12 @@ EventSchema = new SimpleSchema({
         type: [String],
         optional: true,
         defaultValue: []
+    },
+    invalidatedBy: {
+        label: "Users that invalidated this event",
+        type: [String],
+        optional: true,
+        defaultValue: []
     }
 });
 

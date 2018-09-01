@@ -1,9 +1,14 @@
 export const UserManager = {
     SCORE_INCREMENT: 2,
-    increaseScore(userId = Meteor.userId()) {
+    updateScore(userId, value) {
         if (userId) {
-            Meteor.users.update({_id: userId}, 
-                {$inc: {"profile.points": UserManager.SCORE_INCREMENT}});
+            Meteor.users.update({_id: userId}, {$inc: {"profile.points": value}});
         }
+    },
+    increaseScore(userId = Meteor.userId()) {
+        UserManager.updateScore(userId, UserManager.SCORE_INCREMENT);
+    },
+    decreaseScore(userId) {
+        UserManager.updateScore(userId, -UserManager.SCORE_INCREMENT);
     }
 }

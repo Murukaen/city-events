@@ -26,11 +26,27 @@ Meteor.methods({
     voteUpEvent(eventId) {
         if (!eventIsPostedByCurrentUser(eventId)) {
             let event = Events.findOne({_id: eventId});
-            if (event && !event.validatedBy.includes(Meteor.userId())) {
-                Events.update({_id: eventId}, {$push: {validatedBy: Meteor.userId()}});
+            let userId = Meteor.userId();
+            if (event && !event.validatedBy.includes(userId)) {
+                Events.update({_id: eventId}, {$push: {validatedBy: userId}});
+                Events.update({_id: eventId}, {$pull: {invalidatedBy: userId}});
                 if (!this.isSimulation) {
                     const {UserManager} = require('/imports/api/users/server/user-manager');
                     UserManager.increaseScore(event.createdBy);
+                }
+            }
+        }
+    },
+    voteDownEvent(eventId) {
+        if (!eventIsPostedByCurrentUser(eventId)) {
+            let event = Events.findOne({_id: eventId});
+            let userId = Meteor.userId();
+            if (event && !event.invalidatedBy.includes(userId)) {
+                Events.update({_id: eventId}, {$push: {invalidatedBy: userId}});
+                Events.update({_id: eventId}, {$pull: {validatedBy: userId}});
+                if (!this.isSimulation) {
+                    const {UserManager} = require('/imports/api/users/server/user-manager');
+                    UserManager.decreaseScore(event.createdBy);
                 }
             }
         }
