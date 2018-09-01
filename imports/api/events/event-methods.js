@@ -27,26 +27,56 @@ Meteor.methods({
         if (!eventIsPostedByCurrentUser(eventId)) {
             let event = Events.findOne({_id: eventId});
             let userId = Meteor.userId();
-            if (event && !event.validatedBy.includes(userId)) {
-                Events.update({_id: eventId}, {$push: {validatedBy: userId}});
-                Events.update({_id: eventId}, {$pull: {invalidatedBy: userId}});
-                if (!this.isSimulation) {
-                    const {UserManager} = require('/imports/api/users/server/user-manager');
-                    UserManager.increaseScore(event.createdBy, userId);
+            if (event) {
+                if (!event.validatedBy.includes(userId)) {
+                    Events.update({_id: eventId}, {$push: {validatedBy: userId}});
+                    let hasInvalidatedBefore = event.invalidatedBy.includes(userId);
+                    if (hasInvalidatedBefore) {
+                        Events.update({_id: eventId}, {$pull: {invalidatedBy: userId}});
+                    }
+                    if (!this.isSimulation) {
+                        const {UserManager} = require('/imports/api/users/server/user-manager');
+                        UserManager.increaseScore(event.createdBy, userId);
+                        if (hasInvalidatedBefore) {
+                            UserManager.increaseScore(event.createdBy, userId);
+                        }
+                    }
                 }
-            }
+                else {
+                    Events.update({_id: eventId}, {$pull: {validatedBy: userId}});
+                    if (!this.isSimulation) {
+                        const {UserManager} = require('/imports/api/users/server/user-manager');
+                        UserManager.decreaseScore(event.createdBy, userId);
+                    }
+                }
+            }    
         }
     },
     voteDownEvent(eventId) {
         if (!eventIsPostedByCurrentUser(eventId)) {
             let event = Events.findOne({_id: eventId});
             let userId = Meteor.userId();
-            if (event && !event.invalidatedBy.includes(userId)) {
-                Events.update({_id: eventId}, {$push: {invalidatedBy: userId}});
-                Events.update({_id: eventId}, {$pull: {validatedBy: userId}});
-                if (!this.isSimulation) {
-                    const {UserManager} = require('/imports/api/users/server/user-manager');
-                    UserManager.decreaseScore(event.createdBy, userId);
+            if (event) {
+                if (!event.invalidatedBy.includes(userId)) {
+                    Events.update({_id: eventId}, {$push: {invalidatedBy: userId}});
+                    let hasValidatedBefore = event.validatedBy.includes(userId);
+                    if (hasValidatedBefore) {
+                        Events.update({_id: eventId}, {$pull: {validatedBy: userId}});
+                    }
+                    if (!this.isSimulation) {
+                        const {UserManager} = require('/imports/api/users/server/user-manager');
+                        UserManager.decreaseScore(event.createdBy, userId);
+                        if (hasValidatedBefore) {
+                            UserManager.decreaseScore(event.createdBy, userId);
+                        }
+                    }
+                }
+                else {
+                    Events.update({_id: eventId}, {$pull: {invalidatedBy: userId}});
+                    if (!this.isSimulation) {
+                        const {UserManager} = require('/imports/api/users/server/user-manager');
+                        UserManager.increaseScore(event.createdBy, userId);
+                    }
                 }
             }
         }

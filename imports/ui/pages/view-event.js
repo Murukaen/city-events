@@ -14,4 +14,13 @@ Template.viewEvent.events({
                 console.log(err);
         });
     }
-})
+});
+
+Template.viewEvent.helpers({
+    hasVotedUp() {
+        return Template.instance().data.validatedBy.includes(Meteor.userId());
+    },
+    hasVotedDown() {
+        return Template.instance().data.invalidatedBy.includes(Meteor.userId());
+    }
+});
