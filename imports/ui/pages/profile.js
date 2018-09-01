@@ -13,3 +13,9 @@ Template.profile.events({
         });
     }
 })
+
+Template.profile.helpers({
+    roundedPoints() {
+        return Math.round(Template.instance().data.points);
+    }
+});
