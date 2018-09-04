@@ -13,7 +13,7 @@ import {Profile} from '/imports/lib/profile';
 
 var defaultQueries =  {
     defaults : {
-        'home': 'date=today',
+        'search': 'date=today',
         'myEvents' : 'future=true'
     },
     get (context) {
@@ -41,7 +41,7 @@ Router.configure({
 });
 
 Router.route('/', {
-    name: 'home',
+    name: 'search',
     template: 'allEvents',
     loadingTemplate: 'loading',
     waitOn () {
@@ -68,7 +68,7 @@ Router.route('/verify-email/:token', {
             else {
                 console.log("Email verified");
             }
-            this.redirect('home');
+            this.redirect('search');
         });
     }
 });

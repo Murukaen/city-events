@@ -17,13 +17,13 @@ var MongoQuery = function(query) {
     };
 };
 
-function CriteriaParser(criteria) { // TODO consider passing query in constructor
-    this.addLabel = function (query) {
+function CriteriaParser(criteria, query) { 
+    this.addLabel = function () {
         if (criteria.label) {
             query.labels = criteria.label;
         }
     };
-    this.addDate = function(query) {
+    this.addDate = function() {
         if (criteria.date) {
             let startDate = new Date();
             let endDate = new Date();
@@ -44,7 +44,7 @@ function CriteriaParser(criteria) { // TODO consider passing query in constructo
             new MongoQuery(query).setStartDateLimits(startDate, endDate);
         }  
     };
-    this.addFuture = function(query) {
+    this.addFuture = function() {
         if (criteria.past !== "true") {
             new MongoQuery(query).setStartDateLowerLimit(new Date());
         }
@@ -52,14 +52,20 @@ function CriteriaParser(criteria) { // TODO consider passing query in constructo
             new MongoQuery(query).setStartDateUpperLimit(new Date());
         }
     };
+    this.addCountry = function() {
+        if (criteria.country) {
+            query.country = criteria.country;
+        }
+    }
 }
 
 Meteor.publish('events', function(criteria) {
     let query = {};
     if (criteria) {
-        let parser = new CriteriaParser(criteria);
-        parser.addLabel(query);
-        parser.addDate(query);
+        let parser = new CriteriaParser(criteria, query);
+        parser.addLabel();
+        parser.addDate();
+        parser.addCountry();
     }
     return Events.find(query);
 });
