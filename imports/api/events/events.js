@@ -8,6 +8,16 @@ EventSchema = new SimpleSchema({
         max: 20,
         denyUpdate: true
     },
+    country: {
+        label: 'Event country',
+        type: String,
+        denyUpdate: true
+    },
+    city: {
+        label: 'Event city',
+        type: String,
+        denyUpdate: true
+    },
     location: {
         label: 'Event location',
         type: String

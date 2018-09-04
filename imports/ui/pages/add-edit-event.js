@@ -1,7 +1,7 @@
-import './add-edit-event.html';
-import './add-edit-event.css';
-import '../components/labels.js';
-import '/imports/api/events/event-methods.js';
+import './add-edit-event.html'
+import './add-edit-event.css'
+import '../components/labels'
+import '/imports/api/events/event-methods'
 
 function appendError(errorObj, name,type) {
     switch(type) {
@@ -75,6 +75,8 @@ function initValidator(template) {
         submitHandler(event) {
             var data = {
                 name: $('[name=name]').val(),
+                country: $('[name=country]').val(),
+                city:$('[name=city]').val(),
                 location: $('[name=location]').val(),
                 startDate: $('#start-date').data('DateTimePicker').date().toDate(),
                 endDate: $('#end-date').data('DateTimePicker').date().toDate(),
@@ -112,6 +114,27 @@ Template.addEditEvent.onCreated(() => {
     let template = Template.instance();
     template.labels = new Labels(template.data ? template.data.labels : null);
     template.errors = new ReactiveDict();
+    template.countries = new ReactiveVar();
+    template.selectedCountry = new ReactiveVar();
+    template.cities = new ReactiveVar();
+    template.autorun(() => {
+        Meteor.call('getCities', template.selectedCountry.get(), (err, ret) => {
+            if (!err) {
+                template.cities.set(ret)
+            }
+            else {
+                console.log(err)
+            }
+        })
+    })
+    Meteor.call('getCountries', (err, ret) => {
+        if (!err) {
+            template.countries.set(ret)
+        }
+        else {
+            console.log(err)
+        }
+    })
 });
 
 Template.addEditEvent.onRendered(function() {
@@ -152,6 +175,9 @@ Template.addEditEvent.events({
     },
     'keyup input': function(e,t) {
         t.errors.delete(e.target.name)
+    },
+    'change #selectCountry': function(e, t) {
+        t.selectedCountry.set(e.target.value)
     }
 })
 
@@ -162,5 +188,11 @@ Template.addEditEvent.helpers({
     },
     error(name) {
         return Template.instance().errors.get(name);
+    },
+    countries() {
+        return Template.instance().countries.get();
+    },
+    cities() {
+        return Template.instance().cities.get();
     }
 });

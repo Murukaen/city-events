@@ -13,6 +13,33 @@
                     {{/if}}
                 </div>
             {{/if}}
+            {{#if country}}
+                <p> Country: {{country}} </p>
+            {{else}}
+                <div class="form-group">
+                    <label for="selectCountry">Country:</label>
+                    <select id="selectCountry" name="country">
+                        <option value="">Select Country ...</option>
+                        {{#each countries}}
+                            <option value={{country}}>{{country}}</option>
+                        {{/each}}                    
+                    </select>
+                </div>
+            {{/if}}
+            {{#if city}}
+                <p> City: {{city}} </p>
+            {{else}}
+                {{#if cities.length}}
+                    <div class="form-group">
+                        <label for="selectCity">City:</label>
+                        <select id="selectCity" name="city">
+                            {{#each city in cities}}
+                                <option value={{city}}>{{city}}</option>
+                            {{/each}}                    
+                        </select>
+                    </div>
+                {{/if}}
+            {{/if}}
             <div class="form-group">
                 <label for="inputLocation">Location:</label>
                 <input id="inputLocation" class="form-control" type="text" name="location" value="{{location}}" placeholder="Enter a location..." required />
