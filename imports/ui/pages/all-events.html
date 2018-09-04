@@ -33,6 +33,16 @@
                 </ul>
             </li>
         </ul>
+        <ul class="nav navbar-nav {{#unless cities.length}} hide {{/unless}}">
+            <li class="dropdown" id="cityFilter">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="selected">By City</span> <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    {{#each city in cities}}
+                        <li><a href="#" name={{city}}>{{city}}</a></li>
+                    {{/each}}
+                </ul>
+            </li>
+        </ul> 
         <ul class="nav navbar-nav">
             <li class="dropdown" id="dateFilter">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="selected">By Date</span> <span class="caret"></span></a>

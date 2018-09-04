@@ -25,21 +25,31 @@ Template.allEvents.onCreated(function () {
             console.log(err)
         }
     })
+    template.cities = new ReactiveVar();
+    let currentCountry = Session.get('query').country
+    if (currentCountry) {
+        Meteor.call('getCities', currentCountry, (err, ret) => {
+            if (!err) {
+                template.cities.set(ret)
+            }
+            else {
+                console.log(err)
+            }
+        })
+    }
 });
 
 Template.allEvents.onRendered(function () {
     Meteor.typeahead.inject();
-    let currentDate = Session.get('query').date
-    if (currentDate) {
-        $('#dateFilter').find('.selected').text($('#dateFilter').find('[name=' + currentDate.trim() + ']').text())
-    }
-    let currentCountry = Session.get('query').country
-    if (currentCountry) {
-        $('#countryFilter').find('.selected').text(currentCountry.trim())
-    }
+    Session.get('query').date &&
+    $('#dateFilter').find('.selected').text(
+        $('#dateFilter').find('[name=' + Session.get('query').date.trim() + ']').text())
+    Session.get('query').country && 
+        $('#countryFilter').find('.selected').text(Session.get('query').country.trim())
+    Session.get('query').city && 
+        $('#cityFilter').find('.selected').text(Session.get('query').city.trim())
 });
 
-/* EVENTS */
 Template.allEvents.events({
     'submit #searchForm': function(event, template) {
         event.preventDefault();
@@ -53,10 +63,13 @@ Template.allEvents.events({
     'click #countryFilter ul': function(event, template) {
         event.preventDefault();
         Query.filter('search', 'country', event.target.name);
+    },
+    'click #cityFilter ul': function(event, template) {
+        event.preventDefault();
+        Query.filter('search', 'city', event.target.name);
     }
 });
 
-/* HELPERS */
 Template.allEvents.helpers({
     eventData() {
         return {
@@ -72,5 +85,8 @@ Template.allEvents.helpers({
     },
     countries() {
         return Template.instance().countries.get()
+    },
+    cities() {
+        return Template.instance().cities.get()
     }
 });
