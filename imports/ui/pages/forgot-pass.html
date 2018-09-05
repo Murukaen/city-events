@@ -8,4 +8,9 @@
       <br />
       <input class="btn-submit" type="submit" value="Send">
     </form>
+    {{#if mailSent}}
+      <div>
+        <p>Email sent. Check your mailbox.</p>
+      </div>
+    {{/if}}
 </template>
