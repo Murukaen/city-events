@@ -1,15 +1,15 @@
-import {Events} from '/imports/api/events/events.js';
-import '/imports/ui/layouts/app-body.js';
-import '/imports/ui/pages/all-events.js';
-import '/imports/ui/pages/add-event.js';
-import '/imports/ui/pages/view-event.js';
-import '/imports/ui/pages/my-events.js';
-import '/imports/ui/pages/edit-event.js';
-import '/imports/ui/components/common.js';
-import '/imports/ui/pages/forgot-pass.js';
-import '/imports/ui/pages/reset-pass.js';
-import '/imports/ui/pages/profile.js';
-import {Profile} from '/imports/lib/profile';
+import {Events} from '/imports/api/events/events.js'
+import '/imports/ui/layouts/app-body.js'
+import '/imports/ui/pages/all-events.js'
+import '/imports/ui/pages/add-event.js'
+import '/imports/ui/pages/view-event.js'
+import '/imports/ui/pages/my-events.js'
+import '/imports/ui/pages/edit-event.js'
+import '/imports/ui/components/common.js'
+import '/imports/ui/pages/forgot-pass.js'
+import '/imports/ui/pages/reset-pass.js'
+import '/imports/ui/pages/profile.js'
+import {Profile} from '/imports/lib/profile'
 
 var defaultQueries =  {
     defaults : {

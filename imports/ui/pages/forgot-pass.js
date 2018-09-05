@@ -12,12 +12,14 @@ Template.forgotPassword.onCreated(() => {
     let template = Template.instance()
     template.errors = new ReactiveDict()
     template.mailSent = new ReactiveVar(false)
+    template.submitted = new ReactiveVar(false)
 })
 
 Template.forgotPassword.onRendered(function () {
     let template = Template.instance()
     $('#forgotPasswordForm').validate({
         submitHandler() {
+            template.submitted.set(true)
             var email = trimInput($('#forgotPasswordForm #forgotPasswordEmail').val().toLowerCase())
             Accounts.forgotPassword({email}, (err) => {
                 let errors = {}
@@ -52,5 +54,11 @@ Template.forgotPassword.helpers({
     },
     mailSent() {
         return Template.instance().mailSent.get()
+    },
+    submitted() {
+        return Template.instance().submitted.get()
+    },
+    showLoading() {
+        return Template.instance().submitted.get() && !Template.instance().mailSent.get()
     }
 })

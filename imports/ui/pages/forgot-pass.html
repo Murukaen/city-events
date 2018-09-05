@@ -6,8 +6,13 @@
             <label for="forgotPasswordEmail" class="error"> {{error 'email'}} </label>
         {{/if}}
       <br />
-      <input class="btn-submit" type="submit" value="Send">
+      {{#unless submitted}}
+        <input class="btn-submit" type="submit" value="Send">
+      {{/unless}}
     </form>
+    {{#if showLoading}}
+      {{> loading}}
+    {{/if}}
     {{#if mailSent}}
       <div>
         <p>Email sent. Check your mailbox.</p>

@@ -1,33 +1,33 @@
-import './common.html';
+import './common.html'
 
 Template.registerHelper('formatDate', (date) => {
-    return moment(date).format("DD-MM-YYYY HH:mm");
-});
+    return moment(date).format("DD-MM-YYYY HH:mm")
+})
 
 
 Template.needEmailVerification.onCreated(function () {
-    this.validationSent = new ReactiveVar(false);
-    this.validationSentSuccessfulyl = new ReactiveVar(true);    
-});
+    this.validationSent = new ReactiveVar(false)
+    this.validationSentSuccessfulyl = new ReactiveVar(true)  
+})
 
 
 Template.needEmailVerification.events({
     'click .resend-verification-email': function(event, template) {
-        console.log('Click');
+        console.log('Click')
         Meteor.call('sendVerificationLink', (err, response) => {
-            template.validationSent.set(true);
+            template.validationSent.set(true)
             if (err) {
-                template.validationSentSuccessfulyl.set(false);
+                template.validationSentSuccessfulyl.set(false)
             }
-        });
+        })
     }
-});
+})
 
 Template.needEmailVerification.helpers({
     validationSent () {
-        return Template.instance().validationSent.get();
+        return Template.instance().validationSent.get()
     },
     validationSentSuccessfully () {
-        return Template.instance().validationSentSuccessfulyl.get();
+        return Template.instance().validationSentSuccessfulyl.get()
     }
 })
