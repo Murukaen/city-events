@@ -1,4 +1,4 @@
-import {Events} from './events.js';
+import {Events} from './events.js'
 
 function eventIsPostedByCurrentUser(eventId) {
     if (Meteor.user()) {
@@ -99,3 +99,7 @@ addEvent = new ValidatedMethod({
         }
     }   
 });
+
+export {
+    checkEventNameIsPresent
+}
