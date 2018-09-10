@@ -5,7 +5,7 @@ EventSchema = new SimpleSchema({
         label: 'Event name',
         type: String,
         unique: true,
-        max: 20,
+        //max: 20,
         denyUpdate: true
     },
     country: {

@@ -3,7 +3,7 @@ import './show-events.css';
 
 Template.showEvents.events({
     'click .event-box': function() {
-        if (this.startDate >= new Date()) {
+        if (this.endDate >= new Date()) {
             Router.go(Template.instance().data.eventData.clickRoute, {_id: this._id});
         }
         else {

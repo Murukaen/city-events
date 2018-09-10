@@ -88,17 +88,17 @@ addEvent = new ValidatedMethod({
     validate: Events.simpleSchema().validator(),
     run(data) {
         if (checkEventNameIsPresent(data.name)) {
-            throw new ValidationError([{name: 'name', type: 'unique'}]);
+            throw new ValidationError([{name: 'name', type: 'unique'}])
         }
         else {
-            Events.insert(data);
+            Events.insert(data)
             if (!this.isSimulation) {
-                const {UserManager} = require('/imports/api/users/server/user-manager');
-                UserManager.increaseScore();
+                const {UserManager} = require('/imports/api/users/server/user-manager')
+                UserManager.increaseScore()
             }
         }
     }   
-});
+})
 
 export {
     checkEventNameIsPresent

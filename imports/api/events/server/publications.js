@@ -2,19 +2,15 @@ import {DateUtils} from '/imports/lib/date.js'
 import {Events} from '/imports/api/events/events.js'
 
 var MongoQuery = function(query) {
-    this.query = query || {}
-    this.setStartDateLowerLimit = function(lowerLimit) {
-        this.query.startDate = this.query.startDate || {}
-        this.query.startDate['$gte'] = lowerLimit
-    };
-    this.setStartDateUpperLimit = function(upperLimit) {
-        this.query.startDate = this.query.startDate || {}
-        this.query.startDate['$lte'] = upperLimit
-    };
-    this.setStartDateLimits = function(lowerLimit, upperLimit) {
-        this.setStartDateLowerLimit(lowerLimit)
-        this.setStartDateUpperLimit(upperLimit)
-    };
+    query = query || {}
+    this.setEndDateLowerLimit = function(lowerLimit) {
+        query.endDate = query.endDate || {}
+        query.endDate['$gte'] = lowerLimit
+    }
+    this.setEndDateUpperLimit = function(upperLimit) {
+        query.endDate = query.endDate || {}
+        query.endDate['$lte'] = upperLimit
+    }
 };
 
 function CriteriaParser(criteria, query) { 
@@ -25,31 +21,32 @@ function CriteriaParser(criteria, query) {
     }
     this.addDate = () => {
         if (criteria.date) {
-            let startDate = new Date()
-            let endDate = new Date()
+            let now = new Date()
+            let upper = now   
             switch(criteria.date) {
                 case 'today': 
-                    endDate.setHours(23,59,59,999)
+                    upper.setHours(23,59,59,999)
                     break;
                 case 'week':
-                    ({endDate} = DateUtils.getStartAndEndOfCurrentWeek())
+                    ({endDate: upper} = DateUtils.getStartAndEndOfCurrentWeek())
                     break;
                 case 'month':
-                    ({endDate} = DateUtils.getStartAndEndOfCurrentMonth())
+                    ({endDate: upper} = DateUtils.getStartAndEndOfCurrentMonth())
                     break;
                 case 'year':
-                    ({endDate} = DateUtils.getStartAndEndOfCurrentYear())
+                    ({endDate: upper} = DateUtils.getStartAndEndOfCurrentYear())
                     break;
             }
-            new MongoQuery(query).setStartDateLimits(startDate, endDate)
+            query['$or'] = [{startDate: {'$lte': now}, endDate: {'$gt': now}}, 
+                {startDate: {'$gt': now, '$lt': upper}}]
         }  
     }
     this.addFuture = () => {
         if (criteria.past !== "true") {
-            new MongoQuery(query).setStartDateLowerLimit(new Date())
+            new MongoQuery(query).setEndDateLowerLimit(new Date())
         }
         if (criteria.future !== "true") {
-            new MongoQuery(query).setStartDateUpperLimit(new Date())
+            new MongoQuery(query).setEndDateUpperLimit(new Date())
         }
     }
     this.addCountry = () => {
@@ -76,8 +73,7 @@ Meteor.publish('my-events', function(criteria) {
     if (this.userId) {
         var user = Meteor.users.findOne(this.userId)
         let query = {createdBy: this.userId}
-        new CriteriaParser(criteria)
-            .addFuture(query)
+        new CriteriaParser(criteria, query).addFuture()
         return Events.find(query)
     }
     return this.ready()

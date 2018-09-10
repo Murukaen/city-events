@@ -69,7 +69,7 @@ function initValidator(template) {
     var validator = $('.event-setup').validate({
         rules: {
             name: {
-                maxlength: 20
+                // maxlength: 20
             }
         },
         submitHandler(event) {

@@ -54,3 +54,4 @@ sergeyt:typeahead
 dynamic-import@0.4.2
 underscore@1.0.10
 meteorhacks:picker
+meteortesting:mocha

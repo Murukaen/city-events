@@ -6,7 +6,6 @@ Picker.route('/api', function(params, req, res, next) {
 })
 
 Picker.route('/api/insert', function(params, req, res, next) {
-    console.log("-->" + Object.keys(req))
     let body = ""
     req.on('readable', function() {
         let buffer = req.read()
@@ -21,9 +20,11 @@ Picker.route('/api/insert', function(params, req, res, next) {
             data.startDate = new Date(data.startDate)
             data.endDate = new Date(data.endDate)
             Events.insert(data)
+            console.log("[api:insert] Added")
             res.end("[success] Added")
         }
         else {
+            console.log("[api:insert] Err: Name already present")
             res.end("[err] Name already present")
         }
     }))
