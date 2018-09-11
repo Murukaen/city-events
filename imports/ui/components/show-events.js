@@ -1,6 +1,8 @@
 import './show-events.html';
 import './show-events.css';
 
+MAX_NAME_SIZE = 25
+
 Template.showEvents.events({
     'click .event-box': function() {
         if (this.endDate >= new Date()) {
@@ -26,3 +28,13 @@ Template.showEvents.helpers({
         return chunks;
     }
 });
+
+Template.eventCell.helpers({
+    shortenName (name) {
+        if (name.length <= MAX_NAME_SIZE) {
+            return name
+        } else {
+            return name.substr(0, MAX_NAME_SIZE) + "..."
+        }
+    }
+})
