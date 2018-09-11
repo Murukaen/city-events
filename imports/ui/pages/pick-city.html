@@ -1,0 +1,18 @@
+<template name="pickCity">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-md-offset-5">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown" id="cityFilter">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="selected">Pick City</span> <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            {{#each city in cities}}
+                                <li><a href="#" name={{city}}>{{city}}</a></li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                </ul> 
+            </div>
+        </div>
+    </div>
+</template>

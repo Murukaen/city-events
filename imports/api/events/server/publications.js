@@ -1,5 +1,6 @@
-import {DateUtils} from '/imports/lib/date.js'
-import {Events} from '/imports/api/events/events.js'
+import {DateUtils} from '/imports/lib/date'
+import {Events} from '/imports/api/events/events'
+import {Cities} from '/imports/api/cities/cities'
 
 var MongoQuery = function(query) {
     query = query || {}
@@ -49,22 +50,16 @@ function CriteriaParser(criteria, query) {
             new MongoQuery(query).setEndDateUpperLimit(new Date())
         }
     }
-    this.addCountry = () => {
-        criteria.country && (query.country = criteria.country)
-    }
-    this.addCity = () => {
-        criteria.city && (query.city = criteria.city)
-    }
 }
 
-Meteor.publish('events', function(criteria) {
+Meteor.publish('events', function(country, city, criteria) {
     let query = {}
     if (criteria) {
         let parser = new CriteriaParser(criteria, query)
         parser.addLabel()
         parser.addDate()
-        parser.addCountry()
-        parser.addCity()
+        country && (query.country = country)
+        city && (query.city = city)
     }
     return Events.find(query)
 });
@@ -85,3 +80,11 @@ Meteor.publish('one-event', function(eventId) {
     }
     return this.ready()
 });
+
+Meteor.publish('countries', function() {
+    return Cities.find({}, {country: 1})
+})
+
+Meteor.publish('cities', function(country) {
+    return Cities.find({country}, {cities: 1})
+})

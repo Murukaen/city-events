@@ -1,6 +1,6 @@
 Query = {
     filter(route, name, value) {
-        let query = Session.get('query');
+        let query = Session.get('query')
         if (value || value === false) {
             query[name] = value;
         }
@@ -10,10 +10,10 @@ Query = {
         if (name == 'country') {
             delete query['city']
         }
-        let queryParam = {query: $.param(query)};
-        if (Object.keys(query).length == 0) {
-            queryParam = {};    
+        queryUrl = ''
+        if (Object.keys(query).length > 0) {
+            queryUrl = '?' + $.param(query)
         }
-        Router.go(route, {}, queryParam);
+        Router.go(route + queryUrl)
     }
 };

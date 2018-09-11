@@ -22,6 +22,10 @@ function updateFutureFilter() {
     $('#futureFilter a .selected').text(text);
 }
 
+Template.myEvents.onCreated(function () {
+    Template.instance().route = Router.current().originalUrl.split('?')[0]
+})
+
 Template.myEvents.onRendered(function () {
     let query = Session.get('query');
     $('#filterFutureInput').prop('checked', query.future === "true");
@@ -31,7 +35,7 @@ Template.myEvents.onRendered(function () {
 
 Template.myEvents.events({
     'change #futureFilter input': function(event, template) {
-        Query.filter('myEvents', event.target.name, $(event.target).is(':checked'));
+        Query.filter(template.route, event.target.name, $(event.target).is(':checked'));
     }
 });
 

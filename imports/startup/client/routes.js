@@ -1,15 +1,17 @@
-import {Events} from '/imports/api/events/events.js'
-import '/imports/ui/layouts/app-body.js'
-import '/imports/ui/pages/all-events.js'
-import '/imports/ui/pages/add-event.js'
-import '/imports/ui/pages/view-event.js'
-import '/imports/ui/pages/my-events.js'
-import '/imports/ui/pages/edit-event.js'
-import '/imports/ui/components/common.js'
-import '/imports/ui/pages/forgot-pass.js'
-import '/imports/ui/pages/reset-pass.js'
-import '/imports/ui/pages/profile.js'
+import {Events} from '/imports/api/events/events'
 import {Profile} from '/imports/lib/profile'
+import '/imports/ui/layouts/app-body'
+import '/imports/ui/pages/all-events'
+import '/imports/ui/pages/add-event'
+import '/imports/ui/pages/view-event'
+import '/imports/ui/pages/my-events'
+import '/imports/ui/pages/edit-event'
+import '/imports/ui/components/common'
+import '/imports/ui/pages/forgot-pass'
+import '/imports/ui/pages/reset-pass'
+import '/imports/ui/pages/profile'
+import '/imports/ui/pages/pick-country'
+import '/imports/ui/pages/pick-city'
 
 var defaultQueries =  {
     defaults : {
@@ -17,7 +19,7 @@ var defaultQueries =  {
         'myEvents' : 'future=true'
     },
     get (context) {
-        return context.route._path + '?' + this.defaults[context.route.getName()];
+        return context.url + '?' + this.defaults[context.route.getName()];
     }
 }
 
@@ -41,20 +43,42 @@ Router.configure({
 });
 
 Router.route('/', {
+    name: 'home',
+    action () {
+        this.redirect('pickCountry')
+    }
+})
+
+Router.route('/search', {
+    name: 'pickCountry',
+    template: 'pickCountry',
+    loadingTemplate: 'loading',
+    waitOn () {
+        return Meteor.subscribe('countries')
+    }
+});
+
+Router.route('/search/:country', {
+    name: 'pickCity',
+    template: 'pickCity',
+    loadingTemplate: 'loading',
+    waitOn () {
+        return Meteor.subscribe('cities', this.params.country)
+    }
+})
+
+Router.route('/search/:country/:city', {
     name: 'search',
     template: 'allEvents',
     loadingTemplate: 'loading',
     waitOn () {
         if (Object.keys(this.params.query).length) {
-            return Meteor.subscribe('events', this.params.query);
+            return Meteor.subscribe('events', this.params.country, this.params.city, this.params.query);
         }
-        return [];
+        return []
     },
     onBeforeAction () {
-        setQuery(this);
-    },
-    action () {
-        this.render();
+        setQuery(this)
     }
 });
 
@@ -63,15 +87,15 @@ Router.route('/verify-email/:token', {
     action () {
         Accounts.verifyEmail(this.params.token, (err) => {
             if (err) {
-                console.error(err);
+                console.error(err)
             }
             else {
-                console.log("Email verified");
+                console.log("Email verified")
             }
-            this.redirect('search');
-        });
+            this.redirect('search')
+        })
     }
-});
+})
 
 Router.route('/profile', {
     name: 'profile',
@@ -125,13 +149,10 @@ Router.route('/myevents', {
     template: 'myEvents',
     loadingTemplate: 'loading',
     waitOn () {
-        return Meteor.subscribe('my-events', this.params.query);
+        return Meteor.subscribe('my-events', this.params.query)
     },
     onBeforeAction () {
-        setQuery(this);
-    },
-    action () {
-        this.render();
+        setQuery(this)
     }
 });
 
@@ -140,27 +161,27 @@ Router.route('/event/:_id', {
     template: 'viewEvent',
     loadingTemplate: 'loading',
     waitOn () {
-        return Meteor.subscribe('one-event', this.params._id);
+        return Meteor.subscribe('one-event', this.params._id)
     },
     data () {
-        return Events.findOne({_id: this.params._id});
+        return Events.findOne({_id: this.params._id})
     },
     action () {
-        this.render();
+        this.render()
     }
-});
+})
 
 Router.route('/event/:_id/edit', {
     name: 'edit',
     template: 'editEvent',
     loadingTemplate: 'loading',
     waitOn () {
-        return Meteor.subscribe('one-event', this.params._id);
+        return Meteor.subscribe('one-event', this.params._id)
     },
     data () {
-        return Events.findOne({_id: this.params._id});
+        return Events.findOne({_id: this.params._id})
     },
     action () {
-        this.render();
+        this.render()
     }
 });

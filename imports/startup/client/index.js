@@ -1,2 +1,3 @@
-import './routes.js';
-import '../../api/events/events.js'; // TODO: dev
+import './routes'
+import '../../api/events/events' // TODO: dev
+import '../../api/cities/cities' // TODO: dev
