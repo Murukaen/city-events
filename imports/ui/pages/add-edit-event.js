@@ -3,7 +3,7 @@ import './add-edit-event.css'
 import '../components/labels'
 import '/imports/api/events/event-methods'
 
-function appendError(errorObj, name,type) {
+function appendError(errorObj, name, type) {
     switch(type) {
         case 'unique':
             errorObj[name] = name + ' already present';
@@ -95,10 +95,13 @@ function initValidator(template) {
                     if (err.reason == "Internal server error") {
                         console.log("Internal server error:", err);
                     }
-                    else {
+                    else if (Array.isArray(err.details)) {
                         err.details.forEach((e) => {
                             appendError(errors, e.name, e.type);
                         });
+                    } else {
+                        // err = ALREADY_PRESENT
+                        template.alreadyPresent.set(true)
                     }
                 }
                 else {
@@ -112,11 +115,12 @@ function initValidator(template) {
 
 Template.addEditEvent.onCreated(() => {
     let template = Template.instance();
-    template.labels = new Labels(template.data ? template.data.labels : null);
-    template.errors = new ReactiveDict();
-    template.countries = new ReactiveVar();
-    template.selectedCountry = new ReactiveVar();
-    template.cities = new ReactiveVar();
+    template.labels = new Labels(template.data ? template.data.labels : null)
+    template.errors = new ReactiveDict()
+    template.countries = new ReactiveVar()
+    template.selectedCountry = new ReactiveVar()
+    template.cities = new ReactiveVar()
+    template.alreadyPresent = new ReactiveVar(false)
     template.autorun(() => {
         Meteor.call('getCities', template.selectedCountry.get(), (err, ret) => {
             if (!err) {
@@ -176,23 +180,28 @@ Template.addEditEvent.events({
     'keyup input': function(e,t) {
         t.errors.delete(e.target.name)
     },
+    'focus .form-control': (event, template) => {
+        template.alreadyPresent.set(false)
+    },
     'change #selectCountry': function(e, t) {
         t.selectedCountry.set(e.target.value)
     }
 })
 
-/* HELPERS */
 Template.addEditEvent.helpers({
     labels() {
-        return Template.instance().labels; 
+        return Template.instance().labels
     },
     error(name) {
-        return Template.instance().errors.get(name);
+        return Template.instance().errors.get(name)
     },
     countries() {
-        return Template.instance().countries.get();
+        return Template.instance().countries.get()
     },
     cities() {
-        return Template.instance().cities.get();
+        return Template.instance().cities.get()
+    },
+    isAlreadyPresent() {
+        return Template.instance().alreadyPresent.get()
     }
 });

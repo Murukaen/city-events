@@ -18,7 +18,7 @@
             {{else}}
                 <div class="form-group">
                     <label for="selectCountry">Country:</label>
-                    <select id="selectCountry" name="country" required>
+                    <select id="selectCountry" class="form-control" name="country" required>
                         <option value="">Select Country ...</option>
                         {{#each countries}}
                             <option value={{country}}>{{country}}</option>
@@ -32,7 +32,7 @@
                 {{#if cities.length}}
                     <div class="form-group">
                         <label for="selectCity">City:</label>
-                        <select id="selectCity" name="city">
+                        <select id="selectCity" class="form-control" name="city">
                             {{#each city in cities}}
                                 <option value={{city}}>{{city}}</option>
                             {{/each}}                    
@@ -68,6 +68,11 @@
                 <label for="inputLabel">Add label:</label>
                 <input id="inputLabel" class="form-control" type="text" name="label" placeholder="Type a label...">
             </div>
+            {{#if isAlreadyPresent}}
+                <div>
+                    <p> This event is already present </p>
+                </div>
+            {{/if}}
             <div class="text-center">
                 <button class="btn btn-default" type="submit">
                     {{#if _id}}

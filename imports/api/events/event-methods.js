@@ -8,8 +8,12 @@ function eventIsPostedByCurrentUser(eventId) {
     return false;
 }
 
-function checkEventNameIsPresent(name) {
-    return name && Events.findOne({name: name}) !== undefined;
+function checkEventIdIsPresent(id) {
+    return id && Events.findOne({_id: id}) !== undefined
+}
+
+function constructId(data) {
+    return `${data.country}:${data.city}:${data.name}:${data.startDate}`
 }
 
 Meteor.methods({
@@ -87,10 +91,11 @@ addEvent = new ValidatedMethod({
     name: 'addEvent',
     validate: Events.simpleSchema().validator(),
     run(data) {
-        if (checkEventNameIsPresent(data.name)) {
-            throw new ValidationError([{name: 'name', type: 'unique'}])
-        }
-        else {
+        let id = constructId(data)
+        if (checkEventIdIsPresent(id)) {
+            throw new ValidationError("ALREADY_PRESENT")
+        } else {
+            data._id = id
             Events.insert(data)
             if (!this.isSimulation) {
                 const {UserManager} = require('/imports/api/users/server/user-manager')
@@ -101,5 +106,5 @@ addEvent = new ValidatedMethod({
 })
 
 export {
-    checkEventNameIsPresent
+    checkEventIdIsPresent
 }

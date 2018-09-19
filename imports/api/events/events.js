@@ -1,10 +1,12 @@
 export const Events = new Mongo.Collection('events');
 
 EventSchema = new SimpleSchema({
+    // _id: {
+    //     type: String
+    // },
     name: {
         label: 'Event name',
         type: String,
-        unique: true,
         //max: 20,
         denyUpdate: true
     },
