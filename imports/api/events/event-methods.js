@@ -104,7 +104,3 @@ addEvent = new ValidatedMethod({
         }
     }   
 })
-
-export {
-    checkEventIdIsPresent
-}

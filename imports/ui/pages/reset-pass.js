@@ -20,7 +20,7 @@ Template.resetPassword.onRendered(function () {
                 }
                 else {
                     console.log("Password reset was successful");
-                    Router.go('search');
+                    Router.go('pickCountry');
                 }
             });
         }

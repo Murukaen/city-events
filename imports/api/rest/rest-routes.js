@@ -24,7 +24,6 @@ Picker.route('/api/insert', function(params, req, res, next) {
                 res.end("[success] Added")
             }
             else {
-                console.log("-->", err)
                 console.log("[api:insert] Err: Event already present")
                 res.end("[err] Event already present")
             }
