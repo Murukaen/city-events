@@ -20,6 +20,7 @@
     word-wrap: break-word;
     white-space: normal;
     height:175px;
+    padding: 5px;
 }
 .events-container {
     width: 90%;

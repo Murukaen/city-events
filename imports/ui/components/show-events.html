@@ -22,9 +22,9 @@
 <template name="eventCell">
     <div class="event-box btn btn-default well col-md-3 col-sm-6 col-xs-12">
         <div class="col-xs-12">
-            <h3 class="text-center"> {{shortenName name}} </h3>
+            <h4 class="text-center"> {{shortenName name}} </h4>
             <p class="date"> {{formatDate startDate}} </p>
-            <p class="location"> {{location}} </p>
+            <p class="location"> {{shortenLocation location}} </p>
             <div class="clearfix"> </div>
             <!-- <br />
             {{#if imgUrl}}

@@ -45,6 +45,8 @@ Router.configure({
 Router.route('/', {
     name: 'home',
     action () {
+        Session.set("country", false)
+        Session.set("city", false)
         this.redirect('pickCountry')
     }
 })
@@ -55,6 +57,16 @@ Router.route('/search', {
     loadingTemplate: 'loading',
     waitOn () {
         return Meteor.subscribe('countries')
+    },
+    onBeforeAction () {
+        if (Session.get("country")) {
+            if (Session.get("city")) {
+                this.redirect("search", {country: Session.get("country"), city: Session.get("city")})
+            } else {
+                this.redirect("pickCity", {country: Session.get("country")})
+            }
+        }
+        this.next()
     }
 });
 
@@ -64,6 +76,11 @@ Router.route('/search/:country', {
     loadingTemplate: 'loading',
     waitOn () {
         return Meteor.subscribe('cities', this.params.country)
+    },
+    onBeforeAction () {
+        Session.set("country", this.params.country)
+        Session.set("city", false)
+        this.next()
     }
 })
 
@@ -77,7 +94,15 @@ Router.route('/search/:country/:city', {
         }
         return []
     },
+    data () {
+        return {
+            country: this.params.country,
+            city: this.params.city
+        }
+    },
     onBeforeAction () {
+        Session.set("country", this.params.country)
+        Session.set("city", this.params.city)
         setQuery(this)
     }
 });
@@ -92,7 +117,7 @@ Router.route('/verify-email/:token', {
             else {
                 console.log("Email verified")
             }
-            this.redirect('search')
+            this.redirect('pickCountry')
         })
     }
 })

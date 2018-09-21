@@ -1,7 +1,15 @@
 import './show-events.html';
 import './show-events.css';
 
-MAX_NAME_SIZE = 25
+MAX_NAME_SIZE = 40
+MAX_LOCATION_SIZE = 25
+
+function shorten(str, size) {
+    if (str.length <= size) {
+        return str
+    }
+    return str.substr(0, size) + "..."
+}
 
 Template.showEvents.events({
     'click .event-box': function() {
@@ -31,10 +39,9 @@ Template.showEvents.helpers({
 
 Template.eventCell.helpers({
     shortenName (name) {
-        if (name.length <= MAX_NAME_SIZE) {
-            return name
-        } else {
-            return name.substr(0, MAX_NAME_SIZE) + "..."
-        }
+        return shorten(name, MAX_NAME_SIZE)
+    },
+    shortenLocation (location) {
+        return shorten(location, MAX_LOCATION_SIZE)
     }
 })
