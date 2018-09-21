@@ -13,7 +13,7 @@ function checkEventIdIsPresent(id) {
 }
 
 function constructId(data) {
-    return `${data.country}:${data.city}:${data.name}:${data.startDate}`
+    return SparkMD5.hash(`${data.country}:${data.city}:${data.name}:${data.startDate}`)
 }
 
 Meteor.methods({
