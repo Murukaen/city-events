@@ -11,6 +11,20 @@ function shorten(str, size) {
     return str.substr(0, size) + "..."
 }
 
+Template.showEvents.onCreated(function () {
+    this.popularLabels = new ReactiveVar([])
+    if (this.data.context == 'all') {
+        Meteor.call('getPopularLabels', (err, data) => {
+            if (!err) {
+                this.popularLabels.set(data.map(o => o.label))
+            }
+            else {
+                console.log(err)
+            }
+        })
+    }
+})
+
 Template.showEvents.events({
     'click .event-box': function() {
         if (this.endDate >= new Date()) {
@@ -34,6 +48,9 @@ Template.showEvents.helpers({
         if (all.length > 0)
             chunks.push({row: all});
         return chunks;
+    },
+    popularLabels () {
+        return Template.instance().popularLabels.get()
     }
 });
 

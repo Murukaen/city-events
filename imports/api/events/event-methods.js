@@ -84,6 +84,19 @@ Meteor.methods({
                 }
             }
         }
+    },
+    getPopularLabels() {
+        if (!this.isSimulation) {
+            return Events.aggregate([
+                {$project: { _id: 0, labels: 1 } },
+                {$unwind: "$labels" },
+                {$group: { _id: "$labels", count: { $sum: 1 } }},
+                {$project: { _id: 0,label: "$_id", count: 1 } },
+                {$sort: { count: -1 } },
+                {$limit: 3}
+              ]).toArray()
+        }
+        return []
     }
 });
 

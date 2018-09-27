@@ -5,7 +5,10 @@
                 {{> eventRow}}
             {{/each}}
         {{else}}
-            <p> There are currently no registered events </p>
+            <p> There are currently no registered events on current filter </p>
+            {{#if popularLabels.length}}
+                <p> Popular labels: {{popularLabels}}</p>
+            {{/if}}
         {{/if}}
     </div>
 </template>

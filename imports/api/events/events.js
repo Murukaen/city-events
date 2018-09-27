@@ -48,7 +48,8 @@ EventSchema = new SimpleSchema({
     labels: {
         label: 'Event labels',
         type: [String],
-        optional: true
+        optional: true,
+        defaultValue: []
     },
     createdBy: {
         label: 'Event poster',
