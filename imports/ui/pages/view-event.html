@@ -1,31 +1,17 @@
 <template name="viewEvent">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <table class="table table-condensed table-striped eventView">
-                    <tbody>
-                        <tr> 
-                            <td> What: </td>
-                            <td> {{name}} </td>
-                        </tr>
-                        <tr> 
-                            <td> When: </td>
-                            <td> {{formatDate startDate}} till {{formatDate endDate}}</td>
-                        </tr>
-                        <tr> 
-                            <td> Where: </td>
-                            <td> {{location}}, {{city}}, {{country}} </td>
-                        </tr>
-                        <tr> 
-                            <td> About: </td>
-                            <td> {{description}} </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="col-md-9">
+                <h3> {{name}} </h3>
+                <div> <i>{{formatDate startDate}}</i> till <i>{{formatDate endDate}}</i> </div>
+                <div> {{location}}, {{city}}, {{country}} </div>
+                <hr>
+                <div> {{description}} </div>
+                <hr>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-6">
                 <a id="voteUp" class="btn"><i class="fa fa-thumbs-up fa-2x 
                     {{#if hasVotedUp}} icon-selected {{/if}}"></i></a>
                 <span> {{validatedBy.length}} </span>
