@@ -11,13 +11,16 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <a id="voteUp" class="btn"><i class="fa fa-thumbs-up fa-2x 
+            <div class="col-xs-6">
+                <a id="vote-up" class="btn"><i class="fa fa-thumbs-up fa-2x 
                     {{#if hasVotedUp}} icon-selected {{/if}}"></i></a>
                 <span> {{validatedBy.length}} </span>
-                <a id="voteDown" class="btn"><i class="fa fa-thumbs-down fa-2x 
+                <a id="vote-down" class="btn"><i class="fa fa-thumbs-down fa-2x 
                     {{#if hasVotedDown}} icon-selected {{/if}}"></i></a>
                 <span> {{invalidatedBy.length}} </span>
+            </div>
+            <div class="col-xs-3 col-xs-offset-3">
+                <a id="go-back" class="btn"><i class="fa fa-arrow-left fa-2x"></i></a>
             </div>
         </div>
     </div>
