@@ -83,7 +83,7 @@ function initValidator(template) {
                 description: $('[name=description').val(),
                 labels: template.labels.getLabels(),
                 createdBy: Meteor.userId(),
-                staging: $('#unstageInput').length && !$('#unstageInput').is(':checked')
+                staging: $('#unstageInput').length > 0 && !$('#unstageInput').is(':checked')
             }
             var methodName = 'addEvent';
             if(template.data) {
