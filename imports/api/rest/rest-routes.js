@@ -18,6 +18,7 @@ Picker.route('/api/insert', function(params, req, res, next) {
         let data = JSON.parse(body)
         data.startDate = new Date(data.startDate)
         data.endDate = new Date(data.endDate)
+        data.staging = true
         Meteor.call('addEvent', data, (err) => {
             if (!err) {
                 console.log("[api:insert] Added")

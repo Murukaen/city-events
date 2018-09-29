@@ -66,6 +66,9 @@ EventSchema = new SimpleSchema({
         type: [String],
         optional: true,
         defaultValue: []
+    },
+    staging: {
+        type: Boolean
     }
 });
 

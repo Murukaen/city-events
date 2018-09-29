@@ -82,7 +82,8 @@ function initValidator(template) {
                 endDate: $('#end-date').data('DateTimePicker').date().toDate(),
                 description: $('[name=description').val(),
                 labels: template.labels.getLabels(),
-                createdBy: Meteor.userId()
+                createdBy: Meteor.userId(),
+                staging: false
             }
             var methodName = 'addEvent';
             if(template.data) {

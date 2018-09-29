@@ -61,7 +61,7 @@ Meteor.publish('events', function(country, city, criteria) {
         country && (query.country = country)
         city && (query.city = city)
     }
-    console.log(JSON.stringify(query))
+    query.staging = false
     return Events.find(query)
 });
 
