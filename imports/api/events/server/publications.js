@@ -23,7 +23,7 @@ function CriteriaParser(criteria, query) {
     this.addDate = () => {
         if (criteria.date) {
             let now = new Date()
-            let upper = now   
+            let upper = new Date(now)   
             switch(criteria.date) {
                 case 'today': 
                     upper.setHours(23,59,59,999)
@@ -61,6 +61,7 @@ Meteor.publish('events', function(country, city, criteria) {
         country && (query.country = country)
         city && (query.city = city)
     }
+    console.log(JSON.stringify(query))
     return Events.find(query)
 });
 

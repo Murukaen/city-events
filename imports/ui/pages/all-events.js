@@ -41,7 +41,7 @@ Template.allEvents.events({
 Template.allEvents.helpers({
     eventData() {
         return {
-            events: Events.find({}).fetch(),
+            events: Events.find({}, {sort: {endDate: 1}}).fetch(),
             clickRoute: 'view'
         }    
     },
