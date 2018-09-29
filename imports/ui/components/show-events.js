@@ -60,5 +60,16 @@ Template.eventCell.helpers({
     },
     shortenLocation (location) {
         return shorten(location, MAX_LOCATION_SIZE)
+    },
+    showDate () {
+        let startDate = moment(Template.instance().data.startDate)
+        let endDate = moment(Template.instance().data.endDate)
+        let date = startDate.format("DD-MM-YYYY HH:mm")
+        if (endDate.isAfter(startDate, 'day')) {
+            date += " to " + endDate.format("DD-MM-YYYY HH:mm")
+        } else {
+            date += " - " + endDate.format("HH:mm")
+        }
+        return date;
     }
 })
