@@ -2,38 +2,46 @@
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
           <a class="navbar-brand" href="{{pathFor route='home'}}">City-Events</a>
         </div>
-        <ul class="nav navbar-nav">
-          <li><a href="{{pathFor route='pickCountry'}}">Search</a></li>
-          {{#if currentUser}}
-            <li><a href="{{pathFor route='add'}}">Add event</a></li>
-            <li><a href="{{pathFor route='myEvents'}}">My events</a></li>
-          {{/if}}
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          {{#if currentUser}}
-            <li> <a href="{{pathFor route='profile'}}"> Logged in as {{currentUser.emails.[0].address}} </a></li>
-            <li> <a href="#" class="logout"> Logout </a> </li>
-          {{else}}
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-              <ul id="login-dp" class="dropdown-menu auth">
-                <li>
-                  {{> login}}
+        <div id="nav-collapse" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+              <li><a href="{{pathFor route='pickCountry'}}" data-toggle="collapse" data-target=".navbar-collapse.in">Search</a></li>
+              {{#if currentUser}}
+                <li><a href="{{pathFor route='add'}}" data-toggle="collapse" data-target=".navbar-collapse.in">Add event</a></li>
+                <li><a href="{{pathFor route='myEvents'}}" data-toggle="collapse" data-target=".navbar-collapse.in">My events</a></li>
+              {{/if}}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              {{#if currentUser}}
+                <li> <a href="{{pathFor route='profile'}}" data-toggle="collapse" data-target=".navbar-collapse.in"> Logged in as {{currentUser.emails.[0].address}} </a></li>
+                <li> <a href="#" class="logout" data-toggle="collapse" data-target=".navbar-collapse.in"> Logout </a> </li>
+              {{else}}
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                  <ul id="login-dp" class="dropdown-menu auth">
+                    <li>
+                      {{> login}}
+                    </li>
+                  </ul>
                 </li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Register</b> <span class="caret"></span></a>
-              <ul id="register-dp" class="dropdown-menu auth">
-                <li>
-                  {{> register}}
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Register</b> <span class="caret"></span></a>
+                  <ul id="register-dp" class="dropdown-menu auth">
+                    <li>
+                      {{> register}}
+                    </li>
+                  </ul>
                 </li>
-              </ul>
-            </li>
-          {{/if}}
-        </ul>
+              {{/if}}
+            </ul>   
+        </div>
       </div>
     </nav>
 </template>
