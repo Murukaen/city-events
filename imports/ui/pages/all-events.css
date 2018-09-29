@@ -8,3 +8,7 @@ p {
     margin-left: auto;
     margin-right: auto;
 }
+
+#searchForm input {
+    width: 100%;
+}
