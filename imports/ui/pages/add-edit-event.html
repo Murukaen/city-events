@@ -73,6 +73,12 @@
                     <p> This event is already present </p>
                 </div>
             {{/if}}
+            {{#if staging}}
+                <div class="form-group">
+                    <label for="unstageInput"> Unstage </label>
+                    <input id="unstageInput" name="unstage" type="checkbox"/>
+                </div>
+            {{/if}}
             <div class="text-center">
                 <button class="btn btn-default" type="submit">
                     {{#if _id}}
