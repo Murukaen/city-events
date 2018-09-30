@@ -1,98 +1,107 @@
 <template name="addEditEvent">
-    <div class="row">
-        <form class="col-md-offset-4 col-md-4 event-setup">
-            {{#if name}}
-                <h3> Edit event: {{name}} </h3>
-            {{else}}
-                <h3 class="text-center"> Add a new event </h3>
-                <div class="form-group">
-                    <label for="nameInput">Name:</label>     
-                    <input id="nameInput" class="form-control" type="text" name="name" placeholder="Enter a name..." required autofocus />
-                    {{#if error 'name'}}
-                        <label for="nameInput" class="err"> {{error 'name'}} </label>
-                    {{/if}}
-                </div>
-            {{/if}}
-            {{#if country}}
-                <p> Country: {{country}} </p>
-            {{else}}
-                <div class="form-group">
-                    <label for="selectCountry">Country:</label>
-                    <select id="selectCountry" class="form-control" name="country" required>
-                        <option value="">Select Country ...</option>
-                        {{#each countries}}
-                            <option value={{country}}>{{country}}</option>
-                        {{/each}}                    
-                    </select>
-                </div>
-            {{/if}}
-            {{#if city}}
-                <p> City: {{city}} </p>
-            {{else}}
-                {{#if cities.length}}
+    <div id="addEditEvent">
+        <div class="row">
+            <form class="col-md-offset-4 col-md-4 event-setup">
+                {{#if name}}
+                    <h3> Edit event: {{name}} </h3>
+                {{else}}
+                    <h3 class="text-center"> Add a new event </h3>
                     <div class="form-group">
-                        <label for="selectCity">City:</label>
-                        <select id="selectCity" class="form-control" name="city">
-                            {{#each city in cities}}
-                                <option value={{city}}>{{city}}</option>
+                        <label for="nameInput">Name</label>     
+                        <input id="nameInput" class="form-control data" type="text" name="name" placeholder="Enter a name..." required autofocus />
+                        {{#if error 'name'}}
+                            <label for="nameInput" class="err"> {{error 'name'}} </label>
+                        {{/if}}
+                    </div>
+                {{/if}}
+                {{#if country}}
+                    <p> Country: {{country}} </p>
+                {{else}}
+                    <div class="form-group">
+                        <label for="selectCountry">Country</label>
+                        <select id="selectCountry" class="form-control data" name="country" required>
+                            <option value="">Select Country ...</option>
+                            {{#each countries}}
+                                <option value={{country}}>{{country}}</option>
                             {{/each}}                    
                         </select>
                     </div>
                 {{/if}}
-            {{/if}}
-            <div class="form-group">
-                <label for="inputLocation">Location:</label>
-                <input id="inputLocation" class="form-control" type="text" name="location" value="{{location}}" placeholder="Enter a location..." required />
-            </div>
-            <div class="form-group">
-                <label for="inputStartDate">Starts:</label>
-                <div id="start-date" class="input-group datetimepicker">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <input id="inputStartDate" name="startDate" type="text" class="form-control" required />
-                </div>
-            </div>
-            <div id="formEndDate" class="form-group">
-                <label for="inputEndDate">Ends:</label>
-                <div id="end-date" class="input-group datetimepicker">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <input id="inputEndDate" name="endDate" type="text" class="form-control" required />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputDescription">Description:</label>
-                <textarea id="inputDescription" class="form-control" name="description" rows="5" 
-                    placeholder="Enter some info about the event..." required>{{description}}</textarea>
-            </div>
-            {{>labelsT labels}}
-            <div class="form-group">
-                <label for="inputLabel">Add label:</label>
-                <input id="inputLabel" class="form-control" type="text" name="label" placeholder="Type a label...">
-            </div>
-            {{#if isAlreadyPresent}}
-                <div>
-                    <p> This event is already present </p>
-                </div>
-            {{/if}}
-            {{#if staging}}
-                <div class="form-group">
-                    <label for="unstageInput"> Unstage </label>
-                    <input id="unstageInput" name="unstage" type="checkbox"/>
-                </div>
-            {{/if}}
-            <div class="text-center">
-                <button class="btn btn-default" type="submit">
-                    {{#if _id}}
-                        Update event
-                    {{else}}
-                        Add event
+                {{#if city}}
+                    <p> City: {{city}} </p>
+                {{else}}
+                    {{#if cities.length}}
+                        <div class="form-group">
+                            <label for="selectCity">City</label>
+                            <select id="selectCity" class="form-control data" name="city">
+                                {{#each city in cities}}
+                                    <option value={{city}}>{{city}}</option>
+                                {{/each}}                    
+                            </select>
+                        </div>
                     {{/if}}
-                </button>
-                {{#if _id}}
-                    <button id="deleteButton" class="btn btn-default btn-danger">
-                        Delete event
-                    </button>
                 {{/if}}
-            </div>    
-        </form>
+                <div class="form-group">
+                    <label for="inputLocation">Location</label>
+                    <input id="inputLocation" class="form-control data" type="text" name="location" value="{{location}}" placeholder="Enter a location..." required />
+                </div>
+                <div class="form-group">
+                    <label for="inputStartDate">Starts</label>
+                    <div id="start-date" class="input-group datetimepicker">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input id="inputStartDate" name="startDate" type="text" class="form-control data" required />
+                    </div>
+                </div>
+                <div id="formEndDate" class="form-group">
+                    <label for="inputEndDate">Ends</label>
+                    <div id="end-date" class="input-group datetimepicker">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input id="inputEndDate" name="endDate" type="text" class="form-control data" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputDescription">Description</label>
+                    <textarea id="inputDescription" class="form-control" name="description" rows="5" 
+                        placeholder="Enter some info about the event..." required>{{description}}</textarea>
+                </div>
+                {{#if labels.length}}
+                    <div id="selected-labels" class="form-group">
+                        <label>Labels</label>
+                        <div class="data">
+                            {{>labelsT reactiveLabels}}
+                        </div>
+                    </div>
+                {{/if}}
+                <div class="form-group">
+                    <label for="inputLabel">Add label</label>
+                    <input id="inputLabel" class="form-control data" type="text" name="label" placeholder="Type a label...">
+                </div>
+                {{#if isAlreadyPresent}}
+                    <div>
+                        <p> This event is already present </p>
+                    </div>
+                {{/if}}
+                {{#if staging}}
+                    <div class="form-group">
+                        <label for="unstageInput"> Unstage </label>
+                        <input id="unstageInput" class="data" name="unstage" type="checkbox"/>
+                    </div>
+                {{/if}}
+                <div class="text-center">
+                    <button class="btn btn-default" type="submit">
+                        {{#if _id}}
+                            Update event
+                        {{else}}
+                            Add event
+                        {{/if}}
+                    </button>
+                    {{#if _id}}
+                        <button id="deleteButton" class="btn btn-default btn-danger">
+                            Delete event
+                        </button>
+                    {{/if}}
+                </div>    
+            </form>
+        </div>    
     </div>
 </template>

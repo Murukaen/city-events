@@ -1,10 +1,10 @@
-#labels ul {
+#addEditEvent #labels ul {
   list-style-type: none;
   margin: 10px 0;
   padding: 0;
 }
 
-#labels li {
+#addEditEvent #labels li {
   display: inline;
   border: 1px solid grey;
   border-radius: 3px;
@@ -13,6 +13,28 @@
   background-color: #CCCCCC;
 }
 
-textarea {
+#addEditEvent textarea {
   resize: vertical;
+  width: 500px;
+}
+
+#addEditEvent div.form-group > label {
+  float: left;
+  padding-top:6px;
+  margin-right: 10px;
+  width: 80px;
+}
+
+#addEditEvent div.form-group .data {
+  display:block;
+  width: 200px;
+}
+
+#addEditEvent #selected-labels > div {
+  width: 90%
+}
+
+#addEditEvent #selected-labels > label {
+  position: relative;
+  bottom: 5px;
 }

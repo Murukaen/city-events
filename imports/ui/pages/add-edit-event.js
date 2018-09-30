@@ -87,7 +87,7 @@ function initValidator(template) {
                 startDate: $('#start-date').data('DateTimePicker').date().toDate(),
                 endDate: $('#end-date').data('DateTimePicker').date().toDate(),
                 description: $('[name=description').val(),
-                labels: template.labels.getLabels(),
+                labels: template.labels.get(),
                 createdBy: Meteor.userId(),
                 staging: $('#unstageInput').length > 0 && !$('#unstageInput').is(':checked')
             }
@@ -122,7 +122,7 @@ function initValidator(template) {
 
 Template.addEditEvent.onCreated(() => {
     let template = Template.instance();
-    template.labels = new Labels(template.data ? template.data.labels : null)
+    template.labels = new ReactiveVar(template.data ? template.data.labels : [])
     template.errors = new ReactiveDict()
     template.countries = new ReactiveVar()
     template.selectedCountry = new ReactiveVar()
@@ -172,8 +172,9 @@ Template.addEditEvent.events({
     'keypress input[name="label"]': function(event, template) {
         if (event.key === 'Enter') {
             event.preventDefault();
-            if (event.target.value && event.target.value != '')
-                template.labels.addLabel(event.target.value.toLowerCase());
+            if (event.target.value && event.target.value != '') {
+                template.labels.set(template.labels.get().concat(event.target.value.toLowerCase()));
+            }
             event.target.value = '';
         }
     },
@@ -197,6 +198,9 @@ Template.addEditEvent.events({
 
 Template.addEditEvent.helpers({
     labels() {
+        return Template.instance().labels.get()
+    },
+    reactiveLabels () {
         return Template.instance().labels
     },
     error(name) {
