@@ -1,28 +1,27 @@
 <template name="myEvents">
     <div id="myEvents">
-        <nav id="filter" class="navbar navbar-default">
-          <div class="container-fluid">
-            <div class="navbar-header">
-                <a href="" class="navbar-brand">Apply filter</a>
+        <div id="heading"> </div>
+        <div id="filter">
+            <div class="filter-element">
+                <h3> Apply filter </h3>
             </div>
-            <ul class="nav navbar-nav">
-                <li class="dropdown" id="futureFilter">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="selected"> - </span> <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <label for="filterPastInput"> Past </label>
-                            <input id="filterPastInput" name="past" type="checkbox"/>
-                        </li>
-                        <li>
-                            <label for="filterFutureInput"> Future </label>
-                            <input id="filterFutureInput" name="future" type="checkbox"/>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-          </div>
-        </nav>
-
-        {{>showEvents eventData=eventData context='mine'}}
+            <hr>
+            <div class="dropdown filter-element" id="futureFilter">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="selected"> - </span> <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <label for="filterPastInput"> Past </label>
+                        <input id="filterPastInput" name="past" type="checkbox"/>
+                    </li>
+                    <li>
+                        <label for="filterFutureInput"> Future </label>
+                        <input id="filterFutureInput" name="future" type="checkbox"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="data">
+            {{>showEvents eventData=eventData context='mine'}}    
+        </div>
     </div>
 </template>

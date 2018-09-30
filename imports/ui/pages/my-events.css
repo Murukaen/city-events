@@ -8,3 +8,30 @@
     border: 1px solid grey;
     padding: 10px;
 }
+
+#myEvents #heading {
+    margin-top: -10px;  
+    position: fixed;
+    z-index: 1;
+    top: 60px;
+    background-color: white;
+    width: 100%;
+    height: 63px;
+}
+
+#myEvents #data {
+    margin-top: 53px;
+    margin-left: 270px;
+}
+
+#myEvents #filter {
+    width: 250px;
+    height: 500px;
+    position: fixed;
+    z-index: 2;
+    padding-left:10px;
+}
+
+#myEvents .filter-element {
+    margin: 10px 0px;
+}

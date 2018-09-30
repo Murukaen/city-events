@@ -1,14 +1,45 @@
-p {
+#allEvents p {
     user-select: none;
     cursor: default;
 }
 
-#filter {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+#allEvents #data {
+    margin-top: 100px;
+    margin-left: 270px;
 }
 
-#searchForm input {
+#allEvents #heading {
+    margin-top: -10px;  
+    position: fixed;
+    z-index: 1;
+    top: 60px;
+    background-color: white;
     width: 100%;
+    padding-bottom: 45px;
 }
+
+#allEvents #filter {
+    width: 250px;
+    height: 500px;
+    position: fixed;
+    z-index: 2;
+    padding-left:10px;
+}
+
+#allEvents .filter-element {
+    margin: 10px 0px;
+}
+
+#allEvents .stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+#allEvents .stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+#allEvents .stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+

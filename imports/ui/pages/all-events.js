@@ -20,7 +20,6 @@ Template.allEvents.onCreated(function () {
 });
 
 Template.allEvents.onRendered(function () {
-    Meteor.typeahead.inject();
     Session.get('query').date &&
     $('#dateFilter').find('.selected').text(
         $('#dateFilter').find('[name=' + Session.get('query').date.trim() + ']').text())
