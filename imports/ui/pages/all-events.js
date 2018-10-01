@@ -10,7 +10,6 @@ Template.allEvents.onCreated(function () {
     let template = Template.instance();
     let currentLabel = Session.get('query').label;
     template.route = Router.current().originalUrl.split('?')[0]
-    // template.labels = new Labels(currentLabel ? [currentLabel] : []);
     template.labels = new ReactiveVar(currentLabel ? [currentLabel] : [])
     template.autorun(function () {
         Query.filter(template.route, 'label', template.labels.get()[0]);
@@ -46,7 +45,6 @@ Template.allEvents.helpers({
         }    
     },
     reactiveLabels() {
-        console.log("--->", Template.instance().labels)
         return Template.instance().labels
     },
     allLabels() {

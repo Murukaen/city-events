@@ -25,7 +25,7 @@ Template.register.onRendered(function() {
                         console.log('Verification error', error.reason);
                       } else {
                         console.log('Verification sent successfully');
-                        // TODO alert user
+                        sAlert.info("Verification email sent")
                       }
                     });
                 }
