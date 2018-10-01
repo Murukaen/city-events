@@ -1,9 +1,23 @@
-a {
+#labels a {
     text-decoration: none;
     color: grey;
 }
 
-a:hover {
+#labels a:hover {
    text-decoration: none; 
 }
 
+#labels ul {
+    list-style-type: none;
+    margin: 10px 0;
+    padding: 0;
+  }
+  
+#labels li {
+    display: inline;
+    border: 1px solid grey;
+    border-radius: 3px;
+    margin-right: 5px;
+    padding: 5px;
+    background-color: #CCCCCC;
+  }

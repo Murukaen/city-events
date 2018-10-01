@@ -69,13 +69,13 @@ function initValidator(template) {
     var validator = $('.event-setup').validate({
         rules: {
             name: {
-                "pattern": "^(\\s*\\w\\s*){1,}$" // at least one non-space character
+                "pattern": "^(\\s*\\S\\s*){1,}$" // at least one non-space character
             },
             location: {
-                "pattern": "^(\\s*\\w\\s*){1,}$" // at least one non-space character
+                "pattern": "^(\\s*\\S\\s*){1,}$" // at least one non-space character
             },
             description: {
-                "pattern": "^(\\s*\\w\\s*){1,}$" // at least one non-space character
+                "pattern": "^(\\s*\\S\\s*){1,}$" // at least one non-space character
             }
         },
         submitHandler(event) {

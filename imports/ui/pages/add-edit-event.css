@@ -1,18 +1,3 @@
-#addEditEvent #labels ul {
-  list-style-type: none;
-  margin: 10px 0;
-  padding: 0;
-}
-
-#addEditEvent #labels li {
-  display: inline;
-  border: 1px solid grey;
-  border-radius: 3px;
-  margin-right: 5px;
-  padding: 5px;
-  background-color: #CCCCCC;
-}
-
 #addEditEvent textarea {
   resize: vertical;
   width: 500px;
