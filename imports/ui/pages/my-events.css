@@ -21,11 +21,12 @@
 
 #myEvents #data {
     margin-top: 53px;
-    margin-left: 270px;
+    margin-left: 210px;
+    margin-right: 10px;
 }
 
 #myEvents #filter {
-    width: 250px;
+    width: 200px;
     height: 500px;
     position: fixed;
     z-index: 2;

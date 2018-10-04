@@ -1,5 +1,5 @@
 <template name="showEvents">
-    <div class="container events-container">
+    <div id="showEvents" class="container-fluid events-container">
         {{#if eventRows.length}}
             {{#each eventRows}}
                 {{> eventRow}}
@@ -23,18 +23,20 @@
 </template>
 
 <template name="eventCell">
-    <div class="event-box btn btn-default well col-md-3 col-sm-6 col-xs-12">
-        <div class="col-xs-12">
-            <h4 class="text-center"> {{shortenName name}} </h4>
-            <p class="date"> {{showDate}} </p>
-            <p class="location"> {{shortenLocation location}} </p>
-            <div class="clearfix"> </div>
-            <!-- <br />
-            {{#if imgUrl}}
-                <img class="img-responsive event-image" src="{{imgUrl}}" />
-            {{else}}
-                <div class="text-center imgPlaceholder"> E </div>
-            {{/if}} -->
+    <div id="eventCell" class="box-wrapper col-md-3 col-sm-6 col-xs-12">
+        <div class="event-box btn btn-default well">
+            <div class="col-xs-12">
+                <h4 class="text-center"> {{shortenName name}} </h4>
+                <p class="date"> {{showDate}} </p>
+                <p class="location"> {{shortenLocation location}} </p>
+                <div class="clearfix"> </div>
+                <!-- <br />
+                {{#if imgUrl}}
+                    <img class="img-responsive event-image" src="{{imgUrl}}" />
+                {{else}}
+                    <div class="text-center imgPlaceholder"> E </div>
+                {{/if}} -->
+            </div>
         </div>
     </div>
 </template>

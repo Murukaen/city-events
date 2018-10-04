@@ -1,11 +1,21 @@
-.location {
+#showEvents .events-container {
+    width: 95%;
+}
+
+#eventCell {
+    padding: 5px;
+}
+
+#eventCell .location {
     clear: both;
     float: left;
 }
-.date {
+
+#eventCell .date {
     float: left;
 }
-.imgPlaceholder {
+
+#eventCell .imgPlaceholder {
     border-style: solid;
     border-width: 1px;
     border-color: black;
@@ -15,13 +25,14 @@
     padding: 30px;
     background-color: #e1e1ea;
 }
-.event-box {
+
+#eventCell .event-box {
     background-color: #f0f0f0;
     word-wrap: break-word;
     white-space: normal;
     height:175px;
     padding: 5px;
-}
-.events-container {
-    width: 95%;
+    overflow: hidden;
+    margin-bottom: 0px;
+    width: 100%;
 }
