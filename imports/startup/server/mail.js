@@ -6,3 +6,12 @@ process.env.MAIL_URL = "smtp://postmaster%40sandbox065cbba0fb9844229aeb7e5130c0e
 //   subject: "Test Email",
 //   text: "Hello there",
 // });
+
+Accounts.emailTemplates.from = 'no-reply@cityevents.io'
+Accounts.emailTemplates.siteName = 'cityevents.io'
+Accounts.emailTemplates.verifyEmail.subject = (user) => {
+    return "CityEvents: Verify email address"
+}
+Accounts.emailTemplates.resetPassword.subject = (user) => {
+    return "CityEvents: Password reset"
+}
