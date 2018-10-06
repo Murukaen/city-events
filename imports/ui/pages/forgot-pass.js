@@ -1,4 +1,5 @@
 import './forgot-pass.html'
+import './forgot-pass.css'
 
 var trimInput = function(val) {
     return val.replace(/\s*/g, "")
@@ -10,7 +11,7 @@ var isNotEmpty = function(val) {
 
 Template.forgotPassword.onCreated(() => {
     let template = Template.instance()
-    template.errors = new ReactiveDict()
+    template.errors = new ReactiveDict({})
     template.mailSent = new ReactiveVar(false)
     template.submitted = new ReactiveVar(false)
     template.email = ''
@@ -18,7 +19,7 @@ Template.forgotPassword.onCreated(() => {
 
 Template.forgotPassword.onRendered(function () {
     let template = Template.instance()
-    $('#forgotPasswordForm').validate({
+    $('#forgot-password-form').validate({
         submitHandler() {
             template.submitted.set(true)
             let email = trimInput($('#forgotPasswordEmail').val().toLowerCase())
@@ -27,11 +28,16 @@ Template.forgotPassword.onRendered(function () {
                 if (err) {
                   if (err.message === 'User not found [403]') {
                     errors['email'] = 'This email does not exist.'
+                  } else if (err.error === 'too-many-requests') {
+                    sAlert.error("Too many request. Please wait 4 seconds before trying again.", {
+                        timeout: 3500
+                    })
                   } else {
                     console.log('We are sorry but something went wrong.', err)
                   }
+                  template.submitted.set(false)
                 } else {
-                  $('#forgotPasswordEmail').val('')
+                  $('#forgot-password-form').hide()
                   template.email = email
                   template.mailSent.set(true)
                 }
@@ -42,7 +48,7 @@ Template.forgotPassword.onRendered(function () {
 })
 
 Template.forgotPassword.events({
-  'submit #forgotPasswordForm': function(e, t) {
+  'submit #forgot-password-form': function(e, t) {
     e.preventDefault()
   },
   'keyup input[name="email"]': function(e,t) {
@@ -62,6 +68,7 @@ Template.forgotPassword.helpers({
     },
     showLoading() {
         return Template.instance().submitted.get() && !Template.instance().mailSent.get()
+            && Object.keys(Template.instance().errors.all()).length == 0
     },
     email() {
         return Template.instance().email

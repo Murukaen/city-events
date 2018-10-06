@@ -1,21 +1,32 @@
 <template name="forgotPassword">
-    <h3> Reset password </h3>
-    <form id="forgotPasswordForm" method="post">
-      <input id="forgotPasswordEmail" type="email" name="email" placeholder="Email Address" required>
-        {{#if error 'email'}}
-            <label for="forgotPasswordEmail" class="error"> {{error 'email'}} </label>
-        {{/if}}
-      <br />
-      {{#unless submitted}}
-        <input class="btn-submit" type="submit" value="Send">
-      {{/unless}}
-    </form>
-    {{#if showLoading}}
-      {{> loading}}
-    {{/if}}
-    {{#if mailSent}}
-      <div>
-        <p>Email sent to {{email}}. Check your mailbox.</p>
+  <div id="template-forgot-password" class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h3> Reset password </h3>
       </div>
-    {{/if}}
+    </div>
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-4">
+        <form id="forgot-password-form" method="post">
+          <label for="forgotPasswordEmail">Enter your email address</label>
+          <input id="forgotPasswordEmail" class="form-control" type="email" name="email" placeholder="Email Address" required>
+            {{#if error 'email'}}
+                <label for="forgotPasswordEmail" class="error"> {{error 'email'}} </label>
+            {{/if}}
+          <br />
+          {{#unless submitted}}
+            <button class="btn btn-primary" type="submit"> Send </button>
+          {{/unless}}
+        </form>
+        {{#if showLoading}}
+          {{> loading}}
+        {{/if}}
+        {{#if mailSent}}
+          <div>
+            <p>Email sent to {{email}}. Check your mailbox.</p>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
 </template>
