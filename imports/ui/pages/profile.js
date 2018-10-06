@@ -51,7 +51,19 @@ Template.profile.events({
                 console.error(err)
             }
             else {
+                sAlert.success("Facebook account linked")
                 Meteor.call('updateProfile', {key: 'isLinkedWithFacebook', value: true})
+            }
+        });
+    },
+    'click #googleLink': function() {
+        Meteor.linkWithGoogle((err) => {
+            if (err) {
+                console.error(err)
+            }
+            else {
+                sAlert.success("Google account linked")
+                Meteor.call('updateProfile', {key: 'isLinkedWithGoogle', value: true})
             }
         });
     },

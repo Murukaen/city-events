@@ -6,6 +6,6 @@ Meteor.startup(() => {
     sAlert.config({
         effect: 'scale',
         timeout: 2500,
-        position: 'top-right'
+        position: 'bottom-right'
     })
 })

@@ -43,11 +43,17 @@
             <br>
             <hr class="clear">
             {{#if isVerified}}
-                <div id="linkSocial">
+                <div id="link-social">
                     {{#unless isLinkedWithFacebook}}
                         <a id="fbLink" href="#" class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i> Link Facebook Account</a>
                     {{/unless}}
+                    <br>
+                    {{#unless isLinkedWithGoogle}}
+                        <a id="googleLink" href="#" class="btn btn-social btn-google"><i class="fa fa-google"></i> Link Google Account</a>
+                    {{/unless}}                       
                 </div>
+            {{else}}
+                <p> Tip: You can link social accounts once you validate your email address </p>    
             {{/if}}
         </div>
               

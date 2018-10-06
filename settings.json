@@ -8,6 +8,10 @@
     "appId": "238727750208154",
     "secret": "INSERT SECRET HERE"
   },
+  "google": {
+    "clientId": "91811312926-comd2g503t330nn4ri826u6gfs08ljjn.apps.googleusercontent.com",
+    "secret": "INSERT SECRET HERE"
+  },
   "public": {
     "profile": "develop"
   }

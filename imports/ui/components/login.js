@@ -44,5 +44,17 @@ Template.login.events({
                 }
             }
         });
+    },
+    'click #google-login': function() {
+        Meteor.loginWithGoogle({}, function(err){
+            if (err) {
+                if (err.reason == 'Must link account first') {
+                    sAlert.warning("Google account is not linked")
+                }
+                else {
+                    console.error("Google login failed with:", err)
+                }
+            }
+        });
     }
 });
