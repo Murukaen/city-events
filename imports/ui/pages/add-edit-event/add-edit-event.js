@@ -173,7 +173,13 @@ Template.addEditEvent.events({
         if (event.key === 'Enter') {
             event.preventDefault();
             if (event.target.value && event.target.value != '') {
-                template.labels.set(template.labels.get().concat(event.target.value.toLowerCase()));
+                let label = event.target.value.toLowerCase()
+                let existingLabels = template.labels.get()
+                if (existingLabels.indexOf(label) >= 0) {
+                    sAlert.warning("Label already added")
+                } else {
+                    template.labels.set(existingLabels.concat(label))
+                }
             }
             event.target.value = '';
         }
