@@ -14,23 +14,20 @@
     border: none;
 }
 
-#profile div#linkSocial {
-    margin-top: 50px;
-}
-
 #profile .tabs {
     float: left;
     border: 1px solid #ccc;
     background-color: #f1f1f1;
     width: 30%;
-    height: 250px;
+    height: 300px;
 }
 
 #profile .tabs button {
     display: block;
     background-color: inherit;
     color: black;
-    padding: 22px 16px;
+    height: 50px;
+    padding: 0 16px;
     width: 100%;
     border: none;
     outline: none;
@@ -54,7 +51,7 @@
     border: 1px solid #ccc;
     width: 70%;
     border-left: none;
-    height: 250px;
+    height: 300px;
 }
 
 #profile .tab-content h3 {
@@ -65,10 +62,12 @@
     clear: both;
 }
 
-#profile form label {
+#profile form label:not(.error) {
     float: left;
     margin-top: 5px;
     margin-right: 5px;
+    width: 100px;
+    text-align: left;
 }
 
 #profile form input {
@@ -83,3 +82,14 @@
 #profile h1 {
     margin-bottom: 30px;
 }
+
+#profile #password-strength {
+    width: 200px;
+    margin-left: 105px;
+    margin-top: 3px;
+}
+
+#profile #change-pass {
+    width: 400px;
+}
+

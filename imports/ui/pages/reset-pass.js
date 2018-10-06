@@ -1,11 +1,19 @@
-import './reset-pass.html';
+import './reset-pass.html'
+import './reset-pass.css'
+import {PasswordScore} from '/imports/lib/password-score'
+
+Template.resetPassword.onCreated(function () {
+    this.strength = ReactiveVar(0)
+})
 
 Template.resetPassword.onRendered(function () {
-    let self = this;
+    let self = this
+    PasswordScore.addValidatorMethod("pwCheck")
     $('#resetPasswordForm').validate({
         rules: {
             'password': {
-                required: true
+                required: true,
+                pwCheck: true
             },
             'password-retype': {
                 required: true,
@@ -13,22 +21,30 @@ Template.resetPassword.onRendered(function () {
             }
         },
         submitHandler() {
-            console.log("Submit for token", self.data.token);
             Accounts.resetPassword(self.data.token, $('#pass').val(), function(err) {
                 if (err) {
-                    console.log(err.message);
+                    console.log(err.message)
                 }
                 else {
-                    console.log("Password reset was successful");
-                    Router.go('pickCountry');
+                    Session.set('passwordReset', true)
+                    Router.go('pickCountry')
                 }
-            });
+            })
         }
-    });
-});
+    })
+})
 
 Template.resetPassword.events({
     'submit form': function(event) {
-        event.preventDefault();
+        event.preventDefault()
     },
+    'keyup input[name=password]': function(event, template) {
+        template.strength.set(PasswordScore.getPasswordStrength($(event.target).val()))
+    }
 });
+
+Template.resetPassword.helpers({
+    strength () {
+        return Template.instance().strength
+    }
+})

@@ -1,10 +1,26 @@
 import './profile.html'
 import './profile.css'
+import {PasswordScore} from '/imports/lib/password-score'
 
-Template.profile.onRendered(function () {
+function initTabs() {
     $('.tab-content').css('display', 'none')
     $(`.tab-content[name=${$('button.active').attr('name')}]`).css('display', 'block')
+}
+
+Template.profile.onCreated(function () {
+    this.strength = ReactiveVar(0)
+})
+
+Template.profile.onRendered(function () {
+    initTabs()
+    PasswordScore.addValidatorMethod("pwCheck")
+    let self = this
     let validator = $('#change-pass').validate({
+        rules: {
+            new_password: {
+                pwCheck: true
+            }
+        },
         submitHandler() {
             let oldPass = $('#old-pass').val()
             let newPass = $('#new-pass').val()
@@ -20,6 +36,7 @@ Template.profile.onRendered(function () {
                 } else {
                     $('#old-pass').val('')
                     $('#new-pass').val('')
+                    self.strength.set(0)
                     sAlert.info("Password changed successfully")
                 }
             })
@@ -31,10 +48,10 @@ Template.profile.events({
     'click #fbLink': function() {
         Meteor.linkWithFacebook((err) => {
             if (err) {
-                console.error(err);
+                console.error(err)
             }
             else {
-                Meteor.call('updateProfile', {key: 'isLinkedWithFacebook', value: true});
+                Meteor.call('updateProfile', {key: 'isLinkedWithFacebook', value: true})
             }
         });
     },
@@ -44,11 +61,17 @@ Template.profile.events({
         let name = $(e.target).attr('name')
         $(`.tab-content[name=${name}]`).css('display', 'block')
         $(`.tabs button[name=${name}]`).addClass('active')
+    },
+    'keyup input[name=new_password]': function(event, template) {
+        template.strength.set(PasswordScore.getPasswordStrength($(event.target).val()))
     }
 })
 
 Template.profile.helpers({
     roundedPoints() {
-        return Math.round(Template.instance().data.points);
+        return Math.round(Template.instance().data.points)
+    },
+    strength() {
+        return Template.instance().strength
     }
-});
+})

@@ -1,6 +1,13 @@
 import './pick-country.html'
 import { Cities } from '../../api/cities/cities'
 
+Template.pickCountry.onRendered(function () {
+    if (Session.get('passwordReset')) {
+        Session.set('passwordReset', false)
+        sAlert.success("Password successfully reset")
+    }
+})
+
 Template.pickCountry.events({
     'change select': function(event, template) {
         let val = $(event.target).val()

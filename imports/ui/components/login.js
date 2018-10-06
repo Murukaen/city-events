@@ -37,7 +37,6 @@ Template.login.events({
         Meteor.loginWithFacebook({}, function(err){
             if (err) {
                 if (err.reason == 'Must link account first') {
-                    console.error("Facebook account is not linked")
                     sAlert.warning("Facebook account is not linked")
                 }
                 else {

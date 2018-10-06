@@ -1,14 +1,25 @@
 <template name="resetPassword">
-    <h3> Choose a new password for your account </h3>
-    <form id="resetPasswordForm" method="post">
-      <div class="form-group">
-         <label for="login-pass">New password</label>
-         <input type="password" class="form-control" id="pass" name="password" required>
+  <div id="template-reset-pass" class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h3> Choose a new password for your account </h3>
       </div>
-      <div class="form-group">
-         <label for="login-pass">Retype password</label>
-         <input type="password" class="form-control" id="pass-retype" name="password-retype" required>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-4">
+        <form id="resetPasswordForm" method="post">
+          <div class="form-group">
+            <label for="login-pass">New password</label>
+            <input type="password" class="form-control" id="pass" name="password" required>
+            {{> passwordStrength strength}}
+          </div>
+          <div class="form-group">
+            <label for="login-pass">Retype password</label>
+            <input type="password" class="form-control" id="pass-retype" name="password-retype" required>
+          </div>
+          <button class="btn btn-primary" type="submit"> Send </button>
+        </form>
       </div>
-      <input class="btn-submit" type="submit" value="Send">
-    </form>
+    </div>
+  </div>  
 </template>

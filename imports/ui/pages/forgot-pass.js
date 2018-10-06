@@ -13,6 +13,7 @@ Template.forgotPassword.onCreated(() => {
     template.errors = new ReactiveDict()
     template.mailSent = new ReactiveVar(false)
     template.submitted = new ReactiveVar(false)
+    template.email = ''
 })
 
 Template.forgotPassword.onRendered(function () {
@@ -20,7 +21,7 @@ Template.forgotPassword.onRendered(function () {
     $('#forgotPasswordForm').validate({
         submitHandler() {
             template.submitted.set(true)
-            var email = trimInput($('#forgotPasswordForm #forgotPasswordEmail').val().toLowerCase())
+            let email = trimInput($('#forgotPasswordEmail').val().toLowerCase())
             Accounts.forgotPassword({email}, (err) => {
                 let errors = {}
                 if (err) {
@@ -30,7 +31,8 @@ Template.forgotPassword.onRendered(function () {
                     console.log('We are sorry but something went wrong.', err)
                   }
                 } else {
-                  console.log('Email Sent. Check your mailbox.')
+                  $('#forgotPasswordEmail').val('')
+                  template.email = email
                   template.mailSent.set(true)
                 }
                 template.errors.set(errors)
@@ -60,5 +62,8 @@ Template.forgotPassword.helpers({
     },
     showLoading() {
         return Template.instance().submitted.get() && !Template.instance().mailSent.get()
+    },
+    email() {
+        return Template.instance().email
     }
 })

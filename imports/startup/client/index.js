@@ -5,7 +5,7 @@ import '../../api/cities/cities' // TODO: dev
 Meteor.startup(() => {
     sAlert.config({
         effect: 'scale',
-        timeout: 3000,
+        timeout: 2500,
         position: 'top-right'
     })
 })

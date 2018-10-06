@@ -20,6 +20,10 @@ Template.allEvents.onCreated(function () {
 });
 
 Template.allEvents.onRendered(function () {
+    if (Session.get('passwordReset')) {
+        Session.set('passwordReset', false)
+        sAlert.success("Password successfully reset")
+    }
     Session.get('query').date &&
     $('#dateFilter').find('.selected').text(
         $('#dateFilter').find('[name=' + Session.get('query').date.trim() + ']').text())
