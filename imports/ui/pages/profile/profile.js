@@ -42,6 +42,7 @@ Template.profile.onRendered(function () {
             })
         }
     })
+    Session.set('activeTabName', 'profile')
 })
 
 Template.profile.events({

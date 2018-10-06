@@ -1,5 +1,5 @@
 <template name="navigation">
-    <nav id="menu" class="navbar navbar-default">
+    <nav id="template-navigation" class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
@@ -12,15 +12,15 @@
         </div>
         <div id="nav-collapse" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-              <li><a href="{{pathFor route='pickCountry'}}" data-toggle="collapse" data-target=".navbar-collapse.in">Search</a></li>
+              <li><a href="{{pathFor route='pickCountry'}}" class="tab" name="search" data-toggle="collapse" data-target=".navbar-collapse.in">Search</a></li>
               {{#if currentUser}}
-                <li><a href="{{pathFor route='add'}}" data-toggle="collapse" data-target=".navbar-collapse.in">Add event</a></li>
-                <li><a href="{{pathFor route='myEvents'}}" data-toggle="collapse" data-target=".navbar-collapse.in">My events</a></li>
+                <li><a href="{{pathFor route='add'}}" class="tab" name="add-event" data-toggle="collapse" data-target=".navbar-collapse.in">Add event</a></li>
+                <li><a href="{{pathFor route='myEvents'}}" class="tab" name="my-events" data-toggle="collapse" data-target=".navbar-collapse.in">My events</a></li>
               {{/if}}
             </ul>
             <ul class="nav navbar-nav navbar-right">
               {{#if currentUser}}
-                <li> <a href="{{pathFor route='profile'}}" data-toggle="collapse" data-target=".navbar-collapse.in"> Logged in as {{currentUser.emails.[0].address}} </a></li>
+                <li> <a href="{{pathFor route='profile'}}" class="tab" name="profile" data-toggle="collapse" data-target=".navbar-collapse.in"> Logged in as {{currentUser.emails.[0].address}} </a></li>
                 <li> <a href="#" class="logout" data-toggle="collapse" data-target=".navbar-collapse.in"> Logout </a> </li>
               {{else}}
                 <li class="dropdown">

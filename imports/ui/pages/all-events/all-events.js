@@ -27,6 +27,7 @@ Template.allEvents.onRendered(function () {
     Session.get('query').date &&
     $('#dateFilter').find('.selected').text(
         $('#dateFilter').find('[name=' + Session.get('query').date.trim() + ']').text())
+    Session.set('activeTabName', 'search')
 });
 
 Template.allEvents.events({

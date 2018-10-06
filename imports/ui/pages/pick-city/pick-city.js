@@ -6,6 +6,7 @@ Template.pickCity.onRendered(function () {
         Session.set('passwordReset', false)
         sAlert.success("Password successfully reset")
     }
+    Session.set('activeTabName', 'search')
 })
 
 Template.pickCity.events({

@@ -31,6 +31,7 @@ Template.myEvents.onRendered(function () {
     $('#filterFutureInput').prop('checked', query.future === "true");
     $('#filterPastInput').prop('checked', query.past === "true");
     updateFutureFilter();
+    Session.set('activeTabName', 'my-events')
 });
 
 Template.myEvents.events({

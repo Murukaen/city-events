@@ -1,16 +1,16 @@
-.auth {
+#template-navigation {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 2;
+}
+
+#template-navigation .auth {
     min-width: 250px;
     padding: 14px 14px 0;
     overflow:hidden;
     background-color:rgba(255,255,255,.8);
 }
-.auth .form-group {
+#template-navigation .auth .form-group {
     margin-bottom: 10px;
-}
-
-#menu {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 2;
 }
