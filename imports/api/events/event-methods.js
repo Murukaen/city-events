@@ -1,4 +1,5 @@
 import {Events} from './events.js'
+import { ValidatedMethod } from 'meteor/mdg:validated-method'
 
 function eventIsPostedByCurrentUser(eventId) {
     if (Meteor.user()) {
@@ -17,9 +18,9 @@ function constructId(data) {
 }
 
 Meteor.methods({
-    updateEvent(data, cbDone) {
-        if (eventIsPostedByCurrentUser(data._id)) {
-            Events.update({_id: data._id}, {$set: data}, cbDone);
+    updateEvent({_id, data}, cbDone) {
+        if (eventIsPostedByCurrentUser(_id)) {
+            Events.update({_id: _id}, {$set: data}, cbDone);
         }
     },
     deleteEvent(eventId) {

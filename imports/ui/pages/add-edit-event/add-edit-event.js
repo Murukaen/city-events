@@ -6,10 +6,13 @@ import '/imports/api/events/event-methods'
 function appendError(errorObj, name, type) {
     switch(type) {
         case 'unique':
-            errorObj[name] = name + ' already present';
-            break;
+            errorObj[name] = name + ' already present'
+            break
+        case 'minString':
+            errorObj[name] = name + ' is too short'
+            break
         default:
-            errorObj[name] = type;
+            errorObj[name] = type
     }
 }
 
@@ -93,22 +96,27 @@ function initValidator(template) {
             }
             var methodName = 'addEvent';
             if(template.data) {
-                data._id = template.data._id;
-                methodName = 'updateEvent';
+                data = {_id: template.data._id, data: data}
+                methodName = 'updateEvent'
             }
             Meteor.call(methodName, data, (err) => {
-                let errors = {};
+                let errors = {}
                 if (err) {
                     if (err.reason == "Internal server error") {
-                        console.log("Internal server error:", err);
-                    }
-                    else if (Array.isArray(err.details)) {
-                        err.details.forEach((e) => {
-                            appendError(errors, e.name, e.type);
-                        });
+                        console.log("Internal server error:", err)
                     } else {
-                        // err = ALREADY_PRESENT
-                        template.alreadyPresent.set(true)
+                        let details = JSON.parse(err.details)
+                        if (Array.isArray(details)) {
+                            sAlert.error(err.reason)
+                            details.forEach((e) => {
+                                appendError(errors, e.name, e.type);
+                            })
+                        } else {
+                            console.log("--->", err)
+                            // err = ALREADY_PRESENT
+                            template.alreadyPresent.set(true)
+                            // TODO Place one more if on the above
+                        }
                     }
                 }
                 else {
@@ -191,7 +199,7 @@ Template.addEditEvent.events({
             DateUtil.setDefaultEndDate();
         }
     },
-    'keyup input': function(e,t) {
+    'keyup .form-control': function(e,t) {
         t.errors.delete(e.target.name)
     },
     'focus .form-control': (event, template) => {

@@ -3,7 +3,11 @@
   width: 500px;
 }
 
-#addEditEvent div.form-group > label {
+#addEditEvent div.form-group {
+  clear: both;
+}
+
+#addEditEvent div.form-group > label:not(.err) {
   float: left;
   padding-top:6px;
   margin-right: 10px;
