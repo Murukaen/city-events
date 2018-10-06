@@ -1,5 +1,5 @@
 import './pick-city.html'
-import { Cities } from '../../api/cities/cities'
+import { Cities } from '../../../api/cities/cities'
 
 Template.pickCity.onRendered(function () {
     if (Session.get('passwordReset')) {

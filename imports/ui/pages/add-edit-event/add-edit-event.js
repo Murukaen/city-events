@@ -1,6 +1,6 @@
 import './add-edit-event.html'
 import './add-edit-event.css'
-import '../components/labels'
+import '../../components/labels'
 import '/imports/api/events/event-methods'
 
 function appendError(errorObj, name, type) {

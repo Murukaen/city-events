@@ -1,5 +1,5 @@
-import '../components/show-events.js'
-import '../helpers/query.js'
+import '../../components/show-events'
+import '../../helpers/query'
 
 import './all-events.html'
 import './all-events.css'

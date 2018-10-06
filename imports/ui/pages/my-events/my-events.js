@@ -1,8 +1,8 @@
-import './my-events.html';
-import './my-events.css';
+import './my-events.html'
+import './my-events.css'
 
-import '../components/show-events.js';
-import '../helpers/query.js';
+import '../../components/show-events'
+import '../../helpers/query'
 
 import {Events} from '/imports/api/events/events.js';
 
