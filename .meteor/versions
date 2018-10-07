@@ -67,6 +67,7 @@ fds:keycodes@2.0.0
 fortawesome:fontawesome@4.7.0
 geojson-utils@1.0.10
 google-oauth@1.2.5
+hinas:meteor-bootstrap-confirmation@0.9.0
 hot-code-push@1.0.4
 html-tools@1.0.11
 htmljs@1.0.11

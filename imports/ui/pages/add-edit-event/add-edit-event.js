@@ -160,6 +160,9 @@ Template.addEditEvent.onRendered(function() {
     let template = Template.instance();
     initValidator(template);
     DateUtil.initDateTimePickers(template);
+    $('#deleteButton').confirmation({
+        placement: 'top'
+    })
 });
 
 /* EVENTS */
@@ -167,7 +170,7 @@ Template.addEditEvent.events({
     'submit form': function(event, template) {
         event.preventDefault();
     },
-    'click #deleteButton': function(event, template) {
+    'click .popover-content a:first': function(event, template) {
         Meteor.call('deleteEvent', template.data._id, (err) => {
             if (err) {
                 console.log(err);
