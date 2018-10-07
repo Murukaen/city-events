@@ -1,4 +1,4 @@
-import {Events} from '/imports/api/events/events'
+import {Events} from '/imports/collections/events/events'
 import {Profile} from '/imports/lib/profile'
 import '/imports/ui/layouts/app-body'
 import '/imports/ui/pages/all-events/all-events'

@@ -1,5 +1,5 @@
-import {Events} from '/imports/api/events/events'
-import '/imports/api/events/event-methods'
+import {Events} from '/imports/collections/events/events'
+import '/imports/collections/events/event-methods'
 import {Profile} from '/imports/lib/profile'
 
 Picker.route('/api', function(params, req, res, next) {

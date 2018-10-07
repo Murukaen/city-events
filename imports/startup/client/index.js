@@ -1,6 +1,6 @@
 import './routes'
-import '../../api/events/events' // TODO: dev
-import '../../api/cities/cities' // TODO: dev
+import '../../collections/events/events' // TODO: dev
+import '../../collections/cities/cities' // TODO: dev
 
 Meteor.startup(() => {
     sAlert.config({

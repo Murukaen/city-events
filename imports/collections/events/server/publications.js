@@ -1,6 +1,6 @@
 import {DateUtils} from '/imports/lib/date'
-import {Events} from '/imports/api/events/events'
-import {Cities} from '/imports/api/cities/cities'
+import {Events} from '/imports/collections/events/events'
+import {Cities} from '/imports/collections/cities/cities'
 
 var MongoQuery = function(query) {
     query = query || {}

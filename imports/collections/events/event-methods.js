@@ -40,7 +40,7 @@ Meteor.methods({
                         Events.update({_id: eventId}, {$pull: {invalidatedBy: userId}});
                     }
                     if (!this.isSimulation) {
-                        const {UserManager} = require('/imports/api/users/server/user-manager');
+                        const {UserManager} = require('/imports/collections/users/server/user-manager');
                         UserManager.increaseScore(event.createdBy, userId);
                         if (hasInvalidatedBefore) {
                             UserManager.increaseScore(event.createdBy, userId);
@@ -50,7 +50,7 @@ Meteor.methods({
                 else {
                     Events.update({_id: eventId}, {$pull: {validatedBy: userId}});
                     if (!this.isSimulation) {
-                        const {UserManager} = require('/imports/api/users/server/user-manager');
+                        const {UserManager} = require('/imports/collections/users/server/user-manager');
                         UserManager.decreaseScore(event.createdBy, userId);
                     }
                 }
@@ -69,7 +69,7 @@ Meteor.methods({
                         Events.update({_id: eventId}, {$pull: {validatedBy: userId}});
                     }
                     if (!this.isSimulation) {
-                        const {UserManager} = require('/imports/api/users/server/user-manager');
+                        const {UserManager} = require('/imports/collections/users/server/user-manager');
                         UserManager.decreaseScore(event.createdBy, userId);
                         if (hasValidatedBefore) {
                             UserManager.decreaseScore(event.createdBy, userId);
@@ -79,7 +79,7 @@ Meteor.methods({
                 else {
                     Events.update({_id: eventId}, {$pull: {invalidatedBy: userId}});
                     if (!this.isSimulation) {
-                        const {UserManager} = require('/imports/api/users/server/user-manager');
+                        const {UserManager} = require('/imports/collections/users/server/user-manager');
                         UserManager.increaseScore(event.createdBy, userId);
                     }
                 }
@@ -112,7 +112,7 @@ addEvent = new ValidatedMethod({
             data._id = id
             Events.insert(data)
             if (!this.isSimulation) {
-                const {UserManager} = require('/imports/api/users/server/user-manager')
+                const {UserManager} = require('/imports/collections/users/server/user-manager')
                 UserManager.increaseScore()
             }
         }
