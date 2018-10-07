@@ -27,12 +27,12 @@ Template.showEvents.onCreated(function () {
 
 Template.showEvents.events({
     'click .event-box': function() {
-        if (this.endDate >= new Date()) {
-            Router.go(Template.instance().data.eventData.clickRoute, {_id: this._id});
+        let route = Template.instance().data.eventData.clickRoute
+        // cannot edit past event, default to 'view'
+        if (this.endDate < new Date()) {
+            route = 'view'
         }
-        else {
-            console.log("Cannot select a past event");
-        }
+        Router.go(route, {_id: this._id});
     }
 });
 
