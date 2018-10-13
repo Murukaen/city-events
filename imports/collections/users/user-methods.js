@@ -7,9 +7,11 @@ Meteor.methods({
             }
         }
     },
-    updateProfile({key, value}) {
+    updateProfile(props) {
         if (Meteor.userId()) {
-            Meteor.users.update({_id: Meteor.userId()}, {$set: {["profile." + key]: value}});
+            for(var key in props) {
+                Meteor.users.update({_id: Meteor.userId()}, {$set: {["profile." + key]: props[key]}});
+            }
         }
     },
     setUsername(username) {

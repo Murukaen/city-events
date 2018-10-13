@@ -141,6 +141,8 @@ Router.route('/profile', {
                 isLinkedWithFacebook: user.profile.isLinkedWithFacebook,
                 isLinkedWithGoogle: user.profile.isLinkedWithGoogle,
                 username: user.username,
+                country: user.profile.country,
+                city: user.profile.city,
                 points: user.profile.points
             };
         }

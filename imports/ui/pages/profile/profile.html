@@ -21,6 +21,18 @@
                                 <td> {{username}} </td>
                             </tr>
                         {{/if}}
+                        {{#if country}}
+                            <tr>
+                                <td> Country </td>
+                                <td> {{country}} </td>
+                            </tr>
+                        {{/if}}
+                        {{#if city}}
+                            <tr>
+                                <td> City </td>
+                                <td> {{city}} </td>
+                            </tr>
+                        {{/if}}
                         <tr>
                             <td> Points </td>
                             <td> {{roundedPoints}} </td>
@@ -30,6 +42,25 @@
             </div>
             
             <div name="management" class="tab-content">
+                <h3>Set location</h3>
+                <form id="set-location" class="clear">
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" class="form-control" id="country" name="country" 
+                            placeholder={{countryPlaceholder}} required>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" id="city" name="city" 
+                            placeholder={{cityPlaceholder}} required>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+                <hr class="clear">
+
                 <h3>Change password</h3>
                 <form id="change-pass" class="clear">
                     <div class="form-group">

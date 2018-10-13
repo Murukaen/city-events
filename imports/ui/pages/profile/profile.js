@@ -54,6 +54,20 @@ Template.profile.onRendered(function () {
             })
         }
     })
+    let locationValidator = $('#set-location').validate({
+        submitHandler() {
+            let country = $('#country').val()
+            let city = $('#city').val()
+            Meteor.call('updateProfile', {country, city}, (err) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    $('#set-location')[0].reset()
+                    sAlert.success("Location updated")
+                }
+            })
+        }
+    })
     Session.set('activeTabName', 'profile')
 })
 
@@ -65,7 +79,7 @@ Template.profile.events({
             }
             else {
                 sAlert.success("Facebook account linked")
-                Meteor.call('updateProfile', {key: 'isLinkedWithFacebook', value: true})
+                Meteor.call('updateProfile', {isLinkedWithFacebook: true})
             }
         });
     },
@@ -76,7 +90,7 @@ Template.profile.events({
             }
             else {
                 sAlert.success("Google account linked")
-                Meteor.call('updateProfile', {key: 'isLinkedWithGoogle', value: true})
+                Meteor.call('updateProfile', {isLinkedWithGoogle: true})
             }
         });
     },
@@ -111,5 +125,11 @@ Template.profile.helpers({
             return "Change username"
         }
         return "Set username"
+    },
+    countryPlaceholder() {
+        return Template.instance().data.country || "Country"
+    },
+    cityPlaceholder() {
+        return Template.instance().data.city || "City"
     }
 })
