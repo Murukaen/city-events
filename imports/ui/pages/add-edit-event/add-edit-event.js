@@ -70,6 +70,13 @@ let DateUtil = {
 
 function initValidator(template) {
     var validator = $('.event-setup').validate({
+        errorPlacement: function(error, element) {
+            if(element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        },
         rules: {
             name: {
                 "pattern": "^(\\s*\\S\\s*){1,}$" // at least one non-space character
