@@ -1,61 +1,90 @@
 <template name="profile">
     <div id="profile">
         <h1> My profile </h1>
-        <div class="tabs">
-            <button name="info" class="active">Info</button>
-            <button name="management">Management</button>
-        </div>
 
-        <div name="info" class="tab-content">
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td> Email </td>
-                        <td> {{email}} </td>
-                    </tr>
-                    <tr>
-                        <td> Points </td>
-                        <td> {{roundedPoints}} </td>
-                    </tr>
-                </tbody>
-            </table> 
-        </div>
-        
-        <div name="management" class="tab-content">
-            <h3>Change password</h3>
-            <form id="change-pass" class="clear">
-                <div class="form-group">
-                    <label for="old-pass">Old password</label>
-                    <input type="password" class="form-control" id="old-pass" name="old_password" placeholder="Old Password" required>
-                </div>
-                <div class="clear"></div>
-                <div class="form-group">
-                    <label for="new-pass">New password</label>
-                    <input type="password" class="form-control" id="new-pass" name="new_password" placeholder="New Password" required>
-                    <div id="password-strength">
-                        {{> passwordStrength strength}}
+        <div class="tab-container">
+            <div class="tabs">
+                <button name="info" class="active">Info</button>
+                <button name="management">Management</button>
+            </div>
+    
+            <div name="info" class="tab-content">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td> Email </td>
+                            <td> {{email}} </td>
+                        </tr>
+                        {{#if username}}
+                            <tr>
+                                <td> Username </td>
+                                <td> {{username}} </td>
+                            </tr>
+                        {{/if}}
+                        <tr>
+                            <td> Points </td>
+                            <td> {{roundedPoints}} </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+            
+            <div name="management" class="tab-content">
+                <h3>Change password</h3>
+                <form id="change-pass" class="clear">
+                    <div class="form-group">
+                        <label for="old-pass">Old password</label>
+                        <input type="password" class="form-control" id="old-pass" name="old_password" 
+                            placeholder="Old Password" required>
                     </div>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-primary" type="submit">Submit</button>
-                </div>
-            </form>
-            <br>
-            <hr class="clear">
-            {{#if isVerified}}
-                <div id="link-social">
-                    {{#unless isLinkedWithFacebook}}
-                        <a id="fbLink" href="#" class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i> Link Facebook Account</a>
-                    {{/unless}}
-                    <br>
-                    {{#unless isLinkedWithGoogle}}
-                        <a id="googleLink" href="#" class="btn btn-social btn-google"><i class="fa fa-google"></i> Link Google Account</a>
-                    {{/unless}}                       
-                </div>
-            {{else}}
-                <p> Tip: You can link social accounts once you validate your email address </p>    
-            {{/if}}
-        </div>
-              
+                    <div class="clear"></div>
+                    <div class="form-group">
+                        <label for="new-pass">New password</label>
+                        <input type="password" class="form-control" id="new-pass" name="new_password" 
+                            placeholder="New Password" required>
+                        <div id="password-strength">
+                            {{> passwordStrength strength}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+                <hr class="clear">
+    
+                {{#if showSocialLinkageInfo}}
+                    <h3>Link social accounts</h3>
+                    {{#if isVerified}}
+                        <div id="link-social">
+                            {{#unless isLinkedWithFacebook}}
+                                <a id="fbLink" href="#" class="btn btn-social btn-facebook">
+                                    <i class="fa fa-facebook"></i> Link Facebook Account</a>
+                            {{/unless}}
+                            <br>
+                            {{#unless isLinkedWithGoogle}}
+                                <a id="googleLink" href="#" class="btn btn-social btn-google">
+                                    <i class="fa fa-google"></i> Link Google Account</a>
+                            {{/unless}}                       
+                        </div>
+                    {{else}}
+                        <p> You can link social accounts once you validate your email address </p>    
+                    {{/if}}
+                    <hr class="clear">
+                {{/if}}
+
+                <h3> {{usernameHeading}} </h3>
+                <form id="change-username" class="clear">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" 
+                            placeholder={{usernamePlaceholder}} required>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div> 
+        </div>        
     </div>
 </template>

@@ -14,3 +14,7 @@
 #template-navigation .auth .form-group {
     margin-bottom: 10px;
 }
+
+#template-navigation #login-dp, #template-navigation #register-dp {
+    background: white;
+}

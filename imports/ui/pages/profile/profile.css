@@ -19,7 +19,6 @@
     border: 1px solid #ccc;
     background-color: #f1f1f1;
     width: 30%;
-    height: 350px;
 }
 
 #profile .tabs button {
@@ -47,15 +46,15 @@
 
 #profile .tab-content {
     float: left;
-    padding: 0px 12px;
+    padding: 0px 20px;
     border: 1px solid #ccc;
     width: 70%;
     border-left: none;
-    height: 350px;
+    min-height: 300px;
 }
 
 #profile .tab-content h3 {
-    float: left
+    text-align: left
 }
 
 #profile .clear {
@@ -75,8 +74,8 @@
     height: 30px;
 }
 
-#profile form button[type=submit] {
-    float: left;
+#profile .form-group{
+    text-align: left;
 }
 
 #profile h1 {
@@ -93,7 +92,18 @@
     width: 400px;
 }
 
+#profile #link-social {
+    text-align: left;
+}
+
 #profile #link-social a {
     margin-bottom: 10px;
 }
 
+#profile .tab-container {
+    display: flex;
+}
+
+#profile hr {
+    margin-bottom: 0px;
+}

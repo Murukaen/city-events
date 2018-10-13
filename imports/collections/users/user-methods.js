@@ -11,5 +11,10 @@ Meteor.methods({
         if (Meteor.userId()) {
             Meteor.users.update({_id: Meteor.userId()}, {$set: {["profile." + key]: value}});
         }
+    },
+    setUsername(username) {
+        if (!this.isSimulation) {
+            return Accounts.setUsername(Meteor.userId(), username);
+        }
     }
 });

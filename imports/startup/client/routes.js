@@ -140,6 +140,7 @@ Router.route('/profile', {
                 isVerified: hasVerifiedEmail(), 
                 isLinkedWithFacebook: user.profile.isLinkedWithFacebook,
                 isLinkedWithGoogle: user.profile.isLinkedWithGoogle,
+                username: user.username,
                 points: user.profile.points
             };
         }

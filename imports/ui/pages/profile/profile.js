@@ -15,7 +15,7 @@ Template.profile.onRendered(function () {
     initTabs()
     PasswordScore.addValidatorMethod("pwCheck")
     let self = this
-    let validator = $('#change-pass').validate({
+    let passValidator = $('#change-pass').validate({
         rules: {
             new_password: {
                 pwCheck: true
@@ -27,7 +27,7 @@ Template.profile.onRendered(function () {
             Accounts.changePassword(oldPass, newPass, (err) => {
                 if (err) {
                     if (err.reason == "Incorrect password") {
-                        validator.showErrors({
+                        passValidator.showErrors({
                             old_password: err.reason    
                         });
                     } else {
@@ -38,6 +38,18 @@ Template.profile.onRendered(function () {
                     $('#new-pass').val('')
                     self.strength.set(0)
                     sAlert.info("Password changed successfully")
+                }
+            })
+        }
+    })
+    let usernameValidator = $('#change-username').validate({
+        submitHandler() {
+            Meteor.call('setUsername', $('#username').val(), (err) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    $('#username').val('')
+                    sAlert.success("Username set")
                 }
             })
         }
@@ -86,5 +98,18 @@ Template.profile.helpers({
     },
     strength() {
         return Template.instance().strength
+    },
+    showSocialLinkageInfo() {
+        let data = Template.instance().data
+        return !data.isVerified || !data.isLinkedWithFacebook || !data.isLinkedWithGoogle
+    },
+    usernamePlaceholder() {
+        return Template.instance().data.username || "Username"
+    },
+    usernameHeading() {
+        if (Template.instance().data.username) {
+            return "Change username"
+        }
+        return "Set username"
     }
 })
