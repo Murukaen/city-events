@@ -1,6 +1,10 @@
 import './login.html';
 import './login.css';
 
+function welcomeAlert(email) {
+    sAlert.success(`Welcome ${email}`)
+}
+
 Template.login.events({
     'submit form': function(event) {
         event.preventDefault();
@@ -10,7 +14,9 @@ Template.login.events({
 Template.login.onRendered(function () {
     var validator = $('.login').validate({
         submitHandler (event) {
-            Meteor.loginWithPassword($(".login #login-email").val(), $(".login #login-pass").val(), function(error) {
+            let email = $(".login #login-email").val()
+            let pass  = $(".login #login-pass").val()
+            Meteor.loginWithPassword(email, pass, function(error) {
                 if (error) {
                     if(error.reason == "User not found") {
                         validator.showErrors({
@@ -22,6 +28,8 @@ Template.login.onRendered(function () {
                             password: error.reason    
                         });
                     }
+                } else {
+                    welcomeAlert(email)
                 }
             });
         }
@@ -42,6 +50,8 @@ Template.login.events({
                 else {
                     console.error("Facebook login failed with:", err)
                 }
+            } else {
+                welcomeAlert(Meteor.user().emails[0].address)
             }
         });
     },
@@ -54,6 +64,8 @@ Template.login.events({
                 else {
                     console.error("Google login failed with:", err)
                 }
+            } else {
+                welcomeAlert(Meteor.user().emails[0].address)
             }
         });
     }
