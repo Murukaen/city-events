@@ -79,7 +79,9 @@ Router.route('/search/:country', {
     },
     onBeforeAction () {
         Session.set("country", this.params.country)
-        Session.set("city", false)
+        if (Session.get("city")) {
+            this.redirect("search", {country: Session.get("country"), city: Session.get("city")})
+        }
         this.next()
     }
 })

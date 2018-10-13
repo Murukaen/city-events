@@ -2,12 +2,12 @@ import {Cities} from './cities'
 
 Meteor.methods({
     getCountries() {
-        return Cities.find({}, {country: 1}).fetch();
+        return Cities.find({}, {fields: {country: 1}}).fetch().map(e => e.country)
     },
     getCities(country) {
         if (country) {
-            return Cities.findOne({country}, {cities: 1}).cities;
+            return Cities.findOne({country}, {fields: {cities: 1}}).cities
         }
-        return [];
+        return []
     }
 })

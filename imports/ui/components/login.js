@@ -5,6 +5,29 @@ function welcomeAlert(email) {
     sAlert.success(`Welcome ${email}`)
 }
 
+function setSessionCountryCity() {
+    let country = Meteor.user().profile.country
+    let city = Meteor.user().profile.city
+    country && Meteor.call('getCountries', (err, resp) => {
+        if (err) {
+            console.log(err)
+        } else {
+            if(resp.indexOf(country) >= 0) {
+                Session.set("country", country)
+                city && Meteor.call('getCities', country, (err, resp) => {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        if(resp.indexOf(city) >= 0) {
+                            Session.set("city", city)
+                        }
+                    }
+                })
+            }    
+        }
+    })   
+}
+
 Template.login.events({
     'submit form': function(event) {
         event.preventDefault();
@@ -29,6 +52,7 @@ Template.login.onRendered(function () {
                         });
                     }
                 } else {
+                    setSessionCountryCity()
                     welcomeAlert(email)
                 }
             });
@@ -51,6 +75,7 @@ Template.login.events({
                     console.error("Facebook login failed with:", err)
                 }
             } else {
+                setSessionCountryCity()
                 welcomeAlert(Meteor.user().emails[0].address)
             }
         });
@@ -65,6 +90,7 @@ Template.login.events({
                     console.error("Google login failed with:", err)
                 }
             } else {
+                setSessionCountryCity()
                 welcomeAlert(Meteor.user().emails[0].address)
             }
         });

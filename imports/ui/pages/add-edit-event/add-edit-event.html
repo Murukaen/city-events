@@ -21,7 +21,7 @@
                         <label for="selectCountry">Country</label>
                         <select id="selectCountry" class="form-control data" name="country" required>
                             <option value="">Select Country ...</option>
-                            {{#each countries}}
+                            {{#each country in countries}}
                                 <option value={{country}}>{{country}}</option>
                             {{/each}}                    
                         </select>
