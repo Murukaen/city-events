@@ -1,3 +1,3 @@
-import './register-api.js';
-import './users.js';
-import './mail.js';
+import './register-api'
+import './users'
+import './mail'

@@ -1,6 +1,7 @@
 import './profile.html'
 import './profile.css'
 import {PasswordScore} from '/imports/lib/password-score'
+import {Location} from '/imports/lib/location'
 
 function initTabs() {
     $('.tab-content').css('display', 'none')
@@ -63,6 +64,7 @@ Template.profile.onRendered(function () {
                     console.log(err)
                 } else {
                     $('#set-location')[0].reset()
+                    Location.updateCountryCitySession()
                     sAlert.success("Location updated")
                 }
             })
