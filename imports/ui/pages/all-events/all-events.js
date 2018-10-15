@@ -28,6 +28,7 @@ Template.allEvents.onRendered(function () {
     $('#dateFilter').find('.selected').text(
         $('#dateFilter').find('[name=' + Session.get('query').date.trim() + ']').text())
     Session.set('activeTabName', 'search')
+    $('#ongoing').prop('checked', Session.get('query').ongoing == 'true')
 });
 
 Template.allEvents.events({
@@ -39,6 +40,9 @@ Template.allEvents.events({
     'click #dateFilter ul': function(event, template) {
         event.preventDefault();
         Query.filter(template.route, 'date', event.target.name);
+    },
+    'change #ongoing': function(event, template) {
+        Query.filter(template.route, 'ongoing', $('#ongoing').is(':checked'))
     }
 });
 

@@ -15,7 +15,7 @@ import '/imports/ui/pages/pick-city/pick-city'
 
 var defaultQueries =  {
     defaults : {
-        'search': 'date=today',
+        'search': 'date=today&ongoing=true',
         'myEvents' : 'future=true'
     },
     get (context) {

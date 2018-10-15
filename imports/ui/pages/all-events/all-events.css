@@ -38,3 +38,8 @@
     background:transparent;
 }
 
+#allEvents #ongoing {
+    margin-left: 10px;
+    transform: scale(1.2);
+}
+

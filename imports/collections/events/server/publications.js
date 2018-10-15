@@ -14,15 +14,17 @@ var MongoQuery = function(query) {
     }
 };
 
-function CriteriaParser(criteria, query) { 
+function CriteriaParser(criteria, query) {
+    criteria.ongoing = criteria.ongoing == 'true'
+
     this.addLabel = () => {
         if (criteria.label) {
             query.labels = criteria.label
         }
     }
     this.addDate = () => {
+        let now = new Date()
         if (criteria.date) {
-            let now = new Date()
             let upper = new Date(now)   
             switch(criteria.date) {
                 case 'today': 
@@ -38,8 +40,14 @@ function CriteriaParser(criteria, query) {
                     ({endDate: upper} = DateUtils.getStartAndEndOfCurrentYear())
                     break;
             }
-            query['$or'] = [{startDate: {'$lte': now}, endDate: {'$gt': now}}, 
-                {startDate: {'$gt': now, '$lt': upper}}]
+            if (criteria.ongoing) {
+                query['$or'] = [{startDate: {'$lte': now}, endDate: {'$gt': now}}, 
+                    {startDate: {'$gt': now, '$lt': upper}}]
+            } else {
+                query.startDate = {'$gt': now, '$lt': upper}
+            }
+        } else if (!criteria.ongoing) {
+            query.startDate = {'$gt': now}
         }  
     }
     this.addFuture = () => {

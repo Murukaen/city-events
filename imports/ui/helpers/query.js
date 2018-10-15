@@ -2,10 +2,9 @@ Query = {
     filter(route, name, value) {
         let query = Session.get('query')
         if (value || value === false) {
-            query[name] = value;
-        }
-        else {
-            delete query[name];
+            query[name] = value
+        } else {
+            delete query[name]
         }
         if (name == 'country') {
             delete query['city']
