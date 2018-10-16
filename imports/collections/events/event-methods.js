@@ -55,6 +55,8 @@ Meteor.methods({
                     }
                 }
             }    
+        } else {
+            throw new Meteor.Error('cant-vote-own-event')
         }
     },
     voteDownEvent(eventId) {
@@ -84,6 +86,8 @@ Meteor.methods({
                     }
                 }
             }
+        } else {
+            throw new Meteor.Error('cant-vote-own-event')
         }
     },
     getPopularLabels() {
